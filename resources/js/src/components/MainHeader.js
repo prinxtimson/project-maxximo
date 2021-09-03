@@ -9,8 +9,8 @@ const MainHeader = () => {
                     <img
                         src="/images/Elint_x.png"
                         alt="Elint X"
-                        width="70"
-                        height="76"
+                        width="50"
+                        height="55"
                     />
                 </Link>
                 <button

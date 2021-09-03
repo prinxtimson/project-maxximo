@@ -19,7 +19,7 @@ use App\Http\Controllers\UserController;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/forgot-password', [AuthController::class, 'forgotPass']);
 Route::post('/reset-password', [AuthController::class, 'resetPass']);
-Route::post('/users', [UserController::class, 'store']);
+Route::post('/register', [UserController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

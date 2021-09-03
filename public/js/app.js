@@ -5824,8 +5824,8 @@ var MainHeader = function MainHeader() {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
           src: "/images/Elint_x.png",
           alt: "Elint X",
-          width: "70",
-          height: "76"
+          width: "50",
+          height: "55"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
         className: "navbar-toggler",
