@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -34,7 +35,44 @@ class UserController extends Controller
         $user = User::create([
             'name' =>  $fields['name'],
             'email' => $fields['email'],
-            //'username' => strtolower($username),
+            'username' => strtolower($username),
+            'avatar' => 'https://www.gravatar.com/avatar/'.$hash,
+            'password' => bcrypt($fields['password'])
+        ]);
+
+        $user->profile()->create([
+            'name' => $fields['name'],
+        ]);
+
+        $user->assignRole('user');
+
+        $token = $user->createToken('access_token')->plainTextToken;
+
+        $response = [
+            'user' => $user->load(['roles']),
+            'token' => $token
+        ];
+
+        return $response;
+    }
+
+    public function register(Request $request)
+    {
+        //
+        $fields = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|unique:users,email',
+            'password' => 'required|string|confirmed'
+        ]);
+
+        $hash = md5(strtolower(trim($fields['email'])));
+
+        $username = str_replace(' ', '', $fields['name']);
+
+        $user = User::create([
+            'name' =>  $fields['name'],
+            'email' => $fields['email'],
+            'username' => strtolower($username),
             'avatar' => 'https://www.gravatar.com/avatar/'.$hash,
             'password' => bcrypt($fields['password'])
         ]);
@@ -47,10 +85,10 @@ class UserController extends Controller
 
         $request->session()->regenerate();
 
-        $token = auth()->user()->createToken('access_token')->plainTextToken;
+        $token = $user->createToken('access_token')->plainTextToken;
 
         $response = [
-            'user' => auth()->user()->load(['roles']),
+            'user' => $user->load(['roles']),
             'token' => $token
         ];
 
