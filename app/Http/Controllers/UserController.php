@@ -23,7 +23,6 @@ class UserController extends Controller
         //
         $fields = $request->validate([
             'name' => 'required|string',
-            'role' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed'
         ]);
@@ -40,17 +39,21 @@ class UserController extends Controller
             'password' => bcrypt($fields['password'])
         ]);
 
-        $user->assignRole($fields['role']);
+        $user->profile()->create([
+            'name' => $fields['name'],
+        ]);
+
+        $user->assignRole('user');
 
         $request->session()->regenerate();
 
-            $token = auth()->user()->createToken('access_token')->plainTextToken;
+        $token = auth()->user()->createToken('access_token')->plainTextToken;
 
-            $response = [
-                'user' => auth()->user()->load(['roles']),
-                'token' => $token
-            ];
+        $response = [
+            'user' => auth()->user()->load(['roles']),
+            'token' => $token
+        ];
 
-            return $response;
+        return $response;
     }
 }
