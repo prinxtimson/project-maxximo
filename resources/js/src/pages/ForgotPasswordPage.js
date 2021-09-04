@@ -5,7 +5,11 @@ import { requestPasswordReset } from "../actions/auth";
 import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 
-const ForgotPasswordPage = ({ isAuthenticated, requestPasswordReset }) => {
+const ForgotPasswordPage = ({
+    isAuthenticated,
+    requestPasswordReset,
+    alerts,
+}) => {
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -13,6 +17,7 @@ const ForgotPasswordPage = ({ isAuthenticated, requestPasswordReset }) => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
         requestPasswordReset(email.trim(), handleSuccess);
     };
 
@@ -32,6 +37,19 @@ const ForgotPasswordPage = ({ isAuthenticated, requestPasswordReset }) => {
                         <i className="fas fa-user"></i> Enter your email to
                         request password reset.
                     </p>
+                    {alerts.map(
+                        (alert) =>
+                            alert.alertType === "danger" && (
+                                <div
+                                    key={alert.id}
+                                    className={`alert alert-${alert.alertType} py-2`}
+                                    role="alert"
+                                >
+                                    {alert.msg}
+                                </div>
+                            )
+                    )}
+
                     <form onSubmit={handleOnSubmit} className="form row g-3">
                         <div className="form-floating col-12">
                             <input
@@ -48,7 +66,9 @@ const ForgotPasswordPage = ({ isAuthenticated, requestPasswordReset }) => {
                         </div>
                         <div className="d-grid gap-2 col-12 mx-auto">
                             <button
-                                className="btn btn-primary btn-lg"
+                                className={`btn btn-${
+                                    loading ? "secondary" : "primary"
+                                } btn-lg text-white`}
                                 type="submit"
                                 disabled={loading}
                             >
@@ -72,6 +92,7 @@ ForgotPasswordPage.propTypes = {
 
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
+    alerts: state.alert,
 });
 
 export default connect(mapStateToProps, { requestPasswordReset })(

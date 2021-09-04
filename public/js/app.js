@@ -5238,28 +5238,18 @@ var loadUser = function loadUser() {
                 payload: res.data
               }); // dispatch(getNotifications());
 
-              _context.next = 14;
+              _context.next = 11;
               break;
 
             case 7:
               _context.prev = 7;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0.response);
-
-              if (!(_context.t0.response.status == 500)) {
-                _context.next = 12;
-                break;
-              }
-
-              return _context.abrupt("return", dispatch((0,_alert__WEBPACK_IMPORTED_MODULE_1__.setAlert)("Server errror, please try again.", "danger")));
-
-            case 12:
-              dispatch((0,_alert__WEBPACK_IMPORTED_MODULE_1__.setAlert)(_context.t0.response.data.message, "danger"));
               dispatch({
                 type: _types__WEBPACK_IMPORTED_MODULE_2__.AUTH_ERROR
               });
 
-            case 14:
+            case 11:
             case "end":
               return _context.stop();
           }
@@ -5481,7 +5471,7 @@ var requestPasswordReset = function requestPasswordReset(email, handleSuccess) {
 
             case 5:
               res = _context5.sent;
-              dispatch((0,_alert__WEBPACK_IMPORTED_MODULE_1__.setAlert)(res.data.msg, "success"));
+              dispatch((0,_alert__WEBPACK_IMPORTED_MODULE_1__.setAlert)("An email has been sent to you, please check your email.", "success"));
               handleSuccess();
               _context5.next = 16;
               break;
@@ -5539,30 +5529,31 @@ var resetPassword = function resetPassword(data, token, handleSuccess) {
               res = _context6.sent;
               dispatch((0,_alert__WEBPACK_IMPORTED_MODULE_1__.setAlert)("Your password had been updated successfully.", "success"));
               handleSuccess();
-              _context6.next = 16;
+              window.location.replace("/login");
+              _context6.next = 17;
               break;
 
-            case 10:
-              _context6.prev = 10;
+            case 11:
+              _context6.prev = 11;
               _context6.t0 = _context6["catch"](2);
               console.log(_context6.t0.response);
 
               if (!(_context6.t0.response.status == 500)) {
-                _context6.next = 15;
+                _context6.next = 16;
                 break;
               }
 
               return _context6.abrupt("return", dispatch((0,_alert__WEBPACK_IMPORTED_MODULE_1__.setAlert)("Server errror, please try again.", "danger")));
 
-            case 15:
+            case 16:
               dispatch((0,_alert__WEBPACK_IMPORTED_MODULE_1__.setAlert)(_context6.t0.response.data.message, "danger"));
 
-            case 16:
+            case 17:
             case "end":
               return _context6.stop();
           }
         }
-      }, _callee6, null, [[2, 10]]);
+      }, _callee6, null, [[2, 11]]);
     }));
 
     return function (_x6) {
@@ -5685,9 +5676,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _MainFooter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MainFooter */ "./resources/js/src/components/MainFooter.js");
-/* harmony import */ var _MainHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MainHeader */ "./resources/js/src/components/MainHeader.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _MainFooter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MainFooter */ "./resources/js/src/components/MainFooter.js");
+/* harmony import */ var _MainHeader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MainHeader */ "./resources/js/src/components/MainHeader.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -5695,20 +5688,47 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var MainContainer = function MainContainer(_ref) {
-  var children = _ref.children;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    className: "d-flex flex-column",
-    style: {
-      minHeight: "95vh"
-    },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_MainHeader__WEBPACK_IMPORTED_MODULE_2__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      className: "container-fluid flex-grow-1 flex-column d-flex justify-content-center",
-      children: children
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_MainFooter__WEBPACK_IMPORTED_MODULE_1__.default, {})]
+  var children = _ref.children,
+      alerts = _ref.alerts;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "position-fixed",
+      style: {
+        zIndex: 10,
+        top: 60,
+        right: 20
+      },
+      children: alerts.map(function (alert) {
+        return alert.alertType === "success" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "toast align-items-center text-white bg-success border-0 my-2 show",
+          role: "alert",
+          "aria-live": "assertive",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "toast-body",
+            children: alert.msg
+          })
+        }, alert.id);
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "d-flex flex-column",
+      style: {
+        minHeight: "95vh"
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_MainHeader__WEBPACK_IMPORTED_MODULE_3__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "container-fluid flex-grow-1 flex-column d-flex justify-content-center",
+        children: children
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_MainFooter__WEBPACK_IMPORTED_MODULE_2__.default, {})]
+    })]
   });
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MainContainer);
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    alerts: state.alert
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps)(MainContainer));
 
 /***/ }),
 
@@ -5969,7 +5989,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ForgotPasswordPage = function ForgotPasswordPage(_ref) {
   var isAuthenticated = _ref.isAuthenticated,
-      requestPasswordReset = _ref.requestPasswordReset;
+      requestPasswordReset = _ref.requestPasswordReset,
+      alerts = _ref.alerts;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
@@ -5987,6 +6008,7 @@ var ForgotPasswordPage = function ForgotPasswordPage(_ref) {
 
   var handleOnSubmit = function handleOnSubmit(e) {
     e.preventDefault();
+    setLoading(true);
     requestPasswordReset(email.trim(), handleSuccess);
   };
 
@@ -6011,6 +6033,12 @@ var ForgotPasswordPage = function ForgotPasswordPage(_ref) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
             className: "fas fa-user"
           }), " Enter your email to request password reset."]
+        }), alerts.map(function (alert) {
+          return alert.alertType === "danger" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            className: "alert alert-".concat(alert.alertType, " py-2"),
+            role: "alert",
+            children: alert.msg
+          }, alert.id);
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
           onSubmit: handleOnSubmit,
           className: "form row g-3",
@@ -6032,7 +6060,7 @@ var ForgotPasswordPage = function ForgotPasswordPage(_ref) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "d-grid gap-2 col-12 mx-auto",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-              className: "btn btn-primary btn-lg",
+              className: "btn btn-".concat(loading ? "secondary" : "primary", " btn-lg text-white"),
               type: "submit",
               disabled: loading,
               children: "Submit"
@@ -6057,7 +6085,8 @@ ForgotPasswordPage.propTypes = {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    alerts: state.alert
   };
 };
 
@@ -6177,7 +6206,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var LoginPage = function LoginPage(_ref) {
-  var loginUser = _ref.loginUser;
+  var loginUser = _ref.loginUser,
+      alerts = _ref.alerts,
+      loading = _ref.loading;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     email: "",
@@ -6215,6 +6246,12 @@ var LoginPage = function LoginPage(_ref) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
             className: "fas fa-user"
           }), " Sign Into Your Account"]
+        }), alerts.map(function (alert) {
+          return alert.alertType === "danger" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            className: "alert alert-".concat(alert.alertType, " py-2"),
+            role: "alert",
+            children: alert.msg
+          }, alert.id);
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
           onSubmit: handleOnSubmit,
           className: "form row g-3 ",
@@ -6257,8 +6294,9 @@ var LoginPage = function LoginPage(_ref) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "d-grid gap-2 col-12 mx-auto",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-              className: "btn btn-primary btn-lg",
+              className: "btn btn-".concat(loading ? "secondary" : "primary", " btn-lg text-white"),
               type: "submit",
+              disabled: loading,
               children: "Signin"
             })
           })]
@@ -6281,7 +6319,9 @@ LoginPage.propTypes = {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading,
+    alerts: state.alert
   };
 };
 
@@ -6343,7 +6383,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var RegistrationPage = function RegistrationPage(_ref) {
   var setAlert = _ref.setAlert,
       registerUser = _ref.registerUser,
-      isAuthenticated = _ref.isAuthenticated;
+      isAuthenticated = _ref.isAuthenticated,
+      alerts = _ref.alerts,
+      loading = _ref.loading;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     name: "",
@@ -6391,6 +6433,12 @@ var RegistrationPage = function RegistrationPage(_ref) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
             className: "fas fa-user"
           }), " Create Your Account"]
+        }), alerts.map(function (alert) {
+          return alert.alertType === "danger" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "alert alert-".concat(alert.alertType, " py-2"),
+            role: "alert",
+            children: alert.msg
+          }, alert.id);
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {
           onSubmit: handleOnSubmit,
           className: "form row g-3",
@@ -6457,8 +6505,9 @@ var RegistrationPage = function RegistrationPage(_ref) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "d-grid gap-2 col-12 mx-auto",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-              className: "btn btn-primary btn-lg",
+              className: "btn btn-".concat(loading ? "secondary" : "primary", " btn-lg text-white"),
               type: "submit",
+              disabled: loading,
               children: "Register"
             })
           })]
@@ -6481,8 +6530,9 @@ RegistrationPage.propTypes = {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    alert: state.alert,
-    isAuthenticated: state.auth.isAuthenticated
+    alerts: state.alert,
+    isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading
   };
 };
 
@@ -6546,7 +6596,8 @@ var ResetPasswordPage = function ResetPasswordPage(_ref) {
   var setAlert = _ref.setAlert,
       isAuthenticated = _ref.isAuthenticated,
       params = _ref.match.params,
-      resetPassword = _ref.resetPassword;
+      resetPassword = _ref.resetPassword,
+      alerts = _ref.alerts;
   var search = new URLSearchParams((0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useLocation)().search);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
@@ -6557,6 +6608,11 @@ var ResetPasswordPage = function ResetPasswordPage(_ref) {
       _useState2 = _slicedToArray(_useState, 2),
       formData = _useState2[0],
       setFormData = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      loading = _useState4[0],
+      setLoading = _useState4[1];
 
   var password = formData.password,
       password_confirmation = formData.password_confirmation;
@@ -6573,6 +6629,7 @@ var ResetPasswordPage = function ResetPasswordPage(_ref) {
       return;
     }
 
+    setLoading(true);
     resetPassword(formData, params.token, handleSuccess);
   };
 
@@ -6581,6 +6638,7 @@ var ResetPasswordPage = function ResetPasswordPage(_ref) {
       password: "",
       password_confirmation: ""
     });
+    setLoading(false);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_MainContainer__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -6594,6 +6652,12 @@ var ResetPasswordPage = function ResetPasswordPage(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h1", {
           className: "card-title text-primary text-center",
           children: "Reset Password"
+        }), alerts.map(function (alert) {
+          return alert.alertType === "danger" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "alert alert-".concat(alert.alertType, " py-2"),
+            role: "alert",
+            children: alert.msg
+          }, alert.id);
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {
           onSubmit: handleOnSubmit,
           className: "form row g-3",
@@ -6630,8 +6694,9 @@ var ResetPasswordPage = function ResetPasswordPage(_ref) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "d-grid gap-2 col-12 mx-auto",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-              className: "btn btn-primary btn-lg",
+              className: "btn btn-".concat(loading ? "secondary" : "primary", " btn-lg text-white"),
               type: "submit",
+              disabled: loading,
               children: "Submit"
             })
           })]
@@ -6649,7 +6714,7 @@ ResetPasswordPage.propTypes = {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    alert: state.alert,
+    alerts: state.alert,
     isAuthenticated: state.auth.isAuthenticated
   };
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { setAlert } from "../actions/alert";
 import { resetPassword } from "../actions/auth";
 import MainContainer from "../components/MainContainer";
@@ -11,6 +11,7 @@ const ResetPasswordPage = ({
     isAuthenticated,
     match: { params },
     resetPassword,
+    alerts,
 }) => {
     const search = new URLSearchParams(useLocation().search);
     const [formData, setFormData] = useState({
@@ -18,6 +19,7 @@ const ResetPasswordPage = ({
         password: "",
         password_confirmation: "",
     });
+    const [loading, setLoading] = useState(false);
 
     const { password, password_confirmation } = formData;
 
@@ -30,7 +32,7 @@ const ResetPasswordPage = ({
             setAlert("Password do not match", "danger");
             return;
         }
-
+        setLoading(true);
         resetPassword(formData, params.token, handleSuccess);
     };
 
@@ -39,6 +41,7 @@ const ResetPasswordPage = ({
             password: "",
             password_confirmation: "",
         });
+        setLoading(false);
     };
 
     return (
@@ -48,6 +51,18 @@ const ResetPasswordPage = ({
                     <h1 className="card-title text-primary text-center">
                         Reset Password
                     </h1>
+                    {alerts.map(
+                        (alert) =>
+                            alert.alertType === "danger" && (
+                                <div
+                                    key={alert.id}
+                                    className={`alert alert-${alert.alertType} py-2`}
+                                    role="alert"
+                                >
+                                    {alert.msg}
+                                </div>
+                            )
+                    )}
                     <form onSubmit={handleOnSubmit} className="form row g-3">
                         <div className="form-floating col-12">
                             <input
@@ -79,8 +94,11 @@ const ResetPasswordPage = ({
                         </div>
                         <div className="d-grid gap-2 col-12 mx-auto">
                             <button
-                                className="btn btn-primary btn-lg"
+                                className={`btn btn-${
+                                    loading ? "secondary" : "primary"
+                                } btn-lg text-white`}
                                 type="submit"
+                                disabled={loading}
                             >
                                 Submit
                             </button>
@@ -99,7 +117,7 @@ ResetPasswordPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    alert: state.alert,
+    alerts: state.alert,
     isAuthenticated: state.auth.isAuthenticated,
 });
 

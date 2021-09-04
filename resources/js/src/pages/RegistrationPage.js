@@ -6,7 +6,13 @@ import { setAlert } from "../actions/alert";
 import { registerUser } from "../actions/auth";
 import { connect } from "react-redux";
 
-const RegistrationPage = ({ setAlert, registerUser, isAuthenticated }) => {
+const RegistrationPage = ({
+    setAlert,
+    registerUser,
+    isAuthenticated,
+    alerts,
+    loading,
+}) => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -38,6 +44,18 @@ const RegistrationPage = ({ setAlert, registerUser, isAuthenticated }) => {
                     <p className="lead text-center">
                         <i className="fas fa-user"></i> Create Your Account
                     </p>
+                    {alerts.map(
+                        (alert) =>
+                            alert.alertType === "danger" && (
+                                <div
+                                    key={alert.id}
+                                    className={`alert alert-${alert.alertType} py-2`}
+                                    role="alert"
+                                >
+                                    {alert.msg}
+                                </div>
+                            )
+                    )}
                     <form onSubmit={handleOnSubmit} className="form row g-3">
                         <div className="form-floating col-12">
                             <input
@@ -95,8 +113,11 @@ const RegistrationPage = ({ setAlert, registerUser, isAuthenticated }) => {
                         </div>
                         <div className="d-grid gap-2 col-12 mx-auto">
                             <button
-                                className="btn btn-primary btn-lg"
+                                className={`btn btn-${
+                                    loading ? "secondary" : "primary"
+                                } btn-lg text-white`}
                                 type="submit"
+                                disabled={loading}
                             >
                                 Register
                             </button>
@@ -117,8 +138,9 @@ RegistrationPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    alert: state.alert,
+    alerts: state.alert,
     isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading,
 });
 
 const mapDispatchToProps = { setAlert, registerUser };

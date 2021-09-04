@@ -24,13 +24,6 @@ export const loadUser = () => async (dispatch) => {
         // dispatch(getNotifications());
     } catch (err) {
         console.log(err.response);
-        if (err.response.status == 500) {
-            return dispatch(
-                setAlert("Server errror, please try again.", "danger")
-            );
-        }
-
-        dispatch(setAlert(err.response.data.message, "danger"));
 
         dispatch({ type: AUTH_ERROR });
     }
@@ -146,7 +139,12 @@ export const requestPasswordReset =
         try {
             const res = await axios.post("/api/forgot-password", body, config);
 
-            dispatch(setAlert(res.data.msg, "success"));
+            dispatch(
+                setAlert(
+                    "An email has been sent to you, please check your email.",
+                    "success"
+                )
+            );
             handleSuccess();
         } catch (err) {
             console.log(err.response);
@@ -181,6 +179,7 @@ export const resetPassword =
             );
 
             handleSuccess();
+            window.location.replace("/login");
         } catch (err) {
             console.log(err.response);
             if (err.response.status == 500) {

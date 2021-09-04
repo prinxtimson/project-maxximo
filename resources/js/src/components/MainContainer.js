@@ -1,17 +1,42 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
 import MainFooter from "./MainFooter";
 import MainHeader from "./MainHeader";
 
-const MainContainer = ({ children }) => {
+const MainContainer = ({ children, alerts }) => {
     return (
-        <div className="d-flex flex-column" style={{ minHeight: "95vh" }}>
-            <MainHeader />
-            <div className="container-fluid flex-grow-1 flex-column d-flex justify-content-center">
-                {children}
+        <Fragment>
+            <div
+                className="position-fixed"
+                style={{ zIndex: 10, top: 60, right: 20 }}
+            >
+                {alerts.map(
+                    (alert) =>
+                        alert.alertType === "success" && (
+                            <div
+                                key={alert.id}
+                                className="toast align-items-center text-white bg-success border-0 my-2 show"
+                                role="alert"
+                                aria-live="assertive"
+                            >
+                                <div className="toast-body">{alert.msg}</div>
+                            </div>
+                        )
+                )}
             </div>
-            <MainFooter />
-        </div>
+            <div className="d-flex flex-column" style={{ minHeight: "95vh" }}>
+                <MainHeader />
+                <div className="container-fluid flex-grow-1 flex-column d-flex justify-content-center">
+                    {children}
+                </div>
+                <MainFooter />
+            </div>
+        </Fragment>
     );
 };
 
-export default MainContainer;
+const mapStateToProps = (state) => ({
+    alerts: state.alert,
+});
+
+export default connect(mapStateToProps)(MainContainer);

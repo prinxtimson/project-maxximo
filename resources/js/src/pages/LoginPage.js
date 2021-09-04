@@ -5,7 +5,7 @@ import MainContainer from "../components/MainContainer";
 import { loginUser } from "../actions/auth";
 import { connect } from "react-redux";
 
-const LoginPage = ({ loginUser }) => {
+const LoginPage = ({ loginUser, alerts, loading }) => {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -31,6 +31,18 @@ const LoginPage = ({ loginUser }) => {
                     <p className="lead text-center">
                         <i className="fas fa-user"></i> Sign Into Your Account
                     </p>
+                    {alerts.map(
+                        (alert) =>
+                            alert.alertType === "danger" && (
+                                <div
+                                    key={alert.id}
+                                    className={`alert alert-${alert.alertType} py-2`}
+                                    role="alert"
+                                >
+                                    {alert.msg}
+                                </div>
+                            )
+                    )}
                     <form onSubmit={handleOnSubmit} className="form row g-3 ">
                         <div className="form-floating col-12">
                             <input
@@ -63,8 +75,11 @@ const LoginPage = ({ loginUser }) => {
                         </div>
                         <div className="d-grid gap-2 col-12 mx-auto">
                             <button
-                                className="btn btn-primary btn-lg"
+                                className={`btn btn-${
+                                    loading ? "secondary" : "primary"
+                                } btn-lg text-white`}
                                 type="submit"
+                                disabled={loading}
                             >
                                 Signin
                             </button>
@@ -87,6 +102,8 @@ LoginPage.propTypes = {
 
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading,
+    alerts: state.alert,
 });
 
 const mapDispatchToProps = { loginUser };
