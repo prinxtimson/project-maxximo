@@ -6,7 +6,7 @@ const HomePage = (props) => {
     return (
         <MainContainer>
             <div className="container">
-                <div className="row">
+                <div className="row align-items-center">
                     <div className="col">
                         <h1>Insights</h1>
                         <h3>Get solutions tailored to your business options</h3>

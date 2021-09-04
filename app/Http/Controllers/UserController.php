@@ -83,6 +83,8 @@ class UserController extends Controller
 
         $user->assignRole('user');
 
+        Auth::login($user);
+
         $request->session()->regenerate();
 
         $token = $user->createToken('access_token')->plainTextToken;

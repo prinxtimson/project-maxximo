@@ -1,4 +1,4 @@
-import axios from "axios";
+const axios = window.axios;
 import { setAlert } from "./alert";
 import {
     AUTH_ERROR,
@@ -9,6 +9,7 @@ import {
     LOGIN_FAIL,
     LOGOUT_USER,
     CLEAR_PROFILE,
+    AUTH_LOADING,
 } from "./types";
 
 // Load authenticated user action
@@ -20,7 +21,7 @@ export const loadUser = () => async (dispatch) => {
             type: USER_LOADED,
             payload: res.data,
         });
-        dispatch(getNotifications());
+        // dispatch(getNotifications());
     } catch (err) {
         console.log(err.response);
         if (err.response.status == 500) {
@@ -29,7 +30,7 @@ export const loadUser = () => async (dispatch) => {
             );
         }
 
-        dispatch(setAlert(err.response.data, "danger"));
+        dispatch(setAlert(err.response.data.message, "danger"));
 
         dispatch({ type: AUTH_ERROR });
     }
@@ -61,6 +62,7 @@ export const uploadAvatar = (file) => async (dispatch) => {
 
 //Login user action
 export const loginUser = (email, password) => async (dispatch) => {
+    dispatch({ type: AUTH_LOADING });
     const config = {
         headers: {
             "Content-Type": "application/json",
@@ -70,16 +72,17 @@ export const loginUser = (email, password) => async (dispatch) => {
     const body = JSON.stringify({ email, password });
 
     try {
-        await axios.get(`${BASE_URL}/sanctum/csrf-cookie`);
+        await axios.get(`/sanctum/csrf-cookie`);
 
-        const res = await axios.post("/login", body, config);
+        const res = await axios.post("/api/login", body, config);
 
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data,
         });
 
-        dispatch(loadUser());
+        //dispatch(loadUser());
+        window.location.replace("/");
     } catch (err) {
         console.log(err.response);
         if (err.response.status == 500) {
@@ -88,7 +91,7 @@ export const loginUser = (email, password) => async (dispatch) => {
             );
         }
 
-        dispatch(setAlert(err.response.data, "danger"));
+        dispatch(setAlert(err.response.data.message, "danger"));
 
         dispatch({ type: LOGIN_FAIL });
     }
@@ -96,6 +99,7 @@ export const loginUser = (email, password) => async (dispatch) => {
 
 // Register user action
 export const registerUser = (formData) => async (dispatch) => {
+    dispatch({ type: AUTH_LOADING });
     const config = {
         headers: {
             "Content-Type": "application/json",
@@ -105,14 +109,16 @@ export const registerUser = (formData) => async (dispatch) => {
     const body = JSON.stringify(formData);
 
     try {
-        const res = await axios.post("/api/users", body, config);
+        const res = await axios.post("/api/register", body, config);
 
         dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data,
         });
 
-        dispatch(loadUser());
+        //dispatch(loadUser());
+
+        window.location.replace("/");
     } catch (err) {
         console.log(err.response);
         if (err.response.status == 500) {
@@ -121,7 +127,7 @@ export const registerUser = (formData) => async (dispatch) => {
             );
         }
 
-        dispatch(setAlert(err.response.data, "danger"));
+        dispatch(setAlert(err.response.data.message, "danger"));
         dispatch({ type: REGISTER_FAIL });
     }
 };
@@ -138,7 +144,7 @@ export const requestPasswordReset =
         const body = JSON.stringify({ email });
 
         try {
-            const res = await axios.put("/api/forgot-password", body, config);
+            const res = await axios.post("/api/forgot-password", body, config);
 
             dispatch(setAlert(res.data.msg, "success"));
             handleSuccess();
@@ -150,7 +156,7 @@ export const requestPasswordReset =
                 );
             }
 
-            dispatch(setAlert(err.response.data, "danger"));
+            dispatch(setAlert(err.response.data.message, "danger"));
         }
     };
 
@@ -165,7 +171,7 @@ export const resetPassword =
 
         const body = JSON.stringify({ ...data, token });
         try {
-            const res = await axios.put("/api/reset-password", body, config);
+            const res = await axios.post("/api/reset-password", body, config);
 
             dispatch(
                 setAlert(
@@ -183,7 +189,7 @@ export const resetPassword =
                 );
             }
 
-            dispatch(setAlert(err.response.data, "danger"));
+            dispatch(setAlert(err.response.data.message, "danger"));
         }
     };
 
@@ -191,7 +197,7 @@ export const resetPassword =
 export const logoutUser = () => async (dispatch) => {
     try {
         await axios.post(`/logout`);
-        location.replace("/login");
+        //location.replace("/login");
         dispatch({ type: CLEAR_PROFILE });
         dispatch({ type: LOGOUT_USER });
     } catch (error) {
@@ -202,6 +208,6 @@ export const logoutUser = () => async (dispatch) => {
             );
         }
 
-        dispatch(setAlert(err.response.data, "danger"));
+        dispatch(setAlert(err.response.data.message, "danger"));
     }
 };

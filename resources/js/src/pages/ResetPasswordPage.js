@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { setAlert } from "../actions/alert";
 import { resetPassword } from "../actions/auth";
 import MainContainer from "../components/MainContainer";
@@ -12,30 +12,32 @@ const ResetPasswordPage = ({
     match: { params },
     resetPassword,
 }) => {
+    const search = new URLSearchParams(useLocation().search);
     const [formData, setFormData] = useState({
+        email: search.get("email"),
         password: "",
-        confirmPassword: "",
+        password_confirmation: "",
     });
 
-    const { password, confirmPassword } = formData;
+    const { password, password_confirmation } = formData;
 
     const handleOnChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        if (password !== confirmPassword) {
+        if (password !== password_confirmation) {
             setAlert("Password do not match", "danger");
             return;
         }
 
-        resetPassword(password, params.token, handleSuccess);
+        resetPassword(formData, params.token, handleSuccess);
     };
 
     const handleSuccess = () => {
         setFormData({
             password: "",
-            confirmPassword: "",
+            password_confirmation: "",
         });
     };
 
@@ -64,10 +66,10 @@ const ResetPasswordPage = ({
                             <input
                                 type="password"
                                 className="form-control form-control-lg"
-                                value={confirmPassword}
+                                value={password_confirmation}
                                 placeholder="Confirm password"
                                 id="floatingInput"
-                                name="confirmPassword"
+                                name="password_confirmation"
                                 onChange={handleOnChange}
                                 required
                             />

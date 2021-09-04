@@ -5,7 +5,7 @@ import MainContainer from "../components/MainContainer";
 import { loginUser } from "../actions/auth";
 import { connect } from "react-redux";
 
-const LoginPage = () => {
+const LoginPage = ({ loginUser }) => {
     const [formData, setFormData] = useState({
         email: "",
         password: "",

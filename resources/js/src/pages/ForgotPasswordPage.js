@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 
 const ForgotPasswordPage = ({ isAuthenticated, requestPasswordReset }) => {
     const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleOnChange = (e) => setEmail(e.target.value);
 
@@ -17,6 +18,7 @@ const ForgotPasswordPage = ({ isAuthenticated, requestPasswordReset }) => {
 
     const handleSuccess = () => {
         setEmail("");
+        setLoading(false);
     };
 
     return (
@@ -48,6 +50,7 @@ const ForgotPasswordPage = ({ isAuthenticated, requestPasswordReset }) => {
                             <button
                                 className="btn btn-primary btn-lg"
                                 type="submit"
+                                disabled={loading}
                             >
                                 Submit
                             </button>

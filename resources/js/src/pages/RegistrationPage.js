@@ -8,21 +8,20 @@ import { connect } from "react-redux";
 
 const RegistrationPage = ({ setAlert, registerUser, isAuthenticated }) => {
     const [formData, setFormData] = useState({
-        firstname: "",
-        lastname: "",
+        name: "",
         email: "",
         password: "",
-        confirmPassword: "",
+        password_confirmation: "",
     });
 
-    const { firstname, lastname, email, password, confirmPassword } = formData;
+    const { name, email, password, password_confirmation } = formData;
 
     const handleOnChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        if (password !== confirmPassword) {
+        if (password !== password_confirmation) {
             setAlert("Password do not match", "danger");
             return;
         }
@@ -40,31 +39,18 @@ const RegistrationPage = ({ setAlert, registerUser, isAuthenticated }) => {
                         <i className="fas fa-user"></i> Create Your Account
                     </p>
                     <form onSubmit={handleOnSubmit} className="form row g-3">
-                        <div className="form-floating col-md-6">
+                        <div className="form-floating col-12">
                             <input
                                 type="text"
                                 className="form-control form-control-lg"
-                                placeholder="First name"
-                                name="firstname"
+                                placeholder="Full name"
+                                name="name"
                                 id="floatingInput"
-                                value={firstname}
+                                value={name}
                                 onChange={handleOnChange}
                                 required
                             />
-                            <label htmlFor="floatingInput">First name</label>
-                        </div>
-                        <div className="form-floating col-md-6">
-                            <input
-                                type="text"
-                                className="form-control form-control-lg"
-                                placeholder="Last name"
-                                name="lastname"
-                                onChange={handleOnChange}
-                                id="floatingInput"
-                                value={lastname}
-                                required
-                            />
-                            <label htmlFor="floatingInput">Last name</label>
+                            <label htmlFor="floatingInput">Full name</label>
                         </div>
                         <div className="form-floating col-12">
                             <input
@@ -96,10 +82,10 @@ const RegistrationPage = ({ setAlert, registerUser, isAuthenticated }) => {
                             <input
                                 type="password"
                                 className="form-control form-control-lg"
-                                value={confirmPassword}
+                                value={password_confirmation}
                                 placeholder="Confirm password"
                                 id="floatingInput"
-                                name="confirmPassword"
+                                name="password_confirmation"
                                 onChange={handleOnChange}
                                 required
                             />
@@ -112,7 +98,7 @@ const RegistrationPage = ({ setAlert, registerUser, isAuthenticated }) => {
                                 className="btn btn-primary btn-lg"
                                 type="submit"
                             >
-                                Signup
+                                Register
                             </button>
                         </div>
                     </form>

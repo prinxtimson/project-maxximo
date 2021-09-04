@@ -1,9 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { logoutUser } from "../actions/auth";
 
-const MainHeader = () => {
+const MainHeader = ({ isAuthenticated, logoutUser }) => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light ">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">
                     <img
@@ -47,16 +49,30 @@ const MainHeader = () => {
                         </li>
                     </ul>
                     <ul className="nav">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/register">
-                                Register
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">
-                                Login
-                            </Link>
-                        </li>
+                        {!isAuthenticated ? (
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/register">
+                                        Register
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/login">
+                                        Login
+                                    </Link>
+                                </li>
+                            </>
+                        ) : (
+                            <li className="nav-item">
+                                <button
+                                    className="nav-link"
+                                    href="#"
+                                    onClick={logoutUser}
+                                >
+                                    Logout
+                                </button>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>
@@ -64,4 +80,8 @@ const MainHeader = () => {
     );
 };
 
-export default MainHeader;
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { logoutUser })(MainHeader);
