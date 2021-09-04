@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MainFooter = () => {
     return (
-        <div className="row">
+        <div className="row align-items-center">
             <div className="col">
-                <p className="text-muted">
+                <p className="text-muted mb-0">
                     {"Copyright © "}
                     <a color="inherit" href="https://tritekconsulting.co.uk">
                         Tritek Consulting Ltd
@@ -16,14 +17,14 @@ const MainFooter = () => {
             <div className="col">
                 <ul className="nav justify-content-center">
                     <li className="nav-item">
-                        <a className="nav-link" href="#">
+                        <Link className="nav-link" to="/terms-and-conditions">
                             Terms &amp; Conditions
-                        </a>
+                        </Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">
+                        <Link className="nav-link" to="/privacy-policy">
                             Privacy Policy
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>

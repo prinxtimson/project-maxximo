@@ -17,6 +17,12 @@ use App\Http\Controllers\AuthController;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+Route::get('/privacy-policy', function () {
+    return view('welcome');
+});
+Route::get('/terms-and-conditions', function () {
+    return view('welcome');
+});
 
 Route::middleware(['guest'])->group(function () {
     //

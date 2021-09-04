@@ -5,7 +5,7 @@ import { logoutUser } from "../actions/auth";
 
 const MainHeader = ({ isAuthenticated, logoutUser }) => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light ">
+        <nav className="navbar navbar-expand-md navbar-light ">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">
                     <img
@@ -48,16 +48,22 @@ const MainHeader = ({ isAuthenticated, logoutUser }) => {
                             </Link>
                         </li>
                     </ul>
-                    <ul className="nav">
+                    <ul className="navbar-nav">
                         {!isAuthenticated ? (
                             <>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/register">
+                                <li className="nav-item mx-2 my-sm-2">
+                                    <Link
+                                        className="nav-link btn btn-primary text-white"
+                                        to="/register"
+                                    >
                                         Register
                                     </Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/login">
+                                <li className="nav-item mx-2 my-sm-2">
+                                    <Link
+                                        className="nav-link btn btn-outline-primary"
+                                        to="/login"
+                                    >
                                         Login
                                     </Link>
                                 </li>

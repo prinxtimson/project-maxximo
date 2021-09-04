@@ -9,6 +9,8 @@ import LoginPage from "./pages/LoginPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import TermsConditionsPage from "./pages/TermsConditionsPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 
 const App = () => {
     useEffect(() => {
@@ -35,6 +37,16 @@ const App = () => {
                         exact
                         path="/reset-password/:token"
                         component={ResetPasswordPage}
+                    />
+                    <Route
+                        exact
+                        path="/privacy-policy"
+                        component={PrivacyPolicyPage}
+                    />
+                    <Route
+                        exact
+                        path="/terms-and-conditions"
+                        component={TermsConditionsPage}
                     />
                 </Switch>
             </Router>

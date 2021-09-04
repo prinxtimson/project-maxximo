@@ -23,72 +23,100 @@ const LoginPage = ({ loginUser, alerts, loading }) => {
 
     return (
         <MainContainer>
-            <div className="card my-5 m-auto p-4" style={{ maxWidth: "540px" }}>
-                <div className="card-body">
-                    <h1 className="card-title text-primary text-center">
-                        Sign In
-                    </h1>
-                    <p className="lead text-center">
-                        <i className="fas fa-user"></i> Sign Into Your Account
-                    </p>
-                    {alerts.map(
-                        (alert) =>
-                            alert.alertType === "danger" && (
-                                <div
-                                    key={alert.id}
-                                    className={`alert alert-${alert.alertType} py-2`}
-                                    role="alert"
+            <div className="container-fluid">
+                <div className="row align-items-center">
+                    <div className="col">
+                        <div
+                            className="card my-5 m-auto p-2"
+                            style={{ maxWidth: "440px" }}
+                        >
+                            <div className="card-body">
+                                <h1 className="card-title text-primary text-center">
+                                    Sign In
+                                </h1>
+                                <p className="lead text-center">
+                                    <i className="fas fa-user"></i> Sign Into
+                                    Your Account
+                                </p>
+                                {alerts.map(
+                                    (alert) =>
+                                        alert.alertType === "danger" && (
+                                            <div
+                                                key={alert.id}
+                                                className={`alert alert-${alert.alertType} py-2`}
+                                                role="alert"
+                                            >
+                                                {alert.msg}
+                                            </div>
+                                        )
+                                )}
+                                <form
+                                    onSubmit={handleOnSubmit}
+                                    className="form row g-3 "
                                 >
-                                    {alert.msg}
-                                </div>
-                            )
-                    )}
-                    <form onSubmit={handleOnSubmit} className="form row g-3 ">
-                        <div className="form-floating col-12">
-                            <input
-                                type="email"
-                                className="form-control form-control-lg"
-                                value={email}
-                                placeholder="Email"
-                                id="floatingInput"
-                                name="email"
-                                onChange={handleOnChange}
-                                required
-                            />
-                            <label htmlFor="floatingInput">Email address</label>
+                                    <div className="form-floating col-12">
+                                        <input
+                                            type="email"
+                                            className="form-control form-control-lg"
+                                            value={email}
+                                            placeholder="Email"
+                                            id="floatingInput"
+                                            name="email"
+                                            onChange={handleOnChange}
+                                            required
+                                        />
+                                        <label htmlFor="floatingInput">
+                                            Email address
+                                        </label>
+                                    </div>
+                                    <div className="form-floating col-12">
+                                        <input
+                                            type="password"
+                                            className="form-control form-control-lg"
+                                            value={password}
+                                            placeholder="Password"
+                                            id="floatingInput"
+                                            name="password"
+                                            onChange={handleOnChange}
+                                            required
+                                        />
+                                        <label htmlFor="floatingInput">
+                                            Password
+                                        </label>
+                                    </div>
+                                    <div className="my-1">
+                                        <Link to="/forgot-password">
+                                            Forgot Password?
+                                        </Link>
+                                    </div>
+                                    <div className="d-grid gap-2 col-12 mx-auto">
+                                        <button
+                                            className={`btn btn-${
+                                                loading
+                                                    ? "secondary"
+                                                    : "primary"
+                                            } btn-lg text-white`}
+                                            type="submit"
+                                            disabled={loading}
+                                        >
+                                            Signin
+                                        </button>
+                                    </div>
+                                </form>
+                                <p className="my-1">
+                                    Don't have an account?{" "}
+                                    <Link to="/register">Register</Link>
+                                </p>
+                            </div>
                         </div>
-                        <div className="form-floating col-12">
-                            <input
-                                type="password"
-                                className="form-control form-control-lg"
-                                value={password}
-                                placeholder="Password"
-                                id="floatingInput"
-                                name="password"
-                                onChange={handleOnChange}
-                                required
-                            />
-                            <label htmlFor="floatingInput">Password</label>
-                        </div>
-                        <div className="my-1">
-                            <Link to="/forgot-password">Forgot Password?</Link>
-                        </div>
-                        <div className="d-grid gap-2 col-12 mx-auto">
-                            <button
-                                className={`btn btn-${
-                                    loading ? "secondary" : "primary"
-                                } btn-lg text-white`}
-                                type="submit"
-                                disabled={loading}
-                            >
-                                Signin
-                            </button>
-                        </div>
-                    </form>
-                    <p className="my-1">
-                        Don't have an account?{" "}
-                        <Link to="/register">Register</Link>
-                    </p>
+                    </div>
+                    <div className="col">
+                        <img
+                            style={{ width: "100%" }}
+                            src="/images/login.png"
+                            alt="Login"
+                        />
+                    </div>
                 </div>
             </div>
         </MainContainer>
