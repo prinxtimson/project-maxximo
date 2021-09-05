@@ -54,7 +54,7 @@ export const uploadAvatar = (file) => async (dispatch) => {
 };
 
 //Login user action
-export const loginUser = (email, password, history) => async (dispatch) => {
+export const loginUser = (email, password) => async (dispatch) => {
     dispatch({ type: AUTH_LOADING });
     const config = {
         headers: {
@@ -74,7 +74,8 @@ export const loginUser = (email, password, history) => async (dispatch) => {
             payload: res.data,
         });
 
-        history.push("/");
+        //dispatch(loadUser());
+        window.location.replace("/");
     } catch (err) {
         console.log(err.response);
         if (err.response.status == 500) {
@@ -90,7 +91,7 @@ export const loginUser = (email, password, history) => async (dispatch) => {
 };
 
 // Register user action
-export const registerUser = (formData, history) => async (dispatch) => {
+export const registerUser = (formData) => async (dispatch) => {
     dispatch({ type: AUTH_LOADING });
     const config = {
         headers: {
@@ -108,7 +109,9 @@ export const registerUser = (formData, history) => async (dispatch) => {
             payload: res.data,
         });
 
-        history.push("/");
+        //dispatch(loadUser());
+
+        window.location.replace("/");
     } catch (err) {
         console.log(err.response);
         if (err.response.status == 500) {
@@ -122,7 +125,7 @@ export const registerUser = (formData, history) => async (dispatch) => {
     }
 };
 
-export const changePassword = (data, history) => async (dispatch) => {
+export const changePassword = (data) => async (dispatch) => {
     dispatch({ type: AUTH_LOADING });
     const config = {
         headers: {
@@ -136,8 +139,7 @@ export const changePassword = (data, history) => async (dispatch) => {
         const res = await axios.post("/api/change-password", body, config);
 
         dispatch(setAlert(res.data.message, "success"));
-
-        history.push("/login");
+        window.location.reload();
     } catch (err) {
         console.log(err.response);
         if (err.response.status == 500) {
@@ -184,41 +186,44 @@ export const requestPasswordReset =
     };
 
 // Reset password action
-export const resetPassword = (data, token, history) => async (dispatch) => {
-    const config = {
-        headers: {
-            "Content-Type": "application/json",
-        },
+export const resetPassword =
+    (data, token, handleSuccess) => async (dispatch) => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        const body = JSON.stringify({ ...data, token });
+        try {
+            const res = await axios.post("/api/reset-password", body, config);
+
+            dispatch(
+                setAlert(
+                    "Your password had been updated successfully.",
+                    "success"
+                )
+            );
+
+            handleSuccess();
+            window.location.replace("/login");
+        } catch (err) {
+            console.log(err.response);
+            if (err.response.status == 500) {
+                return dispatch(
+                    setAlert("Server errror, please try again.", "danger")
+                );
+            }
+
+            dispatch(setAlert(err.response.data.message, "danger"));
+        }
     };
 
-    const body = JSON.stringify({ ...data, token });
-    try {
-        const res = await axios.post("/api/reset-password", body, config);
-
-        dispatch(
-            setAlert("Your password had been updated successfully.", "success")
-        );
-
-        history.push("/login");
-    } catch (err) {
-        console.log(err.response);
-        if (err.response.status == 500) {
-            return dispatch(
-                setAlert("Server errror, please try again.", "danger")
-            );
-        }
-
-        dispatch(setAlert(err.response.data.message, "danger"));
-    }
-};
-
 // Logout user action
-export const logoutUser = (history) => async (dispatch) => {
+export const logoutUser = () => async (dispatch) => {
     try {
         await axios.post(`/logout`);
-        history.push("/");
-        dispatch({ type: CLEAR_PROFILE });
-        dispatch({ type: LOGOUT_USER });
+        window.location.reload();
     } catch (error) {
         console.log(err.response);
         if (err.response.status == 500) {

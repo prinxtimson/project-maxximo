@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
 import MainContainer from "../components/MainContainer";
 import { changePassword } from "../actions/auth";
 import { connect } from "react-redux";
 
 const ChangePasswordPage = ({ loading, changePassword, alerts }) => {
-    const history = useHistory();
     const [formData, setFormData] = useState({
         password: "",
         new_password: "",
@@ -20,7 +18,7 @@ const ChangePasswordPage = ({ loading, changePassword, alerts }) => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        changePassword(formData, history);
+        changePassword(formData);
     };
 
     return (
