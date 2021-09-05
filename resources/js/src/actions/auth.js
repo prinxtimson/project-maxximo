@@ -54,7 +54,7 @@ export const uploadAvatar = (file) => async (dispatch) => {
 };
 
 //Login user action
-export const loginUser = (email, password) => async (dispatch) => {
+export const loginUser = (email, password, history) => async (dispatch) => {
     dispatch({ type: AUTH_LOADING });
     const config = {
         headers: {
@@ -74,8 +74,7 @@ export const loginUser = (email, password) => async (dispatch) => {
             payload: res.data,
         });
 
-        //dispatch(loadUser());
-        window.location.replace("/");
+        history.push("/");
     } catch (err) {
         console.log(err.response);
         if (err.response.status == 500) {
@@ -91,7 +90,7 @@ export const loginUser = (email, password) => async (dispatch) => {
 };
 
 // Register user action
-export const registerUser = (formData) => async (dispatch) => {
+export const registerUser = (formData, history) => async (dispatch) => {
     dispatch({ type: AUTH_LOADING });
     const config = {
         headers: {
@@ -109,9 +108,7 @@ export const registerUser = (formData) => async (dispatch) => {
             payload: res.data,
         });
 
-        //dispatch(loadUser());
-
-        window.location.replace("/");
+        history.push("/");
     } catch (err) {
         console.log(err.response);
         if (err.response.status == 500) {
@@ -122,6 +119,34 @@ export const registerUser = (formData) => async (dispatch) => {
 
         dispatch(setAlert(err.response.data.message, "danger"));
         dispatch({ type: REGISTER_FAIL });
+    }
+};
+
+export const changePassword = (data, history) => async (dispatch) => {
+    dispatch({ type: AUTH_LOADING });
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+
+    const body = JSON.stringify(data);
+
+    try {
+        const res = await axios.post("/api/change-password", body, config);
+
+        dispatch(setAlert(res.data.message, "success"));
+
+        history.push("/login");
+    } catch (err) {
+        console.log(err.response);
+        if (err.response.status == 500) {
+            return dispatch(
+                setAlert("Server errror, please try again.", "danger")
+            );
+        }
+
+        dispatch(setAlert(err.response.data.message, "danger"));
     }
 };
 
@@ -159,44 +184,39 @@ export const requestPasswordReset =
     };
 
 // Reset password action
-export const resetPassword =
-    (data, token, handleSuccess) => async (dispatch) => {
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
-
-        const body = JSON.stringify({ ...data, token });
-        try {
-            const res = await axios.post("/api/reset-password", body, config);
-
-            dispatch(
-                setAlert(
-                    "Your password had been updated successfully.",
-                    "success"
-                )
-            );
-
-            handleSuccess();
-            window.location.replace("/login");
-        } catch (err) {
-            console.log(err.response);
-            if (err.response.status == 500) {
-                return dispatch(
-                    setAlert("Server errror, please try again.", "danger")
-                );
-            }
-
-            dispatch(setAlert(err.response.data.message, "danger"));
-        }
+export const resetPassword = (data, token, history) => async (dispatch) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+        },
     };
 
+    const body = JSON.stringify({ ...data, token });
+    try {
+        const res = await axios.post("/api/reset-password", body, config);
+
+        dispatch(
+            setAlert("Your password had been updated successfully.", "success")
+        );
+
+        history.push("/login");
+    } catch (err) {
+        console.log(err.response);
+        if (err.response.status == 500) {
+            return dispatch(
+                setAlert("Server errror, please try again.", "danger")
+            );
+        }
+
+        dispatch(setAlert(err.response.data.message, "danger"));
+    }
+};
+
 // Logout user action
-export const logoutUser = () => async (dispatch) => {
+export const logoutUser = (history) => async (dispatch) => {
     try {
         await axios.post(`/logout`);
-        //location.replace("/login");
+        history.push("/");
         dispatch({ type: CLEAR_PROFILE });
         dispatch({ type: LOGOUT_USER });
     } catch (error) {

@@ -1,40 +1,26 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useLocation, useHistory } from "react-router-dom";
-import { setAlert } from "../actions/alert";
-import { resetPassword } from "../actions/auth";
+import { useHistory } from "react-router-dom";
 import MainContainer from "../components/MainContainer";
+import { changePassword } from "../actions/auth";
 import { connect } from "react-redux";
 
-const ResetPasswordPage = ({
-    setAlert,
-    isAuthenticated,
-    match: { params },
-    resetPassword,
-    alerts,
-}) => {
+const ChangePasswordPage = ({ loading, changePassword, alerts }) => {
     const history = useHistory();
-    const search = new URLSearchParams(useLocation().search);
     const [formData, setFormData] = useState({
-        email: search.get("email"),
         password: "",
-        password_confirmation: "",
+        new_password: "",
+        new_password_confirmation: "",
     });
-    const [loading, setLoading] = useState(false);
 
-    const { password, password_confirmation } = formData;
+    const { password, new_password, new_password_confirmation } = formData;
 
     const handleOnChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        if (password !== password_confirmation) {
-            setAlert("Password do not match", "danger");
-            return;
-        }
-        setLoading(true);
-        resetPassword(formData, params.token, history);
+        changePassword(formData, history);
     };
 
     return (
@@ -42,7 +28,7 @@ const ResetPasswordPage = ({
             <div className="card my-5 m-auto p-2" style={{ maxWidth: "440px" }}>
                 <div className="card-body">
                     <h1 className="card-title text-primary text-center">
-                        Reset Password
+                        Change Password
                     </h1>
                     {alerts.map(
                         (alert) =>
@@ -60,29 +46,42 @@ const ResetPasswordPage = ({
                         <div className="form-floating col-12">
                             <input
                                 type="password"
-                                className="form-control form-control-lg"
-                                value={password}
-                                placeholder="Password"
-                                id="floatingInput"
+                                className="form-control form-control-lg mb-3"
+                                placeholder="Old Password"
                                 name="password"
                                 onChange={handleOnChange}
+                                id="floatingInput"
+                                value={password}
                                 required
                             />
-                            <label htmlFor="floatingInput">Password</label>
+                            <label htmlFor="floatingInput">Old password</label>
                         </div>
                         <div className="form-floating col-12">
                             <input
                                 type="password"
                                 className="form-control form-control-lg"
-                                value={password_confirmation}
-                                placeholder="Confirm password"
+                                value={new_password}
+                                placeholder="New password"
                                 id="floatingInput"
-                                name="password_confirmation"
+                                name="new_password"
+                                onChange={handleOnChange}
+                                required
+                            />
+                            <label htmlFor="floatingInput">New password</label>
+                        </div>
+                        <div className="form-floating col-12">
+                            <input
+                                type="password"
+                                className="form-control form-control-lg"
+                                value={new_password_confirmation}
+                                placeholder="Confirm new password"
+                                id="floatingInput"
+                                name="new_password_confirmation"
                                 onChange={handleOnChange}
                                 required
                             />
                             <label htmlFor="floatingInput">
-                                Confirm Password
+                                Confirm new password
                             </label>
                         </div>
                         <div className="d-grid gap-2 col-12 mx-auto">
@@ -103,17 +102,14 @@ const ResetPasswordPage = ({
     );
 };
 
-ResetPasswordPage.propTypes = {
-    setAlert: PropTypes.func.isRequired,
-    resetPassword: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool,
+ChangePasswordPage.propTypes = {
+    loading: PropTypes.bool,
+    changePassword: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+    loading: state.auth.loading,
     alerts: state.alert,
-    isAuthenticated: state.auth.isAuthenticated,
 });
 
-const mapDispatchToProps = { setAlert, resetPassword };
-
-export default connect(mapStateToProps, mapDispatchToProps)(ResetPasswordPage);
+export default connect(mapStateToProps, { changePassword })(ChangePasswordPage);

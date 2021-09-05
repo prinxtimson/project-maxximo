@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { logoutUser } from "../actions/auth";
 
-const MainHeader = ({ isAuthenticated, logoutUser }) => {
+const MainHeader = ({ isAuthenticated, logoutUser, loading }) => {
+    const history = useHistory();
     return (
         <nav className="navbar navbar-expand-md navbar-light ">
             <div className="container-fluid">
@@ -49,11 +50,11 @@ const MainHeader = ({ isAuthenticated, logoutUser }) => {
                         </li>
                     </ul>
                     <ul className="navbar-nav">
-                        {!isAuthenticated ? (
+                        {!loading && !isAuthenticated ? (
                             <>
                                 <li className="nav-item mx-2 my-sm-2">
                                     <Link
-                                        className="nav-link btn btn-primary text-white"
+                                        className="btn btn-primary text-white"
                                         to="/register"
                                     >
                                         Register
@@ -61,7 +62,7 @@ const MainHeader = ({ isAuthenticated, logoutUser }) => {
                                 </li>
                                 <li className="nav-item mx-2 my-sm-2">
                                     <Link
-                                        className="nav-link btn btn-outline-primary"
+                                        className="btn btn-outline-primary"
                                         to="/login"
                                     >
                                         Login
@@ -69,15 +70,25 @@ const MainHeader = ({ isAuthenticated, logoutUser }) => {
                                 </li>
                             </>
                         ) : (
-                            <li className="nav-item">
-                                <button
-                                    className="nav-link"
-                                    href="#"
-                                    onClick={logoutUser}
-                                >
-                                    Logout
-                                </button>
-                            </li>
+                            <>
+                                <li className="nav-item mx-2 my-sm-2">
+                                    <Link
+                                        className="nav-link"
+                                        to="/change-password"
+                                    >
+                                        Change Password
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <button
+                                        className="nav-link btn btn-warning"
+                                        href="#"
+                                        onClick={() => logoutUser(history)}
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
+                            </>
                         )}
                     </ul>
                 </div>
@@ -88,6 +99,7 @@ const MainHeader = ({ isAuthenticated, logoutUser }) => {
 
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, { logoutUser })(MainHeader);

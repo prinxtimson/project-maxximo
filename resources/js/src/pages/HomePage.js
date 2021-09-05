@@ -8,7 +8,12 @@ const HomePage = (props) => {
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col">
-                        <h1 className="display-1 fw-bold">Insights</h1>
+                        <h1
+                            className="display-1 fw-bold"
+                            style={{ color: "blue" }}
+                        >
+                            Insights
+                        </h1>
                         <h2 className="">
                             Get solutions tailored to your business options
                         </h2>
@@ -21,7 +26,7 @@ const HomePage = (props) => {
                             </button>
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="col d-sm-none d-md-block">
                         <img
                             style={{ width: "100%" }}
                             src="/images/metrix.png"

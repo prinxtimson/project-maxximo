@@ -104,7 +104,7 @@ class AuthController extends Controller
         ]);
 
         return response([
-            'msg' => 'password update successful'
+            'message' => 'password update successful'
         ]);
     }
 

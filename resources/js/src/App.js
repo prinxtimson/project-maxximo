@@ -11,6 +11,7 @@ import RegistrationPage from "./pages/RegistrationPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import TermsConditionsPage from "./pages/TermsConditionsPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import ChangePasswordPage from "./pages/ChangePasswordPage";
 
 const App = () => {
     useEffect(() => {
@@ -47,6 +48,11 @@ const App = () => {
                         exact
                         path="/terms-and-conditions"
                         component={TermsConditionsPage}
+                    />
+                    <Route
+                        exact
+                        path="/change-password"
+                        component={ChangePasswordPage}
                     />
                 </Switch>
             </Router>

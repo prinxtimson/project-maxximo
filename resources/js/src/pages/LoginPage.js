@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import MainContainer from "../components/MainContainer";
 import { loginUser } from "../actions/auth";
 import { connect } from "react-redux";
 
 const LoginPage = ({ loginUser, alerts, loading }) => {
+    const history = useHistory();
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -18,7 +19,7 @@ const LoginPage = ({ loginUser, alerts, loading }) => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        loginUser(email.trim(), password);
+        loginUser(email.trim(), password, history);
     };
 
     return (
@@ -110,7 +111,7 @@ const LoginPage = ({ loginUser, alerts, loading }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="col d-sm-none d-md-block">
                         <img
                             style={{ width: "100%" }}
                             src="/images/login.png"
