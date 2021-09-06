@@ -136,7 +136,7 @@ export const changePassword = (data) => async (dispatch) => {
     const body = JSON.stringify(data);
 
     try {
-        const res = await axios.post("/api/change-password", body, config);
+        const res = await axios.put("/api/change-password", body, config);
 
         dispatch(setAlert(res.data.message, "success"));
         window.location.reload();

@@ -5486,7 +5486,7 @@ var changePassword = function changePassword(data) {
               body = JSON.stringify(data);
               _context5.prev = 3;
               _context5.next = 6;
-              return axios.post("/api/change-password", body, config);
+              return axios.put("/api/change-password", body, config);
 
             case 6:
               res = _context5.sent;
