@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import MainContainer from "../components/MainContainer";
 
 const HomePage = (props) => {
@@ -18,12 +19,13 @@ const HomePage = (props) => {
                             Get solutions tailored to your business options
                         </h2>
                         <div className="d-grid gap-2 d-md-block">
-                            <button
+                            <Link
                                 className="btn btn-primary text-white"
                                 type="button"
+                                to="/register"
                             >
                                 Start Your 14-day Free Trial
-                            </button>
+                            </Link>
                         </div>
                     </div>
                     <div className="col d-sm-none d-md-block">
