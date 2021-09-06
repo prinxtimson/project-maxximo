@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import MainContainer from "../components/MainContainer";
+import { connect } from "react-redux";
 
-const HomePage = (props) => {
+const HomePage = ({ isAuthenticated, loading }) => {
     return (
         <MainContainer>
             <div className="container">
@@ -19,13 +20,17 @@ const HomePage = (props) => {
                             Get solutions tailored to your business options
                         </h2>
                         <div className="d-grid gap-2 d-md-block">
-                            <Link
-                                className="btn btn-primary text-white"
-                                type="button"
-                                to="/register"
-                            >
-                                Start Your 14-day Free Trial
-                            </Link>
+                            {loading
+                                ? null
+                                : !isAuthenticated && (
+                                      <Link
+                                          className="btn btn-primary text-white"
+                                          type="button"
+                                          to="/register"
+                                      >
+                                          Start Your 14-day Free Trial
+                                      </Link>
+                                  )}
                         </div>
                     </div>
                     <div className="col d-sm-none d-md-block">
@@ -41,6 +46,13 @@ const HomePage = (props) => {
     );
 };
 
-HomePage.propTypes = {};
+HomePage.propTypes = {
+    loading: PropTypes.bool,
+};
 
-export default HomePage;
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading,
+});
+
+export default connect(mapStateToProps)(HomePage);

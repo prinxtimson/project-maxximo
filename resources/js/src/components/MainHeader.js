@@ -43,14 +43,9 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading }) => {
                                 About us
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="#">
-                                Pricing
-                            </Link>
-                        </li>
                     </ul>
                     <ul className="navbar-nav">
-                        {!loading && !isAuthenticated ? (
+                        {loading ? null : !isAuthenticated ? (
                             <>
                                 <li className="nav-item mx-2 my-sm-2">
                                     <Link
