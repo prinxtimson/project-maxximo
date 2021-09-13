@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw, ContentState } from "draft-js";
 import draftToHtml from "draftjs-to-html";
@@ -9,19 +9,26 @@ import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 import { saveTerms } from "../actions/terms";
 
-const TermsConditionsPage = ({ isAuthenticated, terms, saveTerms }) => {
-    const contentBlock = htmlToDraft(terms.content);
-    const contentState = ContentState.createFromBlockArray(
-        contentBlock.contentBlocks
-    );
+const TermsConditionsPage = ({ isAuthenticated, terms, saveTerms, user }) => {
     const [editorState, setEditorState] = useState(() =>
-        EditorState.createWithContent(contentState)
+        EditorState.createEmpty()
     );
     const [edit, setEdit] = useState(false);
 
+    useEffect(() => {
+        if (terms.content?.body) {
+            const contentBlock = htmlToDraft(terms.content.body);
+            const contentState = ContentState.createFromBlockArray(
+                contentBlock.contentBlocks
+            );
+
+            setEditorState(() => EditorState.createWithContent(contentState));
+        }
+    }, [terms]);
+
     const handleSaveTerms = () => {
-        let data = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-        saveTerms(data);
+        let body = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+        saveTerms({ body }, terms.content.id);
     };
 
     return (
@@ -29,7 +36,7 @@ const TermsConditionsPage = ({ isAuthenticated, terms, saveTerms }) => {
             <div className="container">
                 <h2 className="text-align-center">Terms And Conditions</h2>
                 <div className="py-2">
-                    {isAuthenticated && (
+                    {isAuthenticated && user?.roles[0]?.name === "admin" && (
                         <div className="py-2">
                             {edit ? (
                                 <div className="d-grid gap-2 d-md-block">
@@ -60,13 +67,16 @@ const TermsConditionsPage = ({ isAuthenticated, terms, saveTerms }) => {
                         </div>
                     )}
                     {!edit ? (
-                        <div className="py-2">
-                            <p>terms and conditions sample</p>
-                        </div>
+                        <div
+                            className="py-2"
+                            dangerouslySetInnerHTML={{
+                                __html: terms.content?.body,
+                            }}
+                        />
                     ) : (
                         isAuthenticated && (
                             <div
-                                className="py-3 border rounded"
+                                className="my-3 border rounded"
                                 style={{
                                     minHeight: 450,
                                 }}
@@ -95,6 +105,7 @@ TermsConditionsPage.propTypes = {
 const mapStateToProps = (state) => ({
     terms: state.terms,
     isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { saveTerms })(TermsConditionsPage);

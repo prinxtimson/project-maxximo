@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw, ContentState } from "draft-js";
 import draftToHtml from "draftjs-to-html";
@@ -9,26 +9,34 @@ import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 import { savePrivacy } from "../actions/privacy";
 
-const PrivacyPolicyPage = ({ isAuthenticated, privacy, savePrivacy }) => {
-    const contentBlock = htmlToDraft(privacy.content);
-    const contentState = ContentState.createFromBlockArray(
-        contentBlock.contentBlocks
-    );
+const PrivacyPolicyPage = ({ isAuthenticated, privacy, savePrivacy, user }) => {
     const [editorState, setEditorState] = useState(() =>
-        EditorState.createWithContent(contentState)
+        EditorState.createEmpty()
     );
     const [edit, setEdit] = useState(false);
 
+    useEffect(() => {
+        if (privacy.content?.body) {
+            const contentBlock = htmlToDraft(privacy.content?.body);
+
+            const contentState = ContentState.createFromBlockArray(
+                contentBlock.contentBlocks
+            );
+
+            setEditorState(() => EditorState.createWithContent(contentState));
+        }
+    }, [privacy]);
+
     const handleSavePrivacy = () => {
-        let data = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-        savePrivacy(data);
+        let body = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+        savePrivacy({ body }, privacy.content.id);
     };
     return (
         <MainContainer>
             <div className="container">
                 <h2 className="text-align-center">Privacy Policy</h2>
                 <div className="py-2">
-                    {isAuthenticated && (
+                    {isAuthenticated && user?.roles[0]?.name === "admin" && (
                         <div className="py-2">
                             {edit ? (
                                 <div className="d-grid gap-2 d-md-block">
@@ -59,13 +67,16 @@ const PrivacyPolicyPage = ({ isAuthenticated, privacy, savePrivacy }) => {
                         </div>
                     )}
                     {!edit ? (
-                        <div className="py-2">
-                            <p>privacy policy sample</p>
-                        </div>
+                        <div
+                            className="py-2"
+                            dangerouslySetInnerHTML={{
+                                __html: privacy.content?.body,
+                            }}
+                        />
                     ) : (
                         isAuthenticated && (
                             <div
-                                className="py-3 border rounded"
+                                className="my-3 border rounded"
                                 style={{
                                     minHeight: 450,
                                 }}
@@ -94,6 +105,7 @@ PrivacyPolicyPage.propTypes = {
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
     privacy: state.privacy,
+    user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { savePrivacy })(PrivacyPolicyPage);

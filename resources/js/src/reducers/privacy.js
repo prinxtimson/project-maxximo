@@ -1,8 +1,12 @@
-import { PRIVACY_LOADING, SET_PRIVACY_POLICY } from "../actions/types";
+import {
+    PRIVACY_ERROR,
+    PRIVACY_LOADING,
+    SET_PRIVACY_POLICY,
+} from "../actions/types";
 
 const initialState = {
     loading: true,
-    content: "",
+    content: null,
 };
 
 export default (state = initialState, actions) => {
@@ -17,6 +21,12 @@ export default (state = initialState, actions) => {
         case PRIVACY_LOADING:
             return {
                 loading: true,
+                ...state,
+            };
+        case PRIVACY_ERROR:
+            return {
+                loading: false,
+                ...state,
             };
         default:
             return state;

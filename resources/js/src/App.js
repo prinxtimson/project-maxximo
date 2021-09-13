@@ -6,6 +6,8 @@ import CookieConsent from "react-cookie-consent";
 
 import store from "./store";
 import { loadUser } from "./actions/auth";
+import { getPrivacy } from "./actions/privacy";
+import { getTerms } from "./actions/terms";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
@@ -19,6 +21,8 @@ import DashboardPage from "./pages/DashboardPage";
 const App = () => {
     useEffect(() => {
         store.dispatch(loadUser());
+        store.dispatch(getPrivacy());
+        store.dispatch(getTerms());
     }, []);
 
     return (

@@ -50,6 +50,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('change-password', function () {
         return view('welcome');
     });
+    Route::get('profile', function () {
+        return view('welcome');
+    });
     Route::get('dashboard', function () {
         return view('welcome');
     });

@@ -4,7 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import MainFooter from "./MainFooter";
 import { logoutUser } from "../actions/auth";
 
-const DashboardContainer = ({ children, logoutUser }) => {
+const DashboardContainer = ({ children, logoutUser, user }) => {
+    console.log(user);
     const history = useHistory();
     const [isActive, setIsActive] = React.useState(false);
 
@@ -31,7 +32,7 @@ const DashboardContainer = ({ children, logoutUser }) => {
                                 src="/images/Elint_x.png"
                                 alt="Elint X"
                                 width="50"
-                                height="55"
+                                height="65"
                             />
                         </Link>
                     </div>
@@ -45,7 +46,9 @@ const DashboardContainer = ({ children, logoutUser }) => {
                             />
                         </div>
                         <div className="d-flex mx-2 align-items-center">
-                            <h5 className="d-none d-md-block">Welcome, John</h5>
+                            <h5 className="d-none d-md-block">
+                                Welcome, {user?.name}
+                            </h5>
                             <div className="dropdown mx-2">
                                 <a
                                     href="#"
@@ -55,8 +58,8 @@ const DashboardContainer = ({ children, logoutUser }) => {
                                     aria-expanded="false"
                                 >
                                     <img
-                                        src="https://github.com/mdo.png"
-                                        alt=""
+                                        src={user?.avatar}
+                                        alt={user?.name}
                                         className="rounded-circle me-2"
                                         width="32"
                                         height="32"
@@ -105,30 +108,79 @@ const DashboardContainer = ({ children, logoutUser }) => {
                         id="sidebarMenu"
                     >
                         <ul className="nav nav-pills flex-column mb-auto">
-                            <li className="nav-item">
-                                <Link
-                                    to="#"
-                                    className="nav-link text-dark"
-                                    aria-current="page"
-                                >
-                                    Food
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="#" className="nav-link text-dark">
-                                    Health
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="#" className="nav-link text-dark">
-                                    Entertainment
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="#" className="nav-link text-dark">
-                                    Sport
-                                </Link>
-                            </li>
+                            {user?.roles[0]?.name === "admin" ? (
+                                <>
+                                    <li className="nav-item">
+                                        <Link
+                                            to="#"
+                                            className="nav-link text-dark"
+                                            aria-current="page"
+                                        >
+                                            Visit
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="#"
+                                            className="nav-link text-dark"
+                                        >
+                                            Duration
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="#"
+                                            className="nav-link text-dark"
+                                        >
+                                            Pages
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="#"
+                                            className="nav-link text-dark"
+                                        >
+                                            Delete request
+                                        </Link>
+                                    </li>
+                                </>
+                            ) : (
+                                <>
+                                    <li className="nav-item">
+                                        <Link
+                                            to="#"
+                                            className="nav-link text-dark"
+                                            aria-current="page"
+                                        >
+                                            Food
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="#"
+                                            className="nav-link text-dark"
+                                        >
+                                            Health
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="#"
+                                            className="nav-link text-dark"
+                                        >
+                                            Entertainment
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="#"
+                                            className="nav-link text-dark"
+                                        >
+                                            Sport
+                                        </Link>
+                                    </li>
+                                </>
+                            )}
                         </ul>
                         <hr />
                     </nav>
@@ -142,6 +194,7 @@ const DashboardContainer = ({ children, logoutUser }) => {
 
 const mapStateToProps = (state) => ({
     loading: state.auth.loading,
+    user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { logoutUser })(DashboardContainer);

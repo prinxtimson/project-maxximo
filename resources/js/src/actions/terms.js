@@ -1,10 +1,10 @@
 const axios = window.axios;
 import { setAlert } from "./alert";
-import { SET_TERMS, TERMS_LOADING } from "./types";
+import { SET_TERMS, TERMS_ERROR, TERMS_LOADING } from "./types";
 
 export const getTerms = () => async (dispatch) => {
     try {
-        const res = await axios.get("/api/terms-and-conditions");
+        const res = await axios.get("/api/content/terms_and_conditions");
 
         dispatch({
             type: SET_TERMS,
@@ -15,10 +15,10 @@ export const getTerms = () => async (dispatch) => {
     }
 };
 
-export const saveTerms = (data) => async (dispatch) => {
+export const saveTerms = (data, id) => async (dispatch) => {
     dispatch({ type: TERMS_LOADING });
     try {
-        const res = await axios.post("/api/terms-and-conditions", data);
+        const res = await axios.put(`/api/content/${id}`, data);
 
         dispatch({
             type: SET_TERMS,
@@ -31,7 +31,7 @@ export const saveTerms = (data) => async (dispatch) => {
                 setAlert("Server errror, please try again.", "danger")
             );
         }
-
+        dispatch({ type: TERMS_ERROR });
         dispatch(setAlert(err.response.data.message, "danger"));
     }
 };

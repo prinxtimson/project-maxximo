@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { logoutUser } from "../actions/auth";
 
-const MainHeader = ({ isAuthenticated, logoutUser, loading }) => {
+const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
     const history = useHistory();
     return (
         <nav className="navbar navbar-expand-md navbar-light ">
@@ -13,7 +13,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading }) => {
                         src="/images/Elint_x.png"
                         alt="Elint X"
                         width="50"
-                        height="55"
+                        height="65"
                     />
                 </Link>
                 <div className="collapse navbar-collapse" id="navbarNav">
@@ -67,7 +67,9 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading }) => {
                             />
                         </div>
                         <div className="d-flex mx-2 align-items-center">
-                            <h5 className="d-none d-md-block">Welcome, John</h5>
+                            <h5 className="d-none d-md-block">
+                                Welcome, {user?.name}
+                            </h5>
                             <div className="dropdown mx-2">
                                 <a
                                     href="#"
@@ -77,8 +79,8 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading }) => {
                                     aria-expanded="false"
                                 >
                                     <img
-                                        src="https://github.com/mdo.png"
-                                        alt=""
+                                        src={user?.avatar}
+                                        alt={user?.name}
                                         className="rounded-circle me-2"
                                         width="32"
                                         height="32"
@@ -152,6 +154,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading }) => {
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
     loading: state.auth.loading,
+    user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { logoutUser })(MainHeader);
