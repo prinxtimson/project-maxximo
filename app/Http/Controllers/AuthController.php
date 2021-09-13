@@ -78,6 +78,24 @@ class AuthController extends Controller
             'username' => strtolower($username),
         ]);
 
+        if ($request->hasFile('avatar')) {
+            $user->clearMediaCollection('avatars');
+
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatars');
+    
+            $mediaUrl = $user->getFirstMediaUrl('avatars');
+    
+            $user->update([
+                'avatar' => $mediaUrl,
+            ]);
+        }
+
+        $user->refresh()->load(['profile','roles']);
+
+        $response = [
+            'user' => $user,
+        ];
+
         return $response;
     }
 
@@ -145,5 +163,15 @@ class AuthController extends Controller
         return $status == Password::PASSWORD_RESET
                     ? redirect()->route('login')->with('status', __($status))
                     : back()->withErrors(['email' => [__($status)]]);
+    }
+
+    public function delete()
+    {
+        $user = auth()->user();
+        $user->delete();
+
+        //Mail::to($user)->send(new UserDeactivate($user->profile));
+
+        return $user;
     }
 }

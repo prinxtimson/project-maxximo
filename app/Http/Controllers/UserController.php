@@ -96,4 +96,23 @@ class UserController extends Controller
 
         return $response;
     }
+
+        /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $user = User::withTrashed()->find($id)->load(['roles']);
+
+        //$user->reports()->delete();
+
+        $deleted = $user->forceDelete($id);
+
+        //Mail::to($user)->send(new UserDelete($user->profile));
+
+        return $deleted;
+    }
 }

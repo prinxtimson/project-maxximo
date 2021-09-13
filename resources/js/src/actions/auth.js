@@ -44,17 +44,19 @@ export const uploadAvatar = (file) => async (dispatch) => {
         dispatch(getCurrentProfile());
         dispatch(setAlert(res.data.msg, "success"));
     } catch (err) {
-        const { errors } = err.response.data;
-        console.log(errors);
-
-        if (errors) {
-            errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+        console.log(err.response);
+        if (err.response.status == 500) {
+            return dispatch(
+                setAlert("Server errror, please try again.", "danger")
+            );
         }
+
+        dispatch(setAlert(err.response.data.message, "danger"));
     }
 };
 
 //Login user action
-export const loginUser = (email, password) => async (dispatch) => {
+export const loginUser = (email, password, history) => async (dispatch) => {
     dispatch({ type: AUTH_LOADING });
     const config = {
         headers: {
@@ -75,7 +77,7 @@ export const loginUser = (email, password) => async (dispatch) => {
         });
 
         //dispatch(loadUser());
-        window.location.replace("/");
+        history.replace("/dashboard");
     } catch (err) {
         console.log(err.response);
         if (err.response.status == 500) {
@@ -90,8 +92,27 @@ export const loginUser = (email, password) => async (dispatch) => {
     }
 };
 
+export const updateUser = (data) => async (dispatch) => {
+    try {
+        const res = await axios.post(`/api/update`, data);
+
+        dispatch(setAlert("Profile updated successfuly", "success"));
+
+        dispatch({ type: LOAD_USER, payload: res.data });
+    } catch (error) {
+        console.log(err.response);
+        if (err.response.status == 500) {
+            return dispatch(
+                setAlert("Server errror, please try again.", "danger")
+            );
+        }
+
+        dispatch(setAlert(err.response.data.message, "danger"));
+    }
+};
+
 // Register user action
-export const registerUser = (formData) => async (dispatch) => {
+export const registerUser = (formData, history) => async (dispatch) => {
     dispatch({ type: AUTH_LOADING });
     const config = {
         headers: {
@@ -111,7 +132,7 @@ export const registerUser = (formData) => async (dispatch) => {
 
         //dispatch(loadUser());
 
-        window.location.replace("/");
+        history.replace("/dashboard");
     } catch (err) {
         console.log(err.response);
         if (err.response.status == 500) {
@@ -219,11 +240,29 @@ export const resetPassword =
         }
     };
 
+export const deleteAccount = () => async (dispatch) => {
+    try {
+        await axios.post(`/delete-account`);
+        dispatch({ type: LOGOUT_USER });
+        history.replace("/");
+    } catch (error) {
+        console.log(err.response);
+        if (err.response.status == 500) {
+            return dispatch(
+                setAlert("Server errror, please try again.", "danger")
+            );
+        }
+
+        dispatch(setAlert(err.response.data.message, "danger"));
+    }
+};
+
 // Logout user action
-export const logoutUser = () => async (dispatch) => {
+export const logoutUser = (history) => async (dispatch) => {
     try {
         await axios.post(`/logout`);
-        window.location.reload();
+        dispatch({ type: LOGOUT_USER });
+        history.replace("/");
     } catch (error) {
         console.log(err.response);
         if (err.response.status == 500) {

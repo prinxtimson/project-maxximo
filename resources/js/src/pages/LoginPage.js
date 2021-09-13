@@ -6,6 +6,8 @@ import { loginUser } from "../actions/auth";
 import { connect } from "react-redux";
 
 const LoginPage = ({ loginUser, alerts, loading }) => {
+    const history = useHistory();
+
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -18,7 +20,7 @@ const LoginPage = ({ loginUser, alerts, loading }) => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        loginUser(email.trim(), password);
+        loginUser(email.trim(), password, history);
     };
 
     return (

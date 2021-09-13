@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import MainContainer from "../components/MainContainer";
 import { setAlert } from "../actions/alert";
 import { registerUser } from "../actions/auth";
@@ -13,6 +13,7 @@ const RegistrationPage = ({
     alerts,
     loading,
 }) => {
+    const history = useHistory();
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -31,7 +32,7 @@ const RegistrationPage = ({
             setAlert("Password do not match", "danger");
             return;
         }
-        registerUser(formData);
+        registerUser(formData, history);
     };
 
     return (

@@ -27,7 +27,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/me', [AuthController::class, 'me']);
+    Route::delete('/delete-account', [AuthController::class, 'delete']);
     Route::put('/change-password', [AuthController::class, 'changePass']);
     Route::put('/update', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+Route::group(['middleware' => ['auth:sanctum', 'role:admin|super-admin']], function () {
+    //
+    Route::delete('users/{id}', [UserController::class, 'destroy']);
+    // Route::put('users/disable/{id}', [UserController::class, 'disable']);
+    // Route::put('users/enable/{id}', [UserController::class, 'enable']);
+
 });

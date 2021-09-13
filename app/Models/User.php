@@ -28,6 +28,7 @@ class User extends Authenticatable implements HasMedia
         'username',
         'email',
         'password',
+        'device_token',
     ];
 
     protected $guard_name = 'api';

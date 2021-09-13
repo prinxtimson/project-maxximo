@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
+import CookieConsent from "react-cookie-consent";
+
 import store from "./store";
 import { loadUser } from "./actions/auth";
 import HomePage from "./pages/HomePage";
@@ -12,6 +14,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import TermsConditionsPage from "./pages/TermsConditionsPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
+import DashboardPage from "./pages/DashboardPage";
 
 const App = () => {
     useEffect(() => {
@@ -54,8 +57,15 @@ const App = () => {
                         path="/change-password"
                         component={ChangePasswordPage}
                     />
+                    <Route exact path="/dashboard" component={DashboardPage} />
                 </Switch>
             </Router>
+            <CookieConsent buttonText="Accept all cookies" debug={true}>
+                Elint-X uses site cookies to provide site functionality and
+                improve user experience. By clicking "Accept all cookies", you
+                agree to the storing of cookies on your device to enhance site
+                navigation, site usage and our marketing efforts cookie policy.
+            </CookieConsent>
         </Provider>
     );
 };

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\WebNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,9 @@ use App\Http\Controllers\AuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('/store-token', [WebNotificationController::class, 'storeToken']);
+Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,6 +48,9 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('change-password', function () {
+        return view('welcome');
+    });
+    Route::get('dashboard', function () {
         return view('welcome');
     });
 });
