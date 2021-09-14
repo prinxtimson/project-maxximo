@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import MainFooter from "./MainFooter";
 import { logoutUser } from "../actions/auth";
 
 const DashboardContainer = ({ children, logoutUser, user }) => {
-    console.log(user);
+    const dropBtnRef = useRef(null);
+    const [searchResult, setSearchResult] = useState([]);
     const history = useHistory();
-    const [isActive, setIsActive] = React.useState(false);
+    const [isActive, setIsActive] = useState(false);
 
     const handleToggle = () => setIsActive(!isActive);
+
     return (
         <div>
             <div className="d-flex flex-column" style={{ minHeight: "95vh" }}>
@@ -37,13 +39,47 @@ const DashboardContainer = ({ children, logoutUser, user }) => {
                         </Link>
                     </div>
                     <div className="flex-shrink-0 d-flex align-items-center">
-                        <div className="me-2">
+                        <div className="me-2 dropdown">
+                            <a
+                                className="d-none dropdown-toggle"
+                                type="button"
+                                ref={dropBtnRef}
+                                id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                data-bs-auto-close="false"
+                                data-bs-display="static"
+                            ></a>
                             <input
                                 className="form-control"
                                 type="search"
                                 placeholder="Search"
                                 aria-label="Search"
+                                onFocus={() => dropBtnRef.current.click()}
+                                onBlur={() => dropBtnRef.current.click()}
                             />
+                            <ul
+                                className="dropdown-menu"
+                                aria-labelledby="dropdownMenuButton1"
+                                style={{ minWidth: 320 }}
+                            >
+                                {searchResult.length === 0 ? (
+                                    <li>
+                                        <p className="px-3">No result found</p>
+                                    </li>
+                                ) : (
+                                    searchResult.map((result, index) => (
+                                        <li key={index} className="">
+                                            <a
+                                                className="dropdown-item"
+                                                href="#"
+                                            >
+                                                Action
+                                            </a>
+                                        </li>
+                                    ))
+                                )}
+                            </ul>
                         </div>
                         <div className="d-flex mx-2 align-items-center">
                             <h5 className="d-none d-md-block">

@@ -6229,13 +6229,19 @@ var DashboardContainer = function DashboardContainer(_ref) {
   var children = _ref.children,
       logoutUser = _ref.logoutUser,
       user = _ref.user;
-  console.log(user);
+  var dropBtnRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      searchResult = _useState2[0],
+      setSearchResult = _useState2[1];
+
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useHistory)();
 
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      isActive = _React$useState2[0],
-      setIsActive = _React$useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isActive = _useState4[0],
+      setIsActive = _useState4[1];
 
   var handleToggle = function handleToggle() {
     return setIsActive(!isActive);
@@ -6272,14 +6278,50 @@ var DashboardContainer = function DashboardContainer(_ref) {
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "flex-shrink-0 d-flex align-items-center",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "me-2",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "me-2 dropdown",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+              className: "d-none dropdown-toggle",
+              type: "button",
+              ref: dropBtnRef,
+              id: "dropdownMenuButton1",
+              "data-bs-toggle": "dropdown",
+              "aria-expanded": "false",
+              "data-bs-auto-close": "false",
+              "data-bs-display": "static"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
               className: "form-control",
               type: "search",
               placeholder: "Search",
-              "aria-label": "Search"
-            })
+              "aria-label": "Search",
+              onFocus: function onFocus() {
+                return dropBtnRef.current.click();
+              },
+              onBlur: function onBlur() {
+                return dropBtnRef.current.click();
+              }
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
+              className: "dropdown-menu",
+              "aria-labelledby": "dropdownMenuButton1",
+              style: {
+                minWidth: 320
+              },
+              children: searchResult.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+                  className: "px-3",
+                  children: "No result found"
+                })
+              }) : searchResult.map(function (result, index) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+                  className: "",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+                    className: "dropdown-item",
+                    href: "#",
+                    children: "Action"
+                  })
+                }, index);
+              })
+            })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "d-flex mx-2 align-items-center",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h5", {
@@ -6718,12 +6760,17 @@ var MainHeader = function MainHeader(_ref) {
               return dropBtnRef.current.click();
             }
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
-            className: "dropdown-menu dropdown-menu-end",
+            className: "dropdown-menu",
             "aria-labelledby": "dropdownMenuButton1",
             style: {
-              minWidth: 370
+              minWidth: 320
             },
-            children: searchResult.map(function (result, index) {
+            children: searchResult.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                className: "px-3",
+                children: "No result found"
+              })
+            }) : searchResult.map(function (result, index) {
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
                 className: "",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {

@@ -88,17 +88,26 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                 onBlur={() => dropBtnRef.current.click()}
                             />
                             <ul
-                                className="dropdown-menu dropdown-menu-end"
+                                className="dropdown-menu"
                                 aria-labelledby="dropdownMenuButton1"
-                                style={{ minWidth: 370 }}
+                                style={{ minWidth: 320 }}
                             >
-                                {searchResult.map((result, index) => (
-                                    <li key={index} className="">
-                                        <a className="dropdown-item" href="#">
-                                            Action
-                                        </a>
+                                {searchResult.length === 0 ? (
+                                    <li>
+                                        <p className="px-3">No result found</p>
                                     </li>
-                                ))}
+                                ) : (
+                                    searchResult.map((result, index) => (
+                                        <li key={index} className="">
+                                            <a
+                                                className="dropdown-item"
+                                                href="#"
+                                            >
+                                                Action
+                                            </a>
+                                        </li>
+                                    ))
+                                )}
                             </ul>
                         </div>
                         <div className="d-flex mx-2 align-items-center">
