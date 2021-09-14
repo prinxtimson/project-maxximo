@@ -32,17 +32,17 @@ const MainFooter = () => {
                 <ul className="nav justify-content-end">
                     <li className="nav-item">
                         <a className="nav-link" href="#">
-                            <i className="bi-facebook"></i>
+                            <i className="fab fa-facebook-square"></i>
                         </a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">
-                            <i className="bi-twitter"></i>
+                            <i className="fab fa-twitter"></i>
                         </a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">
-                            <i className="bi-instagram"></i>
+                            <i className="fab fa-instagram"></i>
                         </a>
                     </li>
                 </ul>

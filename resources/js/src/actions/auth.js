@@ -98,7 +98,9 @@ export const updateUser = (data) => async (dispatch) => {
 
         dispatch(setAlert("Profile updated successfuly", "success"));
 
-        dispatch({ type: LOAD_USER, payload: res.data });
+        console.log(res.data);
+
+        dispatch({ type: USER_LOADED, payload: res.data });
     } catch (error) {
         console.log(err.response);
         if (err.response.status == 500) {
@@ -241,19 +243,21 @@ export const resetPassword =
     };
 
 export const deleteAccount = () => async (dispatch) => {
-    try {
-        await axios.post(`/delete-account`);
-        dispatch({ type: LOGOUT_USER });
-        history.replace("/");
-    } catch (error) {
-        console.log(err.response);
-        if (err.response.status == 500) {
-            return dispatch(
-                setAlert("Server errror, please try again.", "danger")
-            );
-        }
+    if (window.confirm("Are you sure? This can NOT be undone!")) {
+        try {
+            await axios.delete(`/delete-account`);
+            dispatch({ type: LOGOUT_USER });
+            history.replace("/");
+        } catch (err) {
+            console.log(err.response);
+            if (err.response.status == 500) {
+                return dispatch(
+                    setAlert("Server errror, please try again.", "danger")
+                );
+            }
 
-        dispatch(setAlert(err.response.data.message, "danger"));
+            dispatch(setAlert(err.response.data.message, "danger"));
+        }
     }
 };
 

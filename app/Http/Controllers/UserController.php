@@ -13,6 +13,11 @@ class UserController extends Controller
 {
     //
 
+    public function index(){
+        $users = User::withTrashed()->with(['roles'])->get();
+        return $users;
+    }
+
         /**
      * Store a newly created resource in storage.
      *

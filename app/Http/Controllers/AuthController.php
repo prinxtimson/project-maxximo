@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\UploadedFile;
+use App\Notifications\AccountDelete;
+use Illuminate\Support\Facades\Notification;
 
 class AuthController extends Controller
 {
@@ -74,7 +76,7 @@ class AuthController extends Controller
 
         //$user = User::find($user);
         $user->update([
-            'name' =>  $fields['firstname'],
+            'name' =>  $fields['name'],
             'username' => strtolower($username),
         ]);
 
@@ -169,6 +171,10 @@ class AuthController extends Controller
     {
         $user = auth()->user();
         $user->delete();
+
+        $admins = User::role('admin')->get();
+
+        Notification::send($admins, new AccountDelete($user));
 
         //Mail::to($user)->send(new UserDeactivate($user->profile));
 

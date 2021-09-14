@@ -45,16 +45,17 @@
   <div class="modal fade" id="freeTrialModal" aria-hidden="true" aria-labelledby="freeTrialModalLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Signup to our 14 days free trial
+
+        <button type="button" style="z-index: 2000" class="btn-close position-absolute top-0 end-0"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+
+        <div class="modal-body py-5">
+          Signup to our 14 days free trial <a href="/register">Now</a>
         </div>
       </div>
     </div>
   </div>
-  <a id='modalTigger' class="d-none" data-bs-toggle="modal" href="#freeTrialModal" role="button"></a>
+
   <script src="{{asset('js/app.js')}}"></script>
   <script src="https://kit.fontawesome.com/f1f8bd22d7.js" crossorigin="anonymous"></script>
 
@@ -89,7 +90,7 @@
 
   $(document).ready(function() {
 
-    $('#modalTigger')[0].click()
+    //$('#modalTigger')[0].click()
     $('#freeTrialModal').on('hidden.bs.modal', function() {
       // Let's check if the browser supports notifications
       if (!("Notification" in window)) {

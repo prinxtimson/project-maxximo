@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { logoutUser } from "../actions/auth";
 
 const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
+    const dropBtnRef = useRef(null);
+    const [searchResult, setSearchResult] = useState([]);
     const history = useHistory();
+
     return (
         <nav className="navbar navbar-expand-md navbar-light ">
             <div className="container-fluid">
@@ -22,16 +25,23 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                             <Link
                                 className="nav-link"
                                 aria-current="page"
-                                to="#"
+                                to="/solution"
                             >
                                 Solutions
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">
+                            <Link className="nav-link" to="/about-us">
                                 About us
                             </Link>
                         </li>
+                        {!loading && isAuthenticated && (
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/dashboard">
+                                    Dashboard
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                     {loading
                         ? null
@@ -58,13 +68,38 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                 </div>
                 {loading ? null : isAuthenticated ? (
                     <div className="flex-shrink-0 d-flex justify-content-end">
-                        <div className="me-2">
+                        <div className="me-2 dropdown">
+                            <a
+                                className="d-none dropdown-toggle"
+                                type="button"
+                                ref={dropBtnRef}
+                                id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                data-bs-auto-close="false"
+                                data-bs-display="static"
+                            ></a>
                             <input
                                 className="form-control"
                                 type="search"
                                 placeholder="Search"
                                 aria-label="Search"
+                                onFocus={() => dropBtnRef.current.click()}
+                                onBlur={() => dropBtnRef.current.click()}
                             />
+                            <ul
+                                className="dropdown-menu dropdown-menu-end"
+                                aria-labelledby="dropdownMenuButton1"
+                                style={{ minWidth: 370 }}
+                            >
+                                {searchResult.map((result, index) => (
+                                    <li key={index} className="">
+                                        <a className="dropdown-item" href="#">
+                                            Action
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                         <div className="d-flex mx-2 align-items-center">
                             <h5 className="d-none d-md-block">
@@ -91,7 +126,10 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                     aria-labelledby="dropdownUser1"
                                 >
                                     <li>
-                                        <Link className="dropdown-item" to="#">
+                                        <Link
+                                            className="dropdown-item"
+                                            to="/profile"
+                                        >
                                             Profile
                                         </Link>
                                     </li>

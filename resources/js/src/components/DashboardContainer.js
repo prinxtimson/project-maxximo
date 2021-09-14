@@ -69,8 +69,14 @@ const DashboardContainer = ({ children, logoutUser, user }) => {
                                     className="dropdown-menu dropdown-menu-end dropdown-menu-dark text-small shadow p-3"
                                     aria-labelledby="dropdownUser1"
                                 >
+                                    <h5 className="d-md-none py-2 text-light">
+                                        Welcome, {user?.name}
+                                    </h5>
                                     <li>
-                                        <Link className="dropdown-item" to="#">
+                                        <Link
+                                            className="dropdown-item"
+                                            to="/profile"
+                                        >
                                             Profile
                                         </Link>
                                     </li>
@@ -137,10 +143,10 @@ const DashboardContainer = ({ children, logoutUser, user }) => {
                                     </li>
                                     <li>
                                         <Link
-                                            to="#"
+                                            to="/dashboard/users"
                                             className="nav-link text-dark"
                                         >
-                                            Delete request
+                                            Users
                                         </Link>
                                     </li>
                                 </>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
@@ -15,6 +15,10 @@ const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
 
     const handleOnChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    useEffect(() => {
+        setFormData({ name: user?.name || "", avatar: user?.avatar || "" });
+    }, [user]);
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -55,11 +59,11 @@ const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
                             onSubmit={handleOnSubmit}
                             className="form row g-3"
                         >
-                            <div className="py-2">
+                            <div className="py-2 position-relative">
                                 <img
                                     src={avatar}
                                     alt={name}
-                                    className="rounded mx-auto d-block"
+                                    className="rounded-circle mx-auto d-block"
                                     style={{ maxWidth: "100%" }}
                                 />
                                 <input
@@ -76,15 +80,18 @@ const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
                                     accept="image/*"
                                     ref={(ref) => setInputRef(ref)}
                                 />
-                                <div className="d-grid gap-2 py-1 col-12 mx-auto">
-                                    <button
-                                        className="btn btn-primary btn-lg"
-                                        onClick={() => inputRef?.click()}
-                                        type="button"
-                                    >
-                                        Upload
-                                    </button>
-                                </div>
+
+                                <a
+                                    className="btn btn-light rounded-circle position-absolute"
+                                    style={{ right: 150, bottom: -5 }}
+                                    onClick={() => inputRef?.click()}
+                                    type="button"
+                                >
+                                    <i
+                                        className="fas fa-camera "
+                                        style={{ fontSize: 25 }}
+                                    ></i>
+                                </a>
                             </div>
                             <div className="form-floating col-12">
                                 <input
@@ -107,7 +114,7 @@ const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
                                     type="submit"
                                     disabled={loading}
                                 >
-                                    Register
+                                    Save
                                 </button>
                             </div>
                         </form>
@@ -140,6 +147,7 @@ ProfilePage.propTypes = {
 const mapStateToProps = (state) => ({
     loading: state.auth.loading,
     alerts: state.alert,
+    user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { updateUser, deleteAccount })(

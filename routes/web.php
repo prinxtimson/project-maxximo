@@ -24,6 +24,12 @@ Route::get('/', function () {
 Route::get('/privacy-policy', function () {
     return view('welcome');
 });
+Route::get('/solution', function () {
+    return view('welcome');
+});
+Route::get('/about-us', function () {
+    return view('welcome');
+});
 Route::get('/terms-and-conditions', function () {
     return view('welcome');
 });
@@ -53,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile', function () {
         return view('welcome');
     });
-    Route::get('dashboard', function () {
+    Route::get('dashboard/{name?}', function () {
         return view('welcome');
     });
 });
