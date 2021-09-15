@@ -6254,7 +6254,7 @@ var DashboardContainer = function DashboardContainer(_ref) {
         minHeight: "95vh"
       },
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("nav", {
-        className: "navbar navbar-light bg-light pt-2",
+        className: "navbar navbar-light bg-light py-0",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
           className: "navbar-toggler mx-2 d-lg-none",
           id: "sidebarCollapse",
@@ -6267,7 +6267,7 @@ var DashboardContainer = function DashboardContainer(_ref) {
           className: "flex-grow-1",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
             id: "brand",
-            className: "navbar-brand d-lg-none",
+            className: "navbar-brand",
             to: "/",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
               src: "/images/Elint_x.png",
@@ -6670,14 +6670,30 @@ var MainHeader = function MainHeader(_ref) {
       user = _ref.user;
   var dropBtnRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(window.innerWidth),
       _useState2 = _slicedToArray(_useState, 2),
-      searchResult = _useState2[0],
-      setSearchResult = _useState2[1];
+      screenWidth = _useState2[0],
+      setScreenWidth = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      searchResult = _useState4[0],
+      setSearchResult = _useState4[1];
 
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useHistory)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    window.addEventListener("resize", updateWidth);
+    return function () {
+      return window.removeEventListener("resize", updateWidth);
+    };
+  }, []);
+
+  var updateWidth = function updateWidth() {
+    setScreenWidth(window.innerWidth);
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("nav", {
-    className: "navbar navbar-expand-md navbar-light ",
+    className: "navbar navbar-expand-lg navbar-light py-0",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "container-fluid",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
@@ -6690,7 +6706,7 @@ var MainHeader = function MainHeader(_ref) {
           height: "65"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "collapse navbar-collapse",
+        className: "collapse navbar-collapse d-none d-lg-block",
         id: "navbarNav",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
           className: "navbar-nav flex-grow-1",
@@ -6859,6 +6875,52 @@ var MainHeader = function MainHeader(_ref) {
             className: "navbar-toggler-icon"
           })
         })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "collapse d-lg-none ".concat(screenWidth < 990 ? "navbar-collapse" : null),
+        id: "navbarNav",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
+          className: "navbar-nav flex-grow-1",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+            className: "nav-item",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+              className: "nav-link",
+              "aria-current": "page",
+              to: "/solution",
+              children: "Solutions"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+            className: "nav-item",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+              className: "nav-link",
+              to: "/about-us",
+              children: "About us"
+            })
+          }), !loading && isAuthenticated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+            className: "nav-item",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+              className: "nav-link",
+              to: "/dashboard",
+              children: "Dashboard"
+            })
+          })]
+        }), loading ? null : !isAuthenticated && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
+          className: "navbar-nav",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+            className: "nav-item mx-2 my-sm-2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+              className: "btn btn-primary text-white",
+              to: "/register",
+              children: "Register"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+            className: "nav-item mx-2 my-sm-2",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+              className: "btn btn-outline-primary",
+              to: "/login",
+              children: "Login"
+            })
+          })]
+        })]
       })]
     })
   });
@@ -7960,14 +8022,14 @@ var PrivacyPolicyPage = function PrivacyPolicyPage(_ref) {
         children: [isAuthenticated && (user === null || user === void 0 ? void 0 : (_user$roles$ = user.roles[0]) === null || _user$roles$ === void 0 ? void 0 : _user$roles$.name) === "admin" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
           className: "py-2",
           children: edit ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-            className: "d-grid gap-2",
+            className: "d-grid gap-2 d-sm-block",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
-              className: "btn btn-light",
+              className: "btn btn-light mx-1",
               type: "button",
               onClick: handleSavePrivacy,
               children: "Save"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
-              className: "btn btn-light mx-2",
+              className: "btn btn-light mx-1",
               type: "button",
               onClick: function onClick() {
                 return setEdit(false);
@@ -8080,13 +8142,18 @@ var ProfilePage = function ProfilePage(_ref) {
       inputRef = _useState2[0],
       setInputRef = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      file = _useState4[0],
+      setFile = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     name: "",
     avatar: ""
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      formData = _useState4[0],
-      setFormData = _useState4[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      formData = _useState6[0],
+      setFormData = _useState6[1];
 
   var name = formData.name,
       avatar = formData.avatar;
@@ -8102,12 +8169,19 @@ var ProfilePage = function ProfilePage(_ref) {
     });
   }, [user]);
 
+  var handleFileSelect = function handleFileSelect(e) {
+    setFile(e.target.files[0]);
+    setFormData(_objectSpread(_objectSpread({}, formData), {}, {
+      avatar: URL.createObjectURL(e.target.files[0])
+    }));
+  };
+
   var handleOnSubmit = function handleOnSubmit(e) {
     e.preventDefault();
     var data = new FormData();
 
-    if (avatar !== user.avatar) {
-      data.append("avatar", avatar);
+    if (file) {
+      data.append("avatar", file);
     }
 
     data.append("_method", "put");
@@ -8143,15 +8217,12 @@ var ProfilePage = function ProfilePage(_ref) {
                 src: avatar,
                 alt: name,
                 className: "rounded-circle mx-auto d-block",
-                style: {
-                  maxWidth: "100%"
-                }
+                width: 150,
+                height: 150
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
                 type: "file",
                 onChange: function onChange(e) {
-                  return setFormData(_objectSpread(_objectSpread({}, formData), {}, {
-                    avatar: e.target.files[0]
-                  }));
+                  return handleFileSelect(e);
                 },
                 name: "avatar",
                 id: "avatar",
@@ -8797,14 +8868,14 @@ var TermsConditionsPage = function TermsConditionsPage(_ref) {
         children: [isAuthenticated && (user === null || user === void 0 ? void 0 : (_user$roles$ = user.roles[0]) === null || _user$roles$ === void 0 ? void 0 : _user$roles$.name) === "admin" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
           className: "py-2",
           children: edit ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-            className: "d-grid gap-2",
+            className: "d-grid gap-2 d-sm-block",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
-              className: "btn btn-light",
+              className: "btn btn-light mx-1",
               type: "button",
               onClick: handleSaveTerms,
               children: "Save"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("button", {
-              className: "btn btn-light mx-2",
+              className: "btn btn-light mx-1",
               type: "button",
               onClick: function onClick() {
                 return setEdit(false);

@@ -39,16 +39,16 @@ const PrivacyPolicyPage = ({ isAuthenticated, privacy, savePrivacy, user }) => {
                     {isAuthenticated && user?.roles[0]?.name === "admin" && (
                         <div className="py-2">
                             {edit ? (
-                                <div className="d-grid gap-2">
+                                <div className="d-grid gap-2 d-sm-block">
                                     <button
-                                        className="btn btn-light"
+                                        className="btn btn-light mx-1"
                                         type="button"
                                         onClick={handleSavePrivacy}
                                     >
                                         Save
                                     </button>
                                     <button
-                                        className="btn btn-light mx-2"
+                                        className="btn btn-light mx-1"
                                         type="button"
                                         onClick={() => setEdit(false)}
                                     >

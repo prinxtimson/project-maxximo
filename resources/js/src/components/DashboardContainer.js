@@ -15,7 +15,7 @@ const DashboardContainer = ({ children, logoutUser, user }) => {
     return (
         <div>
             <div className="d-flex flex-column" style={{ minHeight: "95vh" }}>
-                <nav className="navbar navbar-light bg-light pt-2">
+                <nav className="navbar navbar-light bg-light py-0">
                     <button
                         className="navbar-toggler mx-2 d-lg-none"
                         id="sidebarCollapse"
@@ -25,11 +25,7 @@ const DashboardContainer = ({ children, logoutUser, user }) => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="flex-grow-1">
-                        <Link
-                            id="brand"
-                            className="navbar-brand d-lg-none"
-                            to="/"
-                        >
+                        <Link id="brand" className="navbar-brand" to="/">
                             <img
                                 src="/images/Elint_x.png"
                                 alt="Elint X"

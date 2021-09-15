@@ -6,6 +6,7 @@ import { deleteAccount, updateUser } from "../actions/auth";
 
 const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
     const [inputRef, setInputRef] = useState(null);
+    const [file, setFile] = useState(null);
     const [formData, setFormData] = useState({
         name: "",
         avatar: "",
@@ -20,11 +21,20 @@ const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
         setFormData({ name: user?.name || "", avatar: user?.avatar || "" });
     }, [user]);
 
+    const handleFileSelect = (e) => {
+        setFile(e.target.files[0]);
+        setFormData({
+            ...formData,
+            avatar: URL.createObjectURL(e.target.files[0]),
+        });
+    };
+
     const handleOnSubmit = (e) => {
         e.preventDefault();
+
         let data = new FormData();
-        if (avatar !== user.avatar) {
-            data.append("avatar", avatar);
+        if (file) {
+            data.append("avatar", file);
         }
         data.append("_method", "put");
         data.append("name", name);
@@ -64,16 +74,12 @@ const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
                                     src={avatar}
                                     alt={name}
                                     className="rounded-circle mx-auto d-block"
-                                    style={{ maxWidth: "100%" }}
+                                    width={150}
+                                    height={150}
                                 />
                                 <input
                                     type="file"
-                                    onChange={(e) =>
-                                        setFormData({
-                                            ...formData,
-                                            avatar: e.target.files[0],
-                                        })
-                                    }
+                                    onChange={(e) => handleFileSelect(e)}
                                     name="avatar"
                                     id="avatar"
                                     className="d-none"

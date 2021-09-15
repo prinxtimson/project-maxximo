@@ -1,15 +1,26 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { logoutUser } from "../actions/auth";
 
 const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
     const dropBtnRef = useRef(null);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [searchResult, setSearchResult] = useState([]);
     const history = useHistory();
 
+    useEffect(() => {
+        window.addEventListener("resize", updateWidth);
+
+        return () => window.removeEventListener("resize", updateWidth);
+    }, []);
+
+    const updateWidth = () => {
+        setScreenWidth(window.innerWidth);
+    };
+
     return (
-        <nav className="navbar navbar-expand-md navbar-light ">
+        <nav className="navbar navbar-expand-lg navbar-light py-0">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">
                     <img
@@ -19,7 +30,10 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                         height="65"
                     />
                 </Link>
-                <div className="collapse navbar-collapse" id="navbarNav">
+                <div
+                    className="collapse navbar-collapse d-none d-lg-block"
+                    id="navbarNav"
+                >
                     <ul className="navbar-nav flex-grow-1">
                         <li className="nav-item">
                             <Link
@@ -193,6 +207,58 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                         </button>
                     </div>
                 )}
+                <div
+                    className={`collapse d-lg-none ${
+                        screenWidth < 990 ? "navbar-collapse" : null
+                    }`}
+                    id="navbarNav"
+                >
+                    <ul className="navbar-nav flex-grow-1">
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link"
+                                aria-current="page"
+                                to="/solution"
+                            >
+                                Solutions
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/about-us">
+                                About us
+                            </Link>
+                        </li>
+                        {!loading && isAuthenticated && (
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/dashboard">
+                                    Dashboard
+                                </Link>
+                            </li>
+                        )}
+                    </ul>
+                    {loading
+                        ? null
+                        : !isAuthenticated && (
+                              <ul className="navbar-nav">
+                                  <li className="nav-item mx-2 my-sm-2">
+                                      <Link
+                                          className="btn btn-primary text-white"
+                                          to="/register"
+                                      >
+                                          Register
+                                      </Link>
+                                  </li>
+                                  <li className="nav-item mx-2 my-sm-2">
+                                      <Link
+                                          className="btn btn-outline-primary"
+                                          to="/login"
+                                      >
+                                          Login
+                                      </Link>
+                                  </li>
+                              </ul>
+                          )}
+                </div>
             </div>
         </nav>
     );
