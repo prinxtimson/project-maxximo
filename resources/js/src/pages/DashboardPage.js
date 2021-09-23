@@ -6,7 +6,7 @@ import DashboardContainer from "../components/DashboardContainer";
 import UsersTable from "../components/UsersTable";
 
 const DashboardPage = ({ loading }) => {
-    const { routeName, id } = useParams();
+    const { routeName } = useParams();
 
     const renderComponent = (param) => {
         switch (param) {

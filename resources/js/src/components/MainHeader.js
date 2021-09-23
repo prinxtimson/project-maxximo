@@ -21,7 +21,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light py-0">
-            <div className="container-fluid">
+            <div className="container">
                 <Link className="navbar-brand" to="/">
                     <img
                         src="/images/Elint_x.png"
@@ -42,6 +42,15 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                 to="/solution"
                             >
                                 Solutions
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link"
+                                aria-current="page"
+                                to="/subscribe"
+                            >
+                                Subscription
                             </Link>
                         </li>
                         <li className="nav-item">

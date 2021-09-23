@@ -56,4 +56,9 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function subscription()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }

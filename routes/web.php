@@ -30,6 +30,9 @@ Route::get('/solution', function () {
 Route::get('/about-us', function () {
     return view('welcome');
 });
+Route::get('/subscribe', function () {
+    return view('welcome');
+});
 Route::get('/terms-and-conditions', function () {
     return view('welcome');
 });
@@ -62,4 +65,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard/{name?}', function () {
         return view('welcome');
     });
+   
+});
+
+Route::get('/subscribe/{plan}', function () {
+    return view('welcome');
 });

@@ -20,13 +20,13 @@ export default (state = initialState, actions) => {
             };
         case PRIVACY_LOADING:
             return {
-                loading: true,
                 ...state,
+                loading: true,
             };
         case PRIVACY_ERROR:
             return {
-                loading: false,
                 ...state,
+                loading: false,
             };
         default:
             return state;

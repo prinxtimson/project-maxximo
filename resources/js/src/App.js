@@ -21,6 +21,8 @@ import DashboardPage from "./pages/DashboardPage";
 import ProfilePage from "./pages/ProfilePage";
 import AboutUsPage from "./pages/AboutUsPage";
 import SolutionPage from "./pages/SolutionPage";
+import SubcriptionPage from "./pages/SubcriptionPage";
+import PurchasePage from "./pages/PurchasePage";
 
 const cookies = new Cookies();
 
@@ -90,6 +92,16 @@ const App = () => {
                     />
                     <Route exact path="/profile" component={ProfilePage} />
                     <Route exact path="/about-us" component={AboutUsPage} />
+                    <Route
+                        exact
+                        path="/subscribe"
+                        component={SubcriptionPage}
+                    />
+                    <Route
+                        exact
+                        path="/subscribe/:routeName"
+                        component={PurchasePage}
+                    />
                     <Route exact path="/solution" component={SolutionPage} />
                 </Switch>
             </Router>

@@ -26,12 +26,13 @@ export const savePrivacy = (data, id) => async (dispatch) => {
         });
     } catch (err) {
         console.log(err.response);
+        dispatch({ type: PRIVACY_ERROR });
         if (err.response.status == 500) {
             return dispatch(
                 setAlert("Server errror, please try again.", "danger")
             );
         }
-        dispatch({ type: PRIVACY_ERROR });
+
         dispatch(setAlert(err.response.data.message, "danger"));
     }
 };
