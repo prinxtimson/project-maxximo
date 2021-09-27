@@ -24,7 +24,7 @@ const MainContainer = ({ children, alerts }) => {
                         )
                 )}
             </div>
-            <div className="d-flex flex-column" style={{ minHeight: "95vh" }}>
+            <div className="d-flex flex-column flex-grow-1 bg-white">
                 <MainHeader />
                 <div className="container-fluid flex-grow-1 flex-column d-flex justify-content-center">
                     {children}

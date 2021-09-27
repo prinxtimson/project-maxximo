@@ -14,35 +14,53 @@
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <!-- Styles -->
   <style>
+  html {
+    height: 100%;
+  }
+
   body {
     font-family: 'Nunito', sans-serif;
-    background-color: white;
+    min-height: 100%;
+    display: flex !important;
+    flex-direction: column;
   }
 
   #sidebarMenu {
     transition: all 0.3s;
-    width: 280px
+    width: 260px
   }
 
   .active {
-    margin-left: -280px;
+    margin-left: -260px;
+  }
+
+  .brand-active {
+    display: none;
   }
 
   @media (max-width: 990px) {
     #sidebarMenu {
-      margin-left: -280px;
+      margin-left: -260px;
     }
 
     #sidebarMenu.active {
       margin-left: 0;
     }
 
+    #brand {
+      display: block;
+      transition: all 0.3s;
+    }
+
+    #brand.brand-active {
+      display: none;
+    }
   }
   </style>
 </head>
 
 <body class="antialiased">
-  <div id="app"></div>
+  <div id="app" class='main flex-grow-1 d-flex'></div>
   <div class="modal fade" id="freeTrialModal" aria-hidden="true" aria-labelledby="freeTrialModalLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">

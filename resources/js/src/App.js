@@ -23,6 +23,7 @@ import AboutUsPage from "./pages/AboutUsPage";
 import SolutionPage from "./pages/SolutionPage";
 import SubcriptionPage from "./pages/SubcriptionPage";
 import PurchasePage from "./pages/PurchasePage";
+import ContactUsPage from "./pages/ContactUsPage";
 
 const cookies = new Cookies();
 
@@ -65,6 +66,7 @@ const App = () => {
                         path="/forgot-password"
                         component={ForgotPasswordPage}
                     />
+                    <Route exact path="/contact-us" component={ContactUsPage} />
                     <Route
                         exact
                         path="/reset-password/:token"

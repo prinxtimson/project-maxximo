@@ -33,6 +33,9 @@ Route::get('/about-us', function () {
 Route::get('/subscribe', function () {
     return view('welcome');
 });
+Route::get('/contact-us', function () {
+    return view('welcome');
+});
 Route::get('/terms-and-conditions', function () {
     return view('welcome');
 });

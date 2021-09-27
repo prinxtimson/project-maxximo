@@ -26,8 +26,8 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                     <img
                         src="/images/Elint_x.png"
                         alt="Elint X"
-                        width="50"
-                        height="65"
+                        width="59"
+                        height="58"
                     />
                 </Link>
                 <div
@@ -56,6 +56,11 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/about-us">
                                 About us
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/contact-us">
+                                Contact us
                             </Link>
                         </li>
                         {!loading && isAuthenticated && (
