@@ -178,20 +178,20 @@ const HealthChat = ({
     return (
         <div className="container-fluid p-4">
             <div className="row">
-                <div className="col col-md-6 mb-md-0 mb-4">
-                    <div className="card" style={{ minHeight: 400 }}>
-                        <div className="card-body">
-                            {!loading && chartConfigs2 && (
-                                <ReactFC {...chartConfigs2} />
-                            )}
-                        </div>
-                    </div>
-                </div>
                 <div className="col col-md-6">
                     <div className="card" style={{ minHeight: 400 }}>
                         <div className="card-body">
                             {!loading && chartConfigs && (
                                 <ReactFC {...chartConfigs} />
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <div className="col col-md-6 mb-md-0 mb-4">
+                    <div className="card" style={{ minHeight: 400 }}>
+                        <div className="card-body">
+                            {!loading && chartConfigs2 && (
+                                <ReactFC {...chartConfigs2} />
                             )}
                         </div>
                     </div>
