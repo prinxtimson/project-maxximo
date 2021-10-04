@@ -1,6 +1,7 @@
 import {
     CHART_ERROR,
     CLEAR_CHART,
+    GET_FOOD,
     GET_HEALTH,
     GET_HEALTH_BY_COUNTRY,
 } from "../actions/types";
@@ -41,6 +42,12 @@ export default (state = initialState, action) => {
                     ...state.health,
                     country: payload,
                 },
+            };
+        case GET_FOOD:
+            return {
+                ...state,
+                loading: false,
+                food: payload,
             };
         case CHART_ERROR:
             return {

@@ -89,7 +89,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                             <>
                                 <li className="nav-item">
                                     <Link
-                                        to="#"
+                                        to="/dashboard/food"
                                         className="nav-link text-white"
                                         aria-current="page"
                                     >
@@ -106,7 +106,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 </li>
                                 <li>
                                     <Link
-                                        to="#"
+                                        to="/dashboard/entertainment"
                                         className="nav-link text-white"
                                     >
                                         Entertainment
@@ -114,7 +114,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 </li>
                                 <li>
                                     <Link
-                                        to="#"
+                                        to="/dashboard/sport"
                                         className="nav-link text-white"
                                     >
                                         Sport

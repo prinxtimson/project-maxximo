@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import DashboardContainer from "../components/DashboardContainer";
 import UsersTable from "../components/UsersTable";
 import HealthChat from "../components/HealthChat";
+import FoodChart from "../components/FoodChart";
 
 const DashboardPage = ({ loading }) => {
     const { routeName } = useParams();
@@ -15,6 +16,8 @@ const DashboardPage = ({ loading }) => {
                 return <UsersTable />;
             case "health":
                 return <HealthChat />;
+            case "food":
+                return <FoodChart />;
             default:
                 return <h1>Dashboard ....</h1>;
         }

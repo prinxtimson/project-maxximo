@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Line } from "react-chartjs-2";
 import { connect } from "react-redux";
 import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";

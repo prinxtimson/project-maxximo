@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('health', [ChartController::class, 'health_history']);
     Route::get('health/world', [ChartController::class, 'health_world']);
     Route::get('health/{country}', [ChartController::class, 'health_country']);
+    Route::get('food-and-drinks/{food}', [ChartController::class, 'food']);
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
