@@ -6,6 +6,7 @@ import notification from "./notification";
 import privacy from "./privacy";
 import terms from "./terms";
 import subscription from "./subscription";
+import chart from "./chart";
 
 export default combineReducers({
     alert,
@@ -15,4 +16,5 @@ export default combineReducers({
     privacy,
     terms,
     subscription,
+    chart,
 });

@@ -98,7 +98,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 </li>
                                 <li>
                                     <Link
-                                        to="#"
+                                        to="/dashboard/health"
                                         className="nav-link text-white"
                                     >
                                         Health
@@ -125,7 +125,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                         to="/dashboard/subscribe"
                                         className="nav-link text-white"
                                     >
-                                        Subscribe
+                                        Account
                                     </Link>
                                 </li>
                             </>
@@ -140,7 +140,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                     >
                         <div className="container-fluid px-3">
                             <button
-                                className="navbar-toggler mx-2 d-lg-none"
+                                className="navbar-toggler mx-2 d-xl-none"
                                 id="sidebarCollapse"
                                 type="button"
                                 onClick={handleToggle}
@@ -150,7 +150,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                             <div className="flex-grow-1 py-2">
                                 <Link
                                     id="brand"
-                                    className={`navbar-brand d-lg-none ${
+                                    className={`navbar-brand d-xl-none ${
                                         isActive ? "d-none" : "d-block"
                                     }`}
                                     to="/"

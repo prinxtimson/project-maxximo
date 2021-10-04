@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import DashboardContainer from "../components/DashboardContainer";
 import UsersTable from "../components/UsersTable";
+import HealthChat from "../components/HealthChat";
 
 const DashboardPage = ({ loading }) => {
     const { routeName } = useParams();
@@ -12,13 +13,15 @@ const DashboardPage = ({ loading }) => {
         switch (param) {
             case "users":
                 return <UsersTable />;
+            case "health":
+                return <HealthChat />;
             default:
                 return <h1>Dashboard ....</h1>;
         }
     };
     return (
         <DashboardContainer>
-            <div className="container">{renderComponent(routeName)}</div>
+            <div className="container-fluid">{renderComponent(routeName)}</div>
         </DashboardContainer>
     );
 };

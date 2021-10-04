@@ -5,6 +5,9 @@ import { Provider } from "react-redux";
 import CookieConsent from "react-cookie-consent";
 import Cookies from "universal-cookie";
 
+import { Chart } from "react-chartjs-2";
+import DownsamplePlugin from "chartjs-plugin-downsample";
+
 import store from "./store";
 import { loadUser } from "./actions/auth";
 import { getPrivacy } from "./actions/privacy";
@@ -40,6 +43,10 @@ const App = () => {
     store.subscribe(() => {
         setAuth(store.getState().auth);
     });
+
+    // useEffect(() => {
+    //     Chart.plugins.register(DownsamplePlugin);
+    // }, []);
 
     useEffect(() => {
         if (!auth.loading && !auth.isAuthenticated) {

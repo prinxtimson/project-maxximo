@@ -38,7 +38,7 @@
     display: none;
   }
 
-  @media (max-width: 990px) {
+  @media (max-width: 1200px) {
     #sidebarMenu {
       margin-left: -260px;
     }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\SubscriptionController;
@@ -41,6 +42,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/subscription/save-payment', [SubscriptionController::class, 'store']);
     Route::post('/subscription/{id}/cancel', [SubscriptionController::class, 'cancel']);
     Route::put('/subscription/{id}', [SubscriptionController::class, 'update']);
+    Route::get('health', [ChartController::class, 'health_history']);
+    Route::get('health/world', [ChartController::class, 'health_world']);
+    Route::get('health/{country}', [ChartController::class, 'health_country']);
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
