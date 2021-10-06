@@ -5,8 +5,7 @@ import { Provider } from "react-redux";
 import CookieConsent from "react-cookie-consent";
 import Cookies from "universal-cookie";
 
-import { Chart } from "react-chartjs-2";
-import DownsamplePlugin from "chartjs-plugin-downsample";
+import ReactGA from "react-ga";
 
 import store from "./store";
 import { loadUser } from "./actions/auth";
@@ -27,8 +26,11 @@ import SolutionPage from "./pages/SolutionPage";
 import SubcriptionPage from "./pages/SubcriptionPage";
 import PurchasePage from "./pages/PurchasePage";
 import ContactUsPage from "./pages/ContactUsPage";
+import RouteChangeTracker from "./components/RouteChangeTracker";
 
 const cookies = new Cookies();
+
+ReactGA.initialize("G-LCQTQ9ZE2R");
 
 const App = () => {
     const [btnRef, setBtnRef] = useState(null);
@@ -43,10 +45,6 @@ const App = () => {
     store.subscribe(() => {
         setAuth(store.getState().auth);
     });
-
-    // useEffect(() => {
-    //     Chart.plugins.register(DownsamplePlugin);
-    // }, []);
 
     useEffect(() => {
         if (!auth.loading && !auth.isAuthenticated) {
@@ -113,6 +111,7 @@ const App = () => {
                     />
                     <Route exact path="/solution" component={SolutionPage} />
                 </Switch>
+                <RouteChangeTracker />
             </Router>
             <CookieConsent buttonText="Accept all cookies" debug={true}>
                 Elint-X uses site cookies to provide site functionality and
