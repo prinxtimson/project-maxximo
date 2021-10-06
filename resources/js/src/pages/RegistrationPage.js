@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 import MainContainer from "../components/MainContainer";
 import { setAlert } from "../actions/alert";
 import { registerUser } from "../actions/auth";
 import { connect } from "react-redux";
+import ReactGA from "react-ga";
 
 const RegistrationPage = ({
     setAlert,
@@ -20,6 +21,10 @@ const RegistrationPage = ({
         password: "",
         password_confirmation: "",
     });
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
 
     const { name, email, password, password_confirmation } = formData;
 

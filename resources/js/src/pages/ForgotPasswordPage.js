@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { requestPasswordReset } from "../actions/auth";
 import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
+import ReactGA from "react-ga";
 
 const ForgotPasswordPage = ({
     isAuthenticated,
@@ -14,6 +15,10 @@ const ForgotPasswordPage = ({
     const [loading, setLoading] = useState(false);
 
     const handleOnChange = (e) => setEmail(e.target.value);
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
 
     const handleOnSubmit = (e) => {
         e.preventDefault();

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import MainContainer from "../components/MainContainer";
 import { useParams, useHistory } from "react-router-dom";
 import PaypalButton from "../components/PaypalButton";
 import { connect } from "react-redux";
 import { savePayment } from "../actions/subscription";
+import ReactGA from "react-ga";
 
 const PurchasePage = ({ user, savePayment }) => {
     const { routeName } = useParams();
@@ -13,6 +14,10 @@ const PurchasePage = ({ user, savePayment }) => {
     const handleSavePayment = (data) => {
         savePayment(data, history);
     };
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
 
     return (
         <MainContainer>

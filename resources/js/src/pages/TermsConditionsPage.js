@@ -8,12 +8,17 @@ import PropTypes from "prop-types";
 import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 import { saveTerms } from "../actions/terms";
+import ReactGA from "react-ga";
 
 const TermsConditionsPage = ({ isAuthenticated, terms, saveTerms, user }) => {
     const [editorState, setEditorState] = useState(() =>
         EditorState.createEmpty()
     );
     const [edit, setEdit] = useState(false);
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
 
     useEffect(() => {
         if (terms.content?.body) {

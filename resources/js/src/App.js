@@ -26,7 +26,6 @@ import SolutionPage from "./pages/SolutionPage";
 import SubcriptionPage from "./pages/SubcriptionPage";
 import PurchasePage from "./pages/PurchasePage";
 import ContactUsPage from "./pages/ContactUsPage";
-import RouteChangeTracker from "./components/RouteChangeTracker";
 
 const cookies = new Cookies();
 
@@ -111,7 +110,6 @@ const App = () => {
                     />
                     <Route exact path="/solution" component={SolutionPage} />
                 </Switch>
-                <RouteChangeTracker />
             </Router>
             <CookieConsent buttonText="Accept all cookies" debug={true}>
                 Elint-X uses site cookies to provide site functionality and

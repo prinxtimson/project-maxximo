@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import MainContainer from "../components/MainContainer";
 import { changePassword } from "../actions/auth";
 import { connect } from "react-redux";
+import ReactGA from "react-ga";
 
 const ChangePasswordPage = ({ loading, changePassword, alerts }) => {
     const [formData, setFormData] = useState({
@@ -20,6 +21,10 @@ const ChangePasswordPage = ({ loading, changePassword, alerts }) => {
         e.preventDefault();
         changePassword(formData);
     };
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
 
     return (
         <MainContainer>

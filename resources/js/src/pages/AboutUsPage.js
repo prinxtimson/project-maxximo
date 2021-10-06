@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import MainContainer from "../components/MainContainer";
+import ReactGA from "react-ga";
 
 const AboutUsPage = () => {
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
     return (
         <MainContainer>
             <div className="">

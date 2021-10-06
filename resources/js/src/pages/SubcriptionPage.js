@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import MainContainer from "../components/MainContainer";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import ReactGA from "react-ga";
 
 const SubcriptionPage = ({ isAuthenticated }) => {
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
     return (
         <MainContainer>
             <div className="container py-3">

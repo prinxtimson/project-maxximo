@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 import MainContainer from "../components/MainContainer";
 import { loginUser } from "../actions/auth";
 import { connect } from "react-redux";
+import ReactGA from "react-ga";
 
 const LoginPage = ({ loginUser, alerts, loading }) => {
     const history = useHistory();
@@ -12,6 +13,10 @@ const LoginPage = ({ loginUser, alerts, loading }) => {
         email: "",
         password: "",
     });
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
 
     const { email, password } = formData;
 

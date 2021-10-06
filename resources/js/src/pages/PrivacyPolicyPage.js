@@ -8,12 +8,17 @@ import PropTypes from "prop-types";
 import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 import { savePrivacy } from "../actions/privacy";
+import ReactGA from "react-ga";
 
 const PrivacyPolicyPage = ({ isAuthenticated, privacy, savePrivacy, user }) => {
     const [editorState, setEditorState] = useState(() =>
         EditorState.createEmpty()
     );
     const [edit, setEdit] = useState(false);
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
 
     useEffect(() => {
         if (privacy.content?.body) {

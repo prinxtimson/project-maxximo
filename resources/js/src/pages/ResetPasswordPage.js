@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useLocation, useHistory } from "react-router-dom";
 import { setAlert } from "../actions/alert";
 import { resetPassword } from "../actions/auth";
 import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
+import ReactGA from "react-ga";
 
 const ResetPasswordPage = ({
     setAlert,
@@ -36,6 +37,10 @@ const ResetPasswordPage = ({
         setLoading(true);
         resetPassword(formData, params.token, history);
     };
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
 
     return (
         <MainContainer>

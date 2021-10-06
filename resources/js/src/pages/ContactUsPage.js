@@ -1,9 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 import emailjs from "emailjs-com";
 import { setAlert } from "../actions/alert";
+import ReactGA from "react-ga";
 
 const ContactUsPage = ({ alerts, setAlert }) => {
     const [loading, setLoading] = useState(false);
@@ -13,6 +14,10 @@ const ContactUsPage = ({ alerts, setAlert }) => {
         email: "",
         message: "",
     });
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
 
     const { name, email, message } = formData;
 

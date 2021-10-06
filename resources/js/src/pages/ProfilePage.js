@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 import { deleteAccount, updateUser } from "../actions/auth";
+import ReactGA from "react-ga";
 
 const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
     const [inputRef, setInputRef] = useState(null);
@@ -13,6 +14,10 @@ const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
     });
 
     const { name, avatar } = formData;
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, []);
 
     const handleOnChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
