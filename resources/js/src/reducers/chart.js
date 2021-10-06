@@ -31,7 +31,11 @@ export default (state = initialState, action) => {
         case CLEAR_CHART:
             return {
                 loading: true,
-                health: null,
+                health: {
+                    history: null,
+                    world: null,
+                    country: null,
+                },
                 sport: null,
                 food: null,
             };

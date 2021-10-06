@@ -6,6 +6,7 @@ import DashboardContainer from "../components/DashboardContainer";
 import UsersTable from "../components/UsersTable";
 import HealthChat from "../components/HealthChat";
 import FoodChart from "../components/FoodChart";
+import SubscriptionTable from '../components/SubscriptionTable';
 
 const DashboardPage = ({ loading }) => {
     const { routeName } = useParams();
@@ -18,6 +19,8 @@ const DashboardPage = ({ loading }) => {
                 return <HealthChat />;
             case "food":
                 return <FoodChart />;
+            case 'account':
+            return <SubscriptionTable />
             default:
                 return <h1>Dashboard ....</h1>;
         }

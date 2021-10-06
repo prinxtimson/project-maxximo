@@ -12,7 +12,7 @@ const SubscriptionTable = ({ subscriptions, loading }) => {
                         <table className="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Start Date</th>
                                     <th scope="col">Due Date</th>
                                     <th scope="col">Status</th>
@@ -21,7 +21,7 @@ const SubscriptionTable = ({ subscriptions, loading }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {!loading &&
+                                {!loading && subscription.length > 0 ? (
                                     subscriptions.map((subscription) => (
                                         <tr
                                             key={subscription.id}
@@ -80,7 +80,16 @@ const SubscriptionTable = ({ subscriptions, loading }) => {
                                                 </button>
                                             </td>
                                         </tr>
-                                    ))}
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                No subscription available yet.
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>

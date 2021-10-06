@@ -30,6 +30,11 @@
     width: 260px
   }
 
+  .active-tab {
+    color: #0d6efd;
+    background-color: #fff !important;
+  }
+
   .active {
     margin-left: -260px;
   }

@@ -80,6 +80,7 @@ export const loginUser = (email, password, history) => async (dispatch) => {
         history.replace("/dashboard");
     } catch (err) {
         console.log(err.response);
+        dispatch({ type: LOGIN_FAIL });
         if (err.response.status == 500) {
             return dispatch(
                 setAlert("Server errror, please try again.", "danger")
@@ -88,7 +89,6 @@ export const loginUser = (email, password, history) => async (dispatch) => {
 
         dispatch(setAlert(err.response.data.message, "danger"));
 
-        dispatch({ type: LOGIN_FAIL });
     }
 };
 
@@ -137,6 +137,7 @@ export const registerUser = (formData, history) => async (dispatch) => {
         history.replace("/dashboard");
     } catch (err) {
         console.log(err.response);
+        dispatch({ type: REGISTER_FAIL });
         if (err.response.status == 500) {
             return dispatch(
                 setAlert("Server errror, please try again.", "danger")
@@ -144,7 +145,7 @@ export const registerUser = (formData, history) => async (dispatch) => {
         }
 
         dispatch(setAlert(err.response.data.message, "danger"));
-        dispatch({ type: REGISTER_FAIL });
+        
     }
 };
 
