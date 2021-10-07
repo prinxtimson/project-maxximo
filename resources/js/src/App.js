@@ -29,7 +29,7 @@ import ContactUsPage from "./pages/ContactUsPage";
 
 const cookies = new Cookies();
 
-ReactGA.initialize("G-LCQTQ9ZE2R");
+ReactGA.initialize("UA-209541600-1");
 
 const App = () => {
     const [btnRef, setBtnRef] = useState(null);
