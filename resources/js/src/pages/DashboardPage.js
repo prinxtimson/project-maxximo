@@ -8,6 +8,7 @@ import HealthChat from "../components/HealthChat";
 import FoodChart from "../components/FoodChart";
 import SubscriptionTable from "../components/SubscriptionTable";
 import ReactGA from "react-ga";
+import EntertainmentChart from "../components/EntertainmentChart";
 
 const DashboardPage = ({ loading }) => {
     const { routeName } = useParams();
@@ -24,6 +25,8 @@ const DashboardPage = ({ loading }) => {
                 return <HealthChat />;
             case "food":
                 return <FoodChart />;
+            case "entertainment":
+                return <EntertainmentChart />;
             case "account":
                 return <SubscriptionTable />;
             default:

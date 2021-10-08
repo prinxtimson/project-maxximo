@@ -11,6 +11,18 @@ const SubcriptionPage = ({ isAuthenticated }) => {
     }, []);
     return (
         <MainContainer>
+            <div
+                className="p-5"
+                style={{ backgroundColor: "#1976d2", height: 200 }}
+            >
+                <div className="container">
+                    <div className="row align-items-center">
+                        <div className="col-8">
+                            <h1 className="fw-bold text-white">Subscription</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="container py-3">
                 <main>
                     <div className="pricing-header p-3 pb-md-4 mx-auto text-center">

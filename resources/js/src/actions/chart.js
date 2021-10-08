@@ -6,6 +6,8 @@ import {
     GET_FOOD,
     GET_HEALTH,
     GET_HEALTH_BY_COUNTRY,
+    GET_SPORT,
+    GET_VIDEO,
 } from "./types";
 
 export const getHealth = () => async (dispatch) => {
@@ -45,7 +47,7 @@ export const getHealthByCountry = (country) => async (dispatch) => {
             type: GET_HEALTH_BY_COUNTRY,
             payload: res.data,
         });
-    } catch (error) {
+    } catch (err) {
         console.log(err.response);
         dispatch({ type: CHART_ERROR });
         if (err.response.status == 500) {
@@ -66,7 +68,49 @@ export const getFood = (food) => async (dispatch) => {
             type: GET_FOOD,
             payload: res.data,
         });
-    } catch (error) {
+    } catch (err) {
+        console.log(err.response);
+        dispatch({ type: CHART_ERROR });
+        if (err.response.status == 500) {
+            return dispatch(
+                setAlert("Server errror, please try again.", "danger")
+            );
+        }
+
+        dispatch(setAlert(err.response.data.message, "danger"));
+    }
+};
+
+export const getVideo = () => async (dispatch) => {
+    try {
+        const res = await axios.get(`/api/entertainment/video`);
+
+        dispatch({
+            type: GET_VIDEO,
+            payload: res.data,
+        });
+    } catch (err) {
+        console.log(err.response);
+        dispatch({ type: CHART_ERROR });
+        if (err.response.status == 500) {
+            return dispatch(
+                setAlert("Server errror, please try again.", "danger")
+            );
+        }
+
+        dispatch(setAlert(err.response.data.message, "danger"));
+    }
+};
+
+export const getSport = () => async (dispatch) => {
+    try {
+        const res = await axios.get(`/api/sport/tennis`);
+
+        dispatch({
+            type: GET_SPORT,
+            payload: res.data,
+        });
+    } catch (err) {
         console.log(err.response);
         dispatch({ type: CHART_ERROR });
         if (err.response.status == 500) {

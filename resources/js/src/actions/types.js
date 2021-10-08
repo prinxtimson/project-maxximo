@@ -30,5 +30,7 @@ export const SUBSCRIPTION_LOADING = "SUBSCRIPTION_LOADING";
 export const GET_HEALTH = "GET_HEALTH";
 export const GET_HEALTH_BY_COUNTRY = "GET_HEALTH_BY_COUNTRY";
 export const GET_FOOD = "GET_FOOD";
+export const GET_VIDEO = "GET_VIDEO";
+export const GET_SPORT = "GET_SPORT";
 export const CLEAR_CHART = "CLEAR_CHART";
 export const CHART_ERROR = "CHART_ERROR";

@@ -54,6 +54,18 @@ const ContactUsPage = ({ alerts, setAlert }) => {
 
     return (
         <MainContainer>
+            <div
+                className="p-5"
+                style={{ backgroundColor: "#1976d2", height: 200 }}
+            >
+                <div className="container">
+                    <div className="row align-items-center">
+                        <div className="col-8">
+                            <h1 className="fw-bold text-white">Contact Us</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="container-fluid">
                 <div className="row align-items-center">
                     <div className="col">
@@ -62,9 +74,9 @@ const ContactUsPage = ({ alerts, setAlert }) => {
                             style={{ maxWidth: "440px" }}
                         >
                             <div className="card-body">
-                                <h1 className="card-title text-primary text-center">
-                                    Contact Us
-                                </h1>
+                                <h4 className="card-title text-primary text-center">
+                                    We will like to hear from you
+                                </h4>
 
                                 {alerts.map(
                                     (alert) =>

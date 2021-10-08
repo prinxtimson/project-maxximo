@@ -24,4 +24,18 @@ class ChartController extends Controller
     public function food($food){
         return Http::get('https://api.edamam.com/api/nutrition-data?app_id=72c7af91&app_key=7da89b6fdd99a139e1fa3009ff0254e0&nutrition-type=logging&ingr='.$food)->throw()->json();
     }
+
+    public function trend_video(){
+        return Http::withHeaders([
+            'x-rapidapi-host' => 'social-media-data-tt.p.rapidapi.com',
+	        'x-rapidapi-key' => '21f0213dd4msh41a889b503940d6p1b8441jsn897fab25878f'
+        ])->get('https://social-media-data-tt.p.rapidapi.com/live/trending/feed')->throw()->json();
+    }
+
+    public function tennis_ranking(){
+        return Http::withHeaders([
+            'x-rapidapi-host' => 'tennis-live-data.p.rapidapi.com',
+	        'x-rapidapi-key' => '21f0213dd4msh41a889b503940d6p1b8441jsn897fab25878f'
+        ])->get('https://tennis-live-data.p.rapidapi.com/rankings/ATP')->throw()->json();
+    }
 }
