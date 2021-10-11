@@ -12,6 +12,7 @@ import EntertainmentChart from "../components/EntertainmentChart";
 import AdminDashboard from "../components/AdminDashboard";
 import SportsChart from "../components/SportsChart";
 import Dashboard from "../components/Dashboard";
+import PageVisitedChart from "../components/PageVisitedChart";
 
 const DashboardPage = ({ loading }) => {
     const { routeName } = useParams();
@@ -36,6 +37,8 @@ const DashboardPage = ({ loading }) => {
                 return <SportsChart />;
             case "visit":
                 return <AdminDashboard />;
+            case "page-visited":
+                return <PageVisitedChart />;
             default:
                 return <Dashboard />;
         }

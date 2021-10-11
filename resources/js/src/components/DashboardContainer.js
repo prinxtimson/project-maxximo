@@ -67,14 +67,14 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 </li>
                                 <li>
                                     <Link
-                                        to="#"
+                                        to="/dashboard/page-visited"
                                         className={`nav-link ${
                                             routeName === "duration"
                                                 ? "active-tab"
                                                 : "text-white"
                                         }`}
                                     >
-                                        Duration
+                                        Page Visited
                                     </Link>
                                 </li>
                                 <li>

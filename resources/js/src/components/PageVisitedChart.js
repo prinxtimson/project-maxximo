@@ -1,67 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { getVisit } from "../actions/analytics";
 import { connect } from "react-redux";
 import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
 import Column2D from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
-import moment from "moment";
+import { getPageVisit } from "../actions/analytics";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
-const AdminDashboard = ({ getVisit, visit, loading }) => {
+const PageVisitedChart = ({ getPageVisit, loading, page }) => {
     const [chartConfigs, setChartConfigs] = useState(null);
     const [period, setPeriod] = useState(7);
-    //const [chartConfigs2, setChartConfigs2] = useState(null);
 
     useEffect(() => {
-        getVisit(7);
-        document.title = "Visit Chart";
+        getPageVisit(7);
     }, []);
 
     useEffect(() => {
-        if (visit.length > 0) {
+        if (page.length > 0) {
             let data = [];
-            let len = visit.length;
-            if (period > len) {
-                let r = period - len;
 
-                for (let i = 1; i <= r; i++) {
-                    let d = new Date(visit[0]?.date);
-                    d.setDate(d.getDate() - i);
-                    data.unshift({
-                        label: moment(d.toISOString()).format("ll"),
-                        value: 0,
-                    });
-                }
-            }
-            visit.map((item) => {
+            page.map((item) => {
                 data.push({
-                    label: moment(item.date).format("ll"),
-                    value: item.visitors,
+                    label: item.url,
+                    value: item.pageViews,
                 });
             });
 
             setChartConfigs({
-                type: "line", // The chart type
+                type: "bar2d", // The chart type
                 width: "100%", // Width of the chart
                 height: "100%", // Height of the chart
                 dataFormat: "json", // Data type
                 dataSource: {
                     chart: {
-                        caption: "Visitors to website",
-                        xAxisName: "Day",
-                        yAxisName: "Visit",
+                        caption: "Page Visited by Users",
+                        //xAxisName: "URL",
+                        yAxisName: "Total Visit",
                         theme: "fusion",
-                        labelStep: period > 7 ? "5" : "0",
+                        alignCaptionWithCanvas: "0",
                         // drawAnchors: "0",
                     },
                     data,
                 },
             });
         }
-    }, [visit]);
+    }, [page]);
 
     const handleOnChange = (e) => {
         setPeriod(e.target.value);
@@ -104,16 +89,17 @@ const AdminDashboard = ({ getVisit, visit, loading }) => {
     );
 };
 
-AdminDashboard.propTypes = {
-    getVisit: PropTypes.func.isRequired,
+PageVisitedChart.propTypes = {
+    getPageVisit: PropTypes.func.isRequired,
+    page: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
-    visit: state.analytics.visit,
+    page: state.analytics.page,
     loading: state.analytics.loading,
 });
 
-export default connect(mapStateToProps, { getVisit })(AdminDashboard);
+export default connect(mapStateToProps, { getPageVisit })(PageVisitedChart);
 
 const PERIOD = [
     {

@@ -46,9 +46,9 @@ class AnalysisController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function analysis()
     {
-        return Analytics::getAnalyticsService();
+        return Analytics::getAnalyticsService(Period::days(7));
     }
 
     /**
@@ -57,9 +57,11 @@ class AnalysisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($days)
     {
-        //
+        $analyticsData = Analytics::fetchMostVisitedPages(Period::days($days), 20);
+
+        return $analyticsData;
     }
 
     /**
@@ -68,9 +70,9 @@ class AnalysisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function user_type($days)
     {
-        //
+        return Analytics::fetchUserTypes(Period::days($days));
     }
 
     /**
