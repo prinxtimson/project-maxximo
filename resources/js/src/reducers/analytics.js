@@ -10,6 +10,7 @@ const initialState = {
     loading: true,
     visit: [],
     page: [],
+    userType: [],
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -21,7 +22,7 @@ export default (state = initialState, actions) => {
         case SET_ANALYTICS:
             return {
                 ...state,
-                visit: payload,
+                ...payload,
                 loading: false,
             };
         case SET_ANALYTICS_PAGE_VISIT:
@@ -39,6 +40,7 @@ export default (state = initialState, actions) => {
             return {
                 visit: [],
                 page: [],
+                userType: [],
                 loading: true,
             };
         default:

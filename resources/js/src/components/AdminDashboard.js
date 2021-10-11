@@ -10,15 +10,47 @@ import moment from "moment";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
-const AdminDashboard = ({ getVisit, visit, loading }) => {
+const AdminDashboard = ({ getVisit, visit, loading, userType }) => {
     const [chartConfigs, setChartConfigs] = useState(null);
     const [period, setPeriod] = useState(7);
-    //const [chartConfigs2, setChartConfigs2] = useState(null);
+    const [chartConfigs2, setChartConfigs2] = useState(null);
 
     useEffect(() => {
         getVisit(7);
         document.title = "Visit Chart";
     }, []);
+
+    useEffect(() => {
+        if (userType.length > 0) {
+            let data = [];
+
+            userType.map((item) => {
+                data.push({
+                    label: item.type,
+                    value: item.sessions,
+                });
+            });
+
+            setChartConfigs2({
+                type: "doughnut2d", // The chart type
+                width: "100%", // Width of the chart
+                height: "100%", // Height of the chart
+                dataFormat: "json", // Data type
+                dataSource: {
+                    chart: {
+                        caption: "User Type",
+                        theme: "fusion",
+                        startingAngle: "310",
+                        showLegend: "1",
+                        decimals: "1",
+                        valuePosition: "inside",
+                        minAngleForValue: "40",
+                    },
+                    data,
+                },
+            });
+        }
+    }, [userType]);
 
     useEffect(() => {
         if (visit.length > 0) {
@@ -91,12 +123,23 @@ const AdminDashboard = ({ getVisit, visit, loading }) => {
                     </select>
                 </div>
             </div>
-            <div className="">
-                <div className="card" style={{ minHeight: 500 }}>
-                    <div className="card-body">
-                        {!loading && chartConfigs && (
-                            <ReactFC {...chartConfigs} />
-                        )}
+            <div className="row">
+                <div className="col col-md-6 mb-md-0 mb-4">
+                    <div className="card" style={{ minHeight: 500 }}>
+                        <div className="card-body">
+                            {!loading && chartConfigs && (
+                                <ReactFC {...chartConfigs} />
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <div className="col col-md-6 ">
+                    <div className="card" style={{ minHeight: 500 }}>
+                        <div className="card-body">
+                            {!loading && chartConfigs2 && (
+                                <ReactFC {...chartConfigs2} />
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,6 +153,7 @@ AdminDashboard.propTypes = {
 
 const mapStateToProps = (state) => ({
     visit: state.analytics.visit,
+    userType: state.analytics.userType,
     loading: state.analytics.loading,
 });
 

@@ -195,6 +195,9 @@ const HealthChat = ({
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className="row align-items-center justify-content-center">
                 <div className="col col-md-6 mt-4">
                     <div className="card" style={{ minHeight: 400 }}>
                         <div className="card-body">

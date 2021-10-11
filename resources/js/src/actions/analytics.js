@@ -26,14 +26,14 @@ export const getVisit = (days) => async (dispatch) => {
     try {
         const res = await axios.get(`/api/analytics/visit/${days}`);
 
-        const res1 = await axios.get("/api/analytics/user-type/7");
+        const res1 = await axios.get(`/api/analytics/user-type/${days}`);
 
         console.log(res.data);
         console.log(res1.data);
 
         dispatch({
             type: SET_ANALYTICS_VISIT,
-            payload: res.data,
+            payload: { visit: res.data, userType: res1.data },
         });
     } catch (err) {
         console.log(err.response);

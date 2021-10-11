@@ -123,7 +123,7 @@ const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
     return (
         <div className="container-fluid p-4">
             <div className="p-2">
-                <h5>Trending Video</h5>
+                <h5>Trending Tictok Video</h5>
             </div>
             <div className="row mb-4">
                 <div className="col col-md-6">

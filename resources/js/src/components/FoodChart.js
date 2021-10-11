@@ -55,7 +55,7 @@ const FoodChart = ({ getFood, clearChart, food, loading }) => {
             }
 
             setChartConfigs({
-                type: "pie2d", // The chart type
+                type: "bar2d", // The chart type
                 width: "100%",
                 height: "100%",
                 dataFormat: "json",
@@ -64,6 +64,7 @@ const FoodChart = ({ getFood, clearChart, food, loading }) => {
                         caption: "Total Daily Nutrient Needed",
                         theme: "fusion",
                         startingAngle: "310",
+                        legendPosition: "right",
                         showLegend: "1",
                         decimals: "1",
                         valuePosition: "inside",
@@ -74,7 +75,7 @@ const FoodChart = ({ getFood, clearChart, food, loading }) => {
             });
 
             setChartConfigs2({
-                type: "doughnut2d", // The chart type
+                type: "bar2d", // The chart type
                 width: "100%",
                 height: "100%",
                 dataFormat: "json",
@@ -83,6 +84,7 @@ const FoodChart = ({ getFood, clearChart, food, loading }) => {
                         caption: "Total Nutrient Available in Food",
                         theme: "fusion",
                         startingAngle: "310",
+                        legendPosition: "right",
                         showLegend: "1",
                         decimals: "1",
                         valuePosition: "inside",
