@@ -4,6 +4,7 @@ import {
     CHART_ERROR,
     CLEAR_CHART,
     GET_FOOD,
+    GET_FOOTBALL_BY_ID,
     GET_HEALTH,
     GET_HEALTH_BY_COUNTRY,
     GET_SPORT,
@@ -15,8 +16,6 @@ export const getHealth = () => async (dispatch) => {
         const res = await axios.get("/api/health");
         const res2 = await axios.get("/api/health/world");
         const res3 = await axios.get("/api/health/GB");
-
-        console.log(res3.data);
 
         dispatch({
             type: GET_HEALTH,
@@ -105,10 +104,41 @@ export const getVideo = () => async (dispatch) => {
 export const getSport = () => async (dispatch) => {
     try {
         const res = await axios.get(`/api/sport/tennis`);
+        const res1 = await axios.get(`/api/sport/football`);
+        const res2 = await axios.get(
+            `/api/sport/football/${res1.data.response[0].fixture.id}`
+        );
 
         dispatch({
             type: GET_SPORT,
-            payload: res.data,
+            payload: {
+                tennis: res.data,
+                football: {
+                    fixtures: res1.data.response,
+                    statistics: res2.data.response,
+                },
+            },
+        });
+    } catch (err) {
+        console.log(err.response);
+        dispatch({ type: CHART_ERROR });
+        if (err.response.status == 500) {
+            return dispatch(
+                setAlert("Server errror, please try again.", "danger")
+            );
+        }
+
+        dispatch(setAlert(err.response.data.message, "danger"));
+    }
+};
+
+export const getFootballById = (id) => async (dispatch) => {
+    try {
+        const res = await axios.get(`/api/sport/football/${id}`);
+
+        dispatch({
+            type: GET_FOOTBALL_BY_ID,
+            payload: res.data.response,
         });
     } catch (err) {
         console.log(err.response);

@@ -2,6 +2,7 @@ import {
     CHART_ERROR,
     CLEAR_CHART,
     GET_FOOD,
+    GET_FOOTBALL_BY_ID,
     GET_HEALTH,
     GET_HEALTH_BY_COUNTRY,
     GET_SPORT,
@@ -17,6 +18,7 @@ const initialState = {
     },
     sport: {
         tennis: null,
+        football: null,
     },
     food: null,
     entertainment: {
@@ -71,7 +73,19 @@ export default (state = initialState, action) => {
                 loading: false,
                 sport: {
                     ...state.sport,
-                    tennis: payload,
+                    ...payload,
+                },
+            };
+        case GET_FOOTBALL_BY_ID:
+            return {
+                ...state,
+                loading: false,
+                sport: {
+                    ...state.sport,
+                    football: {
+                        ...state.sport.football,
+                        statistics: payload,
+                    },
                 },
             };
         case GET_VIDEO:

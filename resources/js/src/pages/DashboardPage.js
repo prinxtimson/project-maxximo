@@ -9,6 +9,9 @@ import FoodChart from "../components/FoodChart";
 import SubscriptionTable from "../components/SubscriptionTable";
 import ReactGA from "react-ga";
 import EntertainmentChart from "../components/EntertainmentChart";
+import AdminDashboard from "../components/AdminDashboard";
+import SportsChart from "../components/SportsChart";
+import Dashboard from "../components/Dashboard";
 
 const DashboardPage = ({ loading }) => {
     const { routeName } = useParams();
@@ -29,8 +32,10 @@ const DashboardPage = ({ loading }) => {
                 return <EntertainmentChart />;
             case "account":
                 return <SubscriptionTable />;
+            case "sport":
+                return <SportsChart />;
             default:
-                return <h1>Dashboard ....</h1>;
+                return <Dashboard />;
         }
     };
     return (

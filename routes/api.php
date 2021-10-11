@@ -7,6 +7,7 @@ use App\Http\Controllers\ChartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\AnalysisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('health/{country}', [ChartController::class, 'health_country']);
     Route::get('entertainment/video', [ChartController::class, 'trend_video']);
     Route::get('sport/tennis', [ChartController::class, 'tennis_ranking']);
+    Route::get('sport/football', [ChartController::class, 'fixtures']);
+    Route::get('sport/football/{id}', [ChartController::class, 'statistics']);
     Route::get('food-and-drinks/{food}', [ChartController::class, 'food']);
+    Route::get('analytics', [AnalysisController::class, 'index']);
+    Route::get('analytics/session', [AnalysisController::class, 'session']);
+    Route::get('analytics/analysis', [AnalysisController::class, 'store']);
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function () {
