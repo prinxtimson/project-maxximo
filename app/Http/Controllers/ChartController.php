@@ -27,9 +27,9 @@ class ChartController extends Controller
 
     public function trend_video(){
         return Http::withHeaders([
-            'x-rapidapi-host' => 'social-media-data-tt.p.rapidapi.com',
+            'x-rapidapi-host' => 'tiktok-best-experience.p.rapidapi.com',
 	        'x-rapidapi-key' => '21f0213dd4msh41a889b503940d6p1b8441jsn897fab25878f'
-        ])->get('https://social-media-data-tt.p.rapidapi.com/live/trending/feed')->throw()->json();
+        ])->get('https://tiktok-best-experience.p.rapidapi.com/trending')->throw()->json();
     }
 
     public function tennis_ranking(){

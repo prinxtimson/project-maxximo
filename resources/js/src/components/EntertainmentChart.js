@@ -28,25 +28,25 @@ const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
             let commentCountData = [];
             let playCountData = [];
 
-            trendVideo.media.map(({ statistics, author, music }) => {
+            trendVideo.items.map(({ stats, author, music }) => {
                 diggCountData.push({
                     label: author.nickname,
-                    value: statistics.diggCount,
+                    value: stats.diggCount,
                     tooltext: `Music:{br} Title: ${music.title}{br} Author: ${music.authorName}`,
                 });
                 shareCountData.push({
                     label: author.nickname,
-                    value: statistics.shareCount,
+                    value: stats.shareCount,
                     tooltext: `Music:{br} Title: ${music.title}{br} Author: ${music.authorName}`,
                 });
                 commentCountData.push({
                     label: author.nickname,
-                    value: statistics.commentCount,
+                    value: stats.commentCount,
                     tooltext: `Music:{br} Title: ${music.title}{br} Author: ${music.authorName}`,
                 });
                 playCountData.push({
                     label: author.nickname,
-                    value: statistics.playCount,
+                    value: stats.playCount,
                     tooltext: `Music:{br} Title: ${music.title}{br} Author: ${music.authorName}`,
                 });
             });
