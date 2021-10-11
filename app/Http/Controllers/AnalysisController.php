@@ -13,9 +13,9 @@ class AnalysisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($days)
     {
-        $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
+        $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days($days));
 
         return $analyticsData;
     }

@@ -51,7 +51,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('sport/football', [ChartController::class, 'fixtures']);
     Route::get('sport/football/{id}', [ChartController::class, 'statistics']);
     Route::get('food-and-drinks/{food}', [ChartController::class, 'food']);
-    Route::get('analytics', [AnalysisController::class, 'index']);
+    Route::get('analytics/visit/{days}', [AnalysisController::class, 'index']);
     Route::get('analytics/session', [AnalysisController::class, 'session']);
     Route::get('analytics/analysis', [AnalysisController::class, 'store']);
 });

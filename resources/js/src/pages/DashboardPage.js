@@ -34,6 +34,8 @@ const DashboardPage = ({ loading }) => {
                 return <SubscriptionTable />;
             case "sport":
                 return <SportsChart />;
+            case "visit":
+                return <AdminDashboard />;
             default:
                 return <Dashboard />;
         }

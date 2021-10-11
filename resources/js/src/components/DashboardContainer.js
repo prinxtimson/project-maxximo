@@ -54,8 +54,12 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                             <>
                                 <li className="nav-item">
                                     <Link
-                                        to="#"
-                                        className={`nav-link ${routeName === 'visit' ? 'active-tab' : 'text-white'}`}
+                                        to="/dashboard/visit"
+                                        className={`nav-link ${
+                                            routeName === "visit"
+                                                ? "active-tab"
+                                                : "text-white"
+                                        }`}
                                         aria-current="page"
                                     >
                                         Visit
@@ -64,7 +68,11 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="#"
-                                        className={`nav-link ${routeName === 'duration' ? 'active-tab' : 'text-white'}`}
+                                        className={`nav-link ${
+                                            routeName === "duration"
+                                                ? "active-tab"
+                                                : "text-white"
+                                        }`}
                                     >
                                         Duration
                                     </Link>
@@ -72,7 +80,11 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/subscribe"
-                                        className={`nav-link ${routeName === 'subscribe' ? 'active-tab' : 'text-white'}`}
+                                        className={`nav-link ${
+                                            routeName === "subscribe"
+                                                ? "active-tab"
+                                                : "text-white"
+                                        }`}
                                     >
                                         Subscribe
                                     </Link>
@@ -80,7 +92,11 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/users"
-                                        className={`nav-link ${routeName === 'users' ? 'active-tab' : 'text-white'}`}
+                                        className={`nav-link ${
+                                            routeName === "users"
+                                                ? "active-tab"
+                                                : "text-white"
+                                        }`}
                                     >
                                         Users
                                     </Link>
@@ -91,7 +107,11 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li className="nav-item">
                                     <Link
                                         to="/dashboard/food"
-                                        className={`nav-link ${routeName === 'food' ? 'active-tab' : 'text-white'}`}
+                                        className={`nav-link ${
+                                            routeName === "food"
+                                                ? "active-tab"
+                                                : "text-white"
+                                        }`}
                                         aria-current="page"
                                     >
                                         Food
@@ -100,7 +120,11 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/health"
-                                        className={`nav-link ${routeName === 'health' ? 'active-tab' : 'text-white'}`}
+                                        className={`nav-link ${
+                                            routeName === "health"
+                                                ? "active-tab"
+                                                : "text-white"
+                                        }`}
                                     >
                                         Health
                                     </Link>
@@ -108,7 +132,11 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/entertainment"
-                                        className={`nav-link ${routeName === 'entertainment' ? 'active-tab' : 'text-white'}`}
+                                        className={`nav-link ${
+                                            routeName === "entertainment"
+                                                ? "active-tab"
+                                                : "text-white"
+                                        }`}
                                     >
                                         Entertainment
                                     </Link>
@@ -116,7 +144,11 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/sport"
-                                        className={`nav-link ${routeName === 'sport' ? 'active-tab' : 'text-white'}`}
+                                        className={`nav-link ${
+                                            routeName === "sport"
+                                                ? "active-tab"
+                                                : "text-white"
+                                        }`}
                                     >
                                         Sport
                                     </Link>
@@ -124,7 +156,11 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/account"
-                                        className={`nav-link ${routeName === 'account' ? 'active-tab' : 'text-white'}`}
+                                        className={`nav-link ${
+                                            routeName === "account"
+                                                ? "active-tab"
+                                                : "text-white"
+                                        }`}
                                     >
                                         Account
                                     </Link>
