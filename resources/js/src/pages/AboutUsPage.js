@@ -9,10 +9,10 @@ const AboutUsPage = () => {
     }, []);
     return (
         <MainContainer>
-            <div className="">
+            <div className="bg-white">
                 <div
                     className="p-5"
-                    style={{ backgroundColor: "#1976d2", height: 200 }}
+                    style={{ backgroundColor: "#00a7ad", height: 200 }}
                 >
                     <div className="container">
                         <div className="row align-items-center">

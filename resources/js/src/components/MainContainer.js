@@ -24,9 +24,12 @@ const MainContainer = ({ children, alerts }) => {
                         )
                 )}
             </div>
-            <div className="d-flex flex-column flex-grow-1 bg-white">
+            <div
+                className="d-flex flex-column flex-grow-1 "
+                style={{ backgroundColor: "#00a7ad" }}
+            >
                 <MainHeader />
-                <div className="flex-grow-1 flex-column d-flex justify-content-center">
+                <div className="flex-grow-1 flex-shrink-0 flex-column d-flex justify-content-center bg-white ">
                     {children}
                 </div>
                 <MainFooter />

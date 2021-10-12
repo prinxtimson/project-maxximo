@@ -38,63 +38,66 @@ const PrivacyPolicyPage = ({ isAuthenticated, privacy, savePrivacy, user }) => {
     };
     return (
         <MainContainer>
-            <div className="container">
-                <h2 className="text-align-center">Privacy Policy</h2>
-                <div className="py-2">
-                    {isAuthenticated && user?.roles[0]?.name === "admin" && (
-                        <div className="py-2">
-                            {edit ? (
-                                <div className="d-grid gap-2 d-sm-block">
+            <div className="bg-white">
+                {" "}
+                <div className="container">
+                    <h2 className="text-align-center">Privacy Policy</h2>
+                    <div className="py-2">
+                        {isAuthenticated && user?.roles[0]?.name === "admin" && (
+                            <div className="py-2">
+                                {edit ? (
+                                    <div className="d-grid gap-2 d-sm-block">
+                                        <button
+                                            className="btn btn-light mx-1"
+                                            type="button"
+                                            onClick={handleSavePrivacy}
+                                        >
+                                            Save
+                                        </button>
+                                        <button
+                                            className="btn btn-light mx-1"
+                                            type="button"
+                                            onClick={() => setEdit(false)}
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                ) : (
                                     <button
-                                        className="btn btn-light mx-1"
+                                        className="btn btn-light"
                                         type="button"
-                                        onClick={handleSavePrivacy}
+                                        onClick={() => setEdit(true)}
                                     >
-                                        Save
+                                        Edit
                                     </button>
-                                    <button
-                                        className="btn btn-light mx-1"
-                                        type="button"
-                                        onClick={() => setEdit(false)}
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            ) : (
-                                <button
-                                    className="btn btn-light"
-                                    type="button"
-                                    onClick={() => setEdit(true)}
-                                >
-                                    Edit
-                                </button>
-                            )}
-                        </div>
-                    )}
-                    {!edit ? (
-                        <div
-                            className="py-2"
-                            dangerouslySetInnerHTML={{
-                                __html: privacy.content?.body,
-                            }}
-                        />
-                    ) : (
-                        isAuthenticated && (
-                            <div
-                                className="my-3 border rounded"
-                                style={{
-                                    minHeight: 450,
-                                }}
-                            >
-                                <Editor
-                                    editorState={editorState}
-                                    wrapperClassName="demo-wrapper"
-                                    editorClassName="demo-editor"
-                                    onEditorStateChange={setEditorState}
-                                />
+                                )}
                             </div>
-                        )
-                    )}
+                        )}
+                        {!edit ? (
+                            <div
+                                className="py-2"
+                                dangerouslySetInnerHTML={{
+                                    __html: privacy.content?.body,
+                                }}
+                            />
+                        ) : (
+                            isAuthenticated && (
+                                <div
+                                    className="my-3 border rounded"
+                                    style={{
+                                        minHeight: 450,
+                                    }}
+                                >
+                                    <Editor
+                                        editorState={editorState}
+                                        wrapperClassName="demo-wrapper"
+                                        editorClassName="demo-editor"
+                                        onEditorStateChange={setEditorState}
+                                    />
+                                </div>
+                            )
+                        )}
+                    </div>
                 </div>
             </div>
         </MainContainer>

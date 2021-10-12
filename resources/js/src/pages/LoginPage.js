@@ -30,7 +30,7 @@ const LoginPage = ({ loginUser, alerts, loading }) => {
 
     return (
         <MainContainer>
-            <div className="container-fluid">
+            <div className="container-fluid bg-white">
                 <div className="row align-items-center">
                     <div className="col">
                         <div

@@ -11,38 +11,43 @@ const HomePage = ({ isAuthenticated, loading }) => {
     }, []);
     return (
         <MainContainer>
-            <div className="container">
-                <div className="row align-items-center">
-                    <div className="col">
-                        <h1
-                            className="display-1 fw-bold"
-                            style={{ color: "blue" }}
-                        >
-                            Insights
-                        </h1>
-                        <h2 className="">
-                            Get solutions tailored to your business options
-                        </h2>
-                        <div className="d-grid gap-2 d-md-block">
-                            {loading
-                                ? null
-                                : !isAuthenticated && (
-                                      <Link
-                                          className="btn btn-primary text-white"
-                                          type="button"
-                                          to="/register"
-                                      >
-                                          Start Your 14-day Free Trial
-                                      </Link>
-                                  )}
+            <div
+                className=""
+                style={{ backgroundColor: "#00a7ad", minHeight: "100%" }}
+            >
+                <div className="container h-100">
+                    <div className="row align-items-center h-100">
+                        <div className="col">
+                            <h1
+                                className="display-1 fw-bold"
+                                style={{ color: "blue" }}
+                            >
+                                Insights
+                            </h1>
+                            <h2 className="fs-1">
+                                Get solutions tailored to your business options
+                            </h2>
+                            <div className="d-grid gap-2 d-md-block">
+                                {loading
+                                    ? null
+                                    : !isAuthenticated && (
+                                          <Link
+                                              className="btn btn-light text-primary"
+                                              type="button"
+                                              to="/register"
+                                          >
+                                              Start Your 14-day Free Trial
+                                          </Link>
+                                      )}
+                            </div>
                         </div>
-                    </div>
-                    <div className="col d-sm-none d-md-block">
-                        <img
-                            style={{ width: "100%" }}
-                            src="/images/metrix.png"
-                            alt="Metrix"
-                        />
+                        <div className="col d-sm-none d-md-block">
+                            <img
+                                style={{ width: "100%" }}
+                                src="/images/metrix.svg"
+                                alt="Metrix"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -54,115 +54,119 @@ const ContactUsPage = ({ alerts, setAlert }) => {
 
     return (
         <MainContainer>
-            <div
-                className="p-5"
-                style={{ backgroundColor: "#1976d2", height: 200 }}
-            >
-                <div className="container">
-                    <div className="row align-items-center">
-                        <div className="col-8">
-                            <h1 className="fw-bold text-white">Contact Us</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="container-fluid">
-                <div className="row align-items-center">
-                    <div className="col">
-                        <div
-                            className="card my-5 m-auto p-2"
-                            style={{ maxWidth: "440px" }}
-                        >
-                            <div className="card-body">
-                                <h4 className="card-title text-primary text-center">
-                                    We will like to hear from you
-                                </h4>
-
-                                {alerts.map(
-                                    (alert) =>
-                                        alert.alertType === "danger" && (
-                                            <div
-                                                key={alert.id}
-                                                className={`alert alert-${alert.alertType} py-2`}
-                                                role="alert"
-                                            >
-                                                {alert.msg}
-                                            </div>
-                                        )
-                                )}
-                                <form
-                                    onSubmit={handleOnSubmit}
-                                    className="form row g-3 "
-                                    ref={formRef}
-                                >
-                                    <div className="form-floating col-12">
-                                        <input
-                                            type="text"
-                                            className="form-control form-control-lg"
-                                            value={name}
-                                            placeholder="Name"
-                                            id="floatingInput"
-                                            name="name"
-                                            onChange={handleOnChange}
-                                            required
-                                        />
-                                        <label htmlFor="floatingInput">
-                                            Name
-                                        </label>
-                                    </div>
-                                    <div className="form-floating col-12">
-                                        <input
-                                            type="email"
-                                            className="form-control form-control-lg"
-                                            value={email}
-                                            placeholder="Email"
-                                            id="floatingInput"
-                                            name="email"
-                                            onChange={handleOnChange}
-                                            required
-                                        />
-                                        <label htmlFor="floatingInput">
-                                            Email address
-                                        </label>
-                                    </div>
-                                    <div className="form-floating col-12">
-                                        <textarea
-                                            className="form-control"
-                                            id="floatingInput"
-                                            value={message}
-                                            style={{ height: 150 }}
-                                            name="message"
-                                            onChange={handleOnChange}
-                                            required
-                                        ></textarea>
-
-                                        <label htmlFor="floatingInput">
-                                            Message
-                                        </label>
-                                    </div>
-                                    <div className="d-grid gap-2 col-12 mx-auto">
-                                        <button
-                                            className={`btn btn-${
-                                                loading
-                                                    ? "secondary"
-                                                    : "primary"
-                                            } btn-lg text-white`}
-                                            type="submit"
-                                            disabled={loading}
-                                        >
-                                            Submit
-                                        </button>
-                                    </div>
-                                </form>
+            <div className="bg-white">
+                <div
+                    className="p-5"
+                    style={{ backgroundColor: "#00a7ad", height: 200 }}
+                >
+                    <div className="container">
+                        <div className="row align-items-center">
+                            <div className="col-8">
+                                <h1 className="fw-bold text-white">
+                                    Contact Us
+                                </h1>
                             </div>
                         </div>
                     </div>
-                    <div className="col d-sm-none d-md-block">
-                        <img
-                            style={{ width: "100%" }}
-                            src="/images/contact_us.png"
-                            alt="Contact us illustration"
-                        />
+                </div>
+                <div className="container-fluid">
+                    <div className="row align-items-center">
+                        <div className="col">
+                            <div
+                                className="card my-5 m-auto p-2"
+                                style={{ maxWidth: "440px" }}
+                            >
+                                <div className="card-body">
+                                    <h4 className="card-title text-primary text-center">
+                                        We will like to hear from you
+                                    </h4>
+
+                                    {alerts.map(
+                                        (alert) =>
+                                            alert.alertType === "danger" && (
+                                                <div
+                                                    key={alert.id}
+                                                    className={`alert alert-${alert.alertType} py-2`}
+                                                    role="alert"
+                                                >
+                                                    {alert.msg}
+                                                </div>
+                                            )
+                                    )}
+                                    <form
+                                        onSubmit={handleOnSubmit}
+                                        className="form row g-3 "
+                                        ref={formRef}
+                                    >
+                                        <div className="form-floating col-12">
+                                            <input
+                                                type="text"
+                                                className="form-control form-control-lg"
+                                                value={name}
+                                                placeholder="Name"
+                                                id="floatingInput"
+                                                name="name"
+                                                onChange={handleOnChange}
+                                                required
+                                            />
+                                            <label htmlFor="floatingInput">
+                                                Name
+                                            </label>
+                                        </div>
+                                        <div className="form-floating col-12">
+                                            <input
+                                                type="email"
+                                                className="form-control form-control-lg"
+                                                value={email}
+                                                placeholder="Email"
+                                                id="floatingInput"
+                                                name="email"
+                                                onChange={handleOnChange}
+                                                required
+                                            />
+                                            <label htmlFor="floatingInput">
+                                                Email address
+                                            </label>
+                                        </div>
+                                        <div className="form-floating col-12">
+                                            <textarea
+                                                className="form-control"
+                                                id="floatingInput"
+                                                value={message}
+                                                style={{ height: 150 }}
+                                                name="message"
+                                                onChange={handleOnChange}
+                                                required
+                                            ></textarea>
+
+                                            <label htmlFor="floatingInput">
+                                                Message
+                                            </label>
+                                        </div>
+                                        <div className="d-grid gap-2 col-12 mx-auto">
+                                            <button
+                                                className={`btn btn-${
+                                                    loading
+                                                        ? "secondary"
+                                                        : "primary"
+                                                } btn-lg text-white`}
+                                                type="submit"
+                                                disabled={loading}
+                                            >
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col d-sm-none d-md-block">
+                            <img
+                                style={{ width: "100%" }}
+                                src="/images/contact_us.png"
+                                alt="Contact us illustration"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

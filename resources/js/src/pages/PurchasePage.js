@@ -21,7 +21,7 @@ const PurchasePage = ({ user, savePayment }) => {
 
     return (
         <MainContainer>
-            <div className="container p-4">
+            <div className="container p-4 bg-white">
                 <div className="row align-items-center justify-content-center">
                     <div className="col-12 col-md-6 col-lg-8">
                         <h2 className="display-6 text-center mb-4">

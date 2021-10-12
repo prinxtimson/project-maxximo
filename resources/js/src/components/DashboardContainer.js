@@ -36,9 +36,10 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
 
             <div className="wrapper d-flex align-items-stretch flex-grow-1">
                 <nav
-                    className={`sidebar flex-column flex-shrink-0 px-3 py-2 text-white bg-primary d-flex ${
+                    className={`sidebar flex-column flex-shrink-0 px-3 py-2 text-white d-flex ${
                         isActive ? "active" : null
                     }`}
+                    style={{ backgroundColor: "#00a7ad" }}
                     id="sidebarMenu"
                 >
                     <Link id="brand" className="navbar-brand mx-auto" to="/">
@@ -55,7 +56,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li className="nav-item">
                                     <Link
                                         to="/dashboard/visit"
-                                        className={`nav-link ${
+                                        className={`nav-link fw-bold ${
                                             routeName === "visit"
                                                 ? "active-tab"
                                                 : "text-white"
@@ -68,7 +69,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/duration"
-                                        className={`nav-link ${
+                                        className={`nav-link fw-bold ${
                                             routeName === "duration"
                                                 ? "active-tab"
                                                 : "text-white"
@@ -80,7 +81,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/page-visited"
-                                        className={`nav-link ${
+                                        className={`nav-link fw-bold ${
                                             routeName === "page-visited"
                                                 ? "active-tab"
                                                 : "text-white"
@@ -92,7 +93,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/bounce-rate"
-                                        className={`nav-link ${
+                                        className={`nav-link fw-bold ${
                                             routeName === "bounce-rate"
                                                 ? "active-tab"
                                                 : "text-white"
@@ -104,7 +105,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/users"
-                                        className={`nav-link ${
+                                        className={`nav-link fw-bold ${
                                             routeName === "users"
                                                 ? "active-tab"
                                                 : "text-white"
@@ -119,7 +120,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li className="nav-item">
                                     <Link
                                         to="/dashboard/food"
-                                        className={`nav-link ${
+                                        className={`nav-link fw-bold ${
                                             routeName === "food"
                                                 ? "active-tab"
                                                 : "text-white"
@@ -132,7 +133,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/health"
-                                        className={`nav-link ${
+                                        className={`nav-link fw-bold ${
                                             routeName === "health"
                                                 ? "active-tab"
                                                 : "text-white"
@@ -144,7 +145,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/entertainment"
-                                        className={`nav-link ${
+                                        className={`nav-link fw-bold ${
                                             routeName === "entertainment"
                                                 ? "active-tab"
                                                 : "text-white"
@@ -156,7 +157,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/sport"
-                                        className={`nav-link ${
+                                        className={`nav-link fw-bold ${
                                             routeName === "sport"
                                                 ? "active-tab"
                                                 : "text-white"
@@ -168,7 +169,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 <li>
                                     <Link
                                         to="/dashboard/account"
-                                        className={`nav-link ${
+                                        className={`nav-link fw-bold ${
                                             routeName === "account"
                                                 ? "active-tab"
                                                 : "text-white"
@@ -266,7 +267,10 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                     </ul>
                                 </div>
                                 <div className="d-flex mx-2 align-items-center">
-                                    <h5 className="d-none d-md-block text-primary">
+                                    <h5
+                                        className="d-none d-md-block fw-bold"
+                                        style={{ color: "#00a7ad" }}
+                                    >
                                         Welcome, {user?.name}
                                     </h5>
                                     <div className="dropdown mx-2">
@@ -289,7 +293,10 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                             className="dropdown-menu dropdown-menu-end dropdown-menu-dark text-small shadow p-3"
                                             aria-labelledby="dropdownUser1"
                                         >
-                                            <h5 className="d-md-none py-2 text-primary">
+                                            <h5
+                                                className="d-md-none py-2 fw-bold"
+                                                style={{ color: "#00a7ad" }}
+                                            >
                                                 Welcome, {user?.name}
                                             </h5>
                                             <li>

@@ -9,10 +9,10 @@ const SolutionPage = () => {
     }, []);
     return (
         <MainContainer>
-            <div className="">
+            <div className="bg-white">
                 <div
                     className="p-5"
-                    style={{ backgroundColor: "#1976d2", height: 350 }}
+                    style={{ backgroundColor: "#00a7ad", height: 350 }}
                 >
                     <div className="container">
                         <div className="row align-items-center">

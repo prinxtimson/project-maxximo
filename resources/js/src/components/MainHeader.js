@@ -37,7 +37,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                     <ul className="navbar-nav flex-grow-1">
                         <li className="nav-item">
                             <Link
-                                className="nav-link"
+                                className="nav-link text-white fw-bold"
                                 aria-current="page"
                                 to="/solution"
                             >
@@ -46,7 +46,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                         </li>
                         <li className="nav-item">
                             <Link
-                                className="nav-link"
+                                className="nav-link text-white fw-bold"
                                 aria-current="page"
                                 to="/subscribe"
                             >
@@ -54,18 +54,27 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/about-us">
+                            <Link
+                                className="nav-link text-white fw-bold"
+                                to="/about-us"
+                            >
                                 About us
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/contact-us">
+                            <Link
+                                className="nav-link text-white fw-bold"
+                                to="/contact-us"
+                            >
                                 Contact us
                             </Link>
                         </li>
                         {!loading && isAuthenticated && (
                             <li className="nav-item">
-                                <Link className="nav-link" to="/dashboard">
+                                <Link
+                                    className="nav-link text-white fw-bold"
+                                    to="/dashboard"
+                                >
                                     Dashboard
                                 </Link>
                             </li>
@@ -139,7 +148,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                             </ul>
                         </div>
                         <div className="d-flex mx-2 align-items-center">
-                            <h5 className="d-none d-md-block">
+                            <h5 className="d-none d-md-block text-white fw-bold">
                                 Welcome, {user?.name}
                             </h5>
                             <div className="dropdown mx-2">
@@ -230,7 +239,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                     <ul className="navbar-nav flex-grow-1">
                         <li className="nav-item">
                             <Link
-                                className="nav-link"
+                                className="nav-link text-white fw-bold"
                                 aria-current="page"
                                 to="/solution"
                             >
@@ -239,7 +248,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                         </li>
                         <li className="nav-item">
                             <Link
-                                className="nav-link"
+                                className="nav-link text-white fw-bold"
                                 aria-current="page"
                                 to="/subscribe"
                             >
@@ -247,18 +256,27 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/about-us">
+                            <Link
+                                className="nav-link text-white fw-bold"
+                                to="/about-us"
+                            >
                                 About us
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/contact-us">
+                            <Link
+                                className="nav-link text-white fw-bold"
+                                to="/contact-us"
+                            >
                                 Contact us
                             </Link>
                         </li>
                         {!loading && isAuthenticated && (
                             <li className="nav-item">
-                                <Link className="nav-link" to="/dashboard">
+                                <Link
+                                    className="nav-link text-white fw-bold"
+                                    to="/dashboard"
+                                >
                                     Dashboard
                                 </Link>
                             </li>
@@ -270,7 +288,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                               <ul className="navbar-nav">
                                   <li className="nav-item mx-2 my-sm-2">
                                       <Link
-                                          className="btn btn-primary text-white"
+                                          className="btn btn-light text-primary"
                                           to="/register"
                                       >
                                           Register
@@ -278,7 +296,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                   </li>
                                   <li className="nav-item mx-2 my-sm-2">
                                       <Link
-                                          className="btn btn-outline-primary"
+                                          className="btn btn-outline-light"
                                           to="/login"
                                       >
                                           Login

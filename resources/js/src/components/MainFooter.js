@@ -6,10 +6,11 @@ const MainFooter = () => {
         <div className="container">
             <div className="row align-items-center">
                 <div className="col">
-                    <p className="text-muted mb-0">
+                    <p className=" mb-0 text-white">
                         {"Copyright © "}
                         <a
                             color="inherit"
+                            className="text-white"
                             href="https://tritekconsulting.co.uk"
                         >
                             Tritek Consulting Ltd
@@ -22,14 +23,17 @@ const MainFooter = () => {
                     <ul className="nav justify-content-center">
                         <li className="nav-item">
                             <Link
-                                className="nav-link"
+                                className="nav-link text-white"
                                 to="/terms-and-conditions"
                             >
                                 Terms &amp; Conditions
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/privacy-policy">
+                        <li className="nav-item text-white">
+                            <Link
+                                className="nav-link text-white"
+                                to="/privacy-policy"
+                            >
                                 Privacy Policy
                             </Link>
                         </li>
@@ -38,7 +42,7 @@ const MainFooter = () => {
                 <div className="col">
                     <ul className="nav justify-content-end">
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <a className="nav-link text-white" href="#">
                                 <i
                                     className="fab fa-facebook-square"
                                     style={{ fontSize: 25 }}
@@ -46,7 +50,7 @@ const MainFooter = () => {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <a className="nav-link text-white" href="#">
                                 <i
                                     className="fab fa-twitter"
                                     style={{ fontSize: 25 }}
@@ -54,7 +58,7 @@ const MainFooter = () => {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <a className="nav-link text-white" href="#">
                                 <i
                                     className="fab fa-instagram"
                                     style={{ fontSize: 25 }}
