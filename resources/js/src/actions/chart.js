@@ -104,19 +104,19 @@ export const getVideo = () => async (dispatch) => {
 export const getSport = () => async (dispatch) => {
     try {
         const res = await axios.get(`/api/sport/tennis`);
-        const res1 = await axios.get(`/api/sport/football`);
-        const res2 = await axios.get(
-            `/api/sport/football/${res1.data.response[0].fixture.id}`
-        );
+        // const res1 = await axios.get(`/api/sport/football`);
+        // const res2 = await axios.get(
+        //     `/api/sport/football/${res1.data.response[0].fixture.id}`
+        // );
 
         dispatch({
             type: GET_SPORT,
             payload: {
                 tennis: res.data,
-                football: {
-                    fixtures: res1.data.response,
-                    statistics: res2.data.response,
-                },
+                // football: {
+                //     fixtures: res1.data.response,
+                //     statistics: res2.data.response,
+                // },
             },
         });
     } catch (err) {

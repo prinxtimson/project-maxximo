@@ -36,26 +36,26 @@ const FoodChart = ({ getFood, clearChart, food, loading }) => {
                 totalNutrientsArry.push({
                     label: value.label,
                     value: value.quantity,
-                    numberScaleUnit: value.unit,
+                    tooltext: `${value.label}, ${value.quantity}${value.unit}`,
                 });
             }
             for (let [key, value] of Object.entries(totalDaily)) {
                 totalDailyArry.push({
                     label: value.label,
                     value: value.quantity,
-                    unit: value.unit,
+                    tooltext: `${value.label}, ${value.quantity}${value.unit}`,
                 });
             }
             for (let [key, value] of Object.entries(totalNutrientsKCal)) {
                 totalNutrientsKCalArry.push({
                     label: value.label,
                     value: value.quantity,
-                    unit: value.unit,
+                    tooltext: `${value.label}, ${value.quantity}${value.unit}`,
                 });
             }
 
             setChartConfigs({
-                type: "bar2d", // The chart type
+                type: "bar3d", // The chart type
                 width: "100%",
                 height: "100%",
                 dataFormat: "json",
@@ -75,7 +75,7 @@ const FoodChart = ({ getFood, clearChart, food, loading }) => {
             });
 
             setChartConfigs2({
-                type: "bar2d", // The chart type
+                type: "bar3d", // The chart type
                 width: "100%",
                 height: "100%",
                 dataFormat: "json",

@@ -49,7 +49,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                             height="58"
                         />
                     </Link>
-                    <ul className="nav nav-pills flex-column mb-auto">
+                    <ul className="nav nav-pills flex-column mb-auto py-5">
                         {user?.roles[0]?.name === "admin" ? (
                             <>
                                 <li className="nav-item">
@@ -62,14 +62,26 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                         }`}
                                         aria-current="page"
                                     >
-                                        Visit
+                                        No of Visit
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        to="/dashboard/duration"
+                                        className={`nav-link ${
+                                            routeName === "duration"
+                                                ? "active-tab"
+                                                : "text-white"
+                                        }`}
+                                    >
+                                        Duration
                                     </Link>
                                 </li>
                                 <li>
                                     <Link
                                         to="/dashboard/page-visited"
                                         className={`nav-link ${
-                                            routeName === "duration"
+                                            routeName === "page-visited"
                                                 ? "active-tab"
                                                 : "text-white"
                                         }`}
@@ -79,14 +91,14 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                 </li>
                                 <li>
                                     <Link
-                                        to="/dashboard/subscribe"
+                                        to="/dashboard/bounce-rate"
                                         className={`nav-link ${
-                                            routeName === "subscribe"
+                                            routeName === "bounce-rate"
                                                 ? "active-tab"
                                                 : "text-white"
                                         }`}
                                     >
-                                        Subscribe
+                                        Bounce Rate
                                     </Link>
                                 </li>
                                 <li>

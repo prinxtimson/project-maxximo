@@ -52,7 +52,7 @@ const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
             });
 
             setChartConfigs({
-                type: "column2d",
+                type: "column3d",
                 width: "100%",
                 height: "100%",
                 dataFormat: "json",
@@ -69,7 +69,7 @@ const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
             });
 
             setChartConfigs2({
-                type: "column2d",
+                type: "column3d",
                 width: "100%",
                 height: "100%",
                 dataFormat: "json",
@@ -86,7 +86,7 @@ const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
             });
 
             setChartConfigs3({
-                type: "column2d",
+                type: "column3d",
                 width: "100%",
                 height: "100%",
                 dataFormat: "json",
@@ -103,7 +103,7 @@ const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
             });
 
             setChartConfigs4({
-                type: "column2d",
+                type: "column3d",
                 width: "100%",
                 height: "100%",
                 dataFormat: "json",

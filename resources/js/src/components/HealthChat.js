@@ -103,7 +103,7 @@ const HealthChat = ({
             const { cases, deaths, recovered } = health?.world;
 
             setChartConfigs2({
-                type: "doughnut2d", // The chart type
+                type: "doughnut3d", // The chart type
                 width: "100%",
                 height: "100%",
                 dataFormat: "json",
@@ -141,7 +141,7 @@ const HealthChat = ({
             const { cases, deaths, recovered, country } = health?.country;
 
             setChartConfigs3({
-                type: "doughnut2d", // The chart type
+                type: "doughnut3d", // The chart type
                 width: "100%",
                 height: "100%",
                 dataFormat: "json",

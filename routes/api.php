@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/on-cancel', [SubscriptionController::class, 'on_cancel']);
 Route::post('/on-suspended', [SubscriptionController::class, 'on_suspended']);
 Route::post('/payment-failed', [SubscriptionController::class, 'payment_failed']);
+Route::get('analytics/bounce/{days}', [AnalysisController::class, 'bounce']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/me', [AuthController::class, 'me']);
@@ -53,8 +54,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('food-and-drinks/{food}', [ChartController::class, 'food']);
     Route::get('analytics/visit/{days}', [AnalysisController::class, 'index']);
     Route::get('analytics/most/{days}', [AnalysisController::class, 'show']);
+    Route::get('analytics/browser/{days}', [AnalysisController::class, 'browser']);
     Route::get('analytics/user-type/{days}', [AnalysisController::class, 'user_type']);
-    Route::get('analytics/session', [AnalysisController::class, 'session']);
+    Route::get('analytics/time/{days}', [AnalysisController::class, 'session_time']);
+    Route::get('analytics/country/{days}', [AnalysisController::class, 'session_country']);
+    Route::get('analytics/bounce/{days}', [AnalysisController::class, 'bounce']);
     Route::get('analytics/analysis', [AnalysisController::class, 'analysis']);
 });
 

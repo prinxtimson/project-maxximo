@@ -33,19 +33,19 @@ const AboutUsPage = () => {
                                         className="col-md-6 float-md-end mb-3 ms-md-3"
                                         srcset=""
                                     />
-                                    <h5 className="mb-4 text-muted fs-3">
+                                    <h5 className="mb-4 text-muted fs-4">
                                         Today, more than at any other time in
                                         human existence, we need data to make
                                         fast, informed and qualitative decisions
                                         in the face of complex challenges.
                                     </h5>
-                                    <h5 className="mb-4 text-muted fs-3">
+                                    <h5 className="mb-4 text-muted fs-4">
                                         Elint-X provides access to vital
                                         resources to enable a global community
                                         aggregate solution to real life
                                         challenges.
                                     </h5>
-                                    <h5 className="mb-4 text-muted fs-3">
+                                    <h5 className="mb-4 text-muted fs-4">
                                         Our mission is to ensure we create a
                                         platform that provides a superlative
                                         user experience for analysing real-world

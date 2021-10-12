@@ -1,56 +1,63 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
 import Column2D from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
-import { getPageVisit } from "../actions/analytics";
+import { getCountry } from "../actions/analytics";
+import moment from "moment";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
-const PageVisitedChart = ({ getPageVisit, loading, page }) => {
+const LocationChart = ({ getCountry, loading, country }) => {
     const [chartConfigs, setChartConfigs] = useState(null);
     const [period, setPeriod] = useState(7);
 
     useEffect(() => {
-        getPageVisit(7);
+        getCountry(7);
     }, []);
 
     useEffect(() => {
-        if (page.length > 0) {
+        if (country.length > 0) {
             let data = [];
 
-            page.map((item) => {
+            country.map((item) => {
+                let rate = (item[2] / item[1]) * 100 || 0;
                 data.push({
-                    label: item.url,
-                    value: item.pageViews,
+                    label: moment(item[0]).format("ll"),
+                    value: rate,
+                    tooltext: `${moment(item[0]).format(
+                        "LL"
+                    )}{br}{br} Bounce Rate: ${rate}%`,
                 });
             });
 
             setChartConfigs({
-                type: "bar2d", // The chart type
+                type: "line", // The chart type
                 width: "100%", // Width of the chart
                 height: "100%", // Height of the chart
                 dataFormat: "json", // Data type
                 dataSource: {
                     chart: {
-                        caption: "Page Visited by Users",
-                        //xAxisName: "URL",
-                        yAxisName: "Total Visit",
+                        caption: "Bounce Rate",
+                        xAxisName: "Day",
+                        yAxisName: "Percentage",
+                        yAxisPosition: "right",
                         theme: "fusion",
                         alignCaptionWithCanvas: "0",
-                        // drawAnchors: "0",
+                        drawAnchors: "0",
+                        numberSuffix: "%",
                     },
                     data,
                 },
             });
         }
-    }, [page]);
+    }, [country]);
 
     const handleOnChange = (e) => {
         setPeriod(e.target.value);
-        getPageVisit(e.target.value);
+        getCountry(e.target.value);
     };
 
     return (
@@ -89,17 +96,17 @@ const PageVisitedChart = ({ getPageVisit, loading, page }) => {
     );
 };
 
-PageVisitedChart.propTypes = {
-    getPageVisit: PropTypes.func.isRequired,
-    page: PropTypes.array,
+LocationChart.propTypes = {
+    getCountry: PropTypes.func.isRequired,
+    country: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
-    page: state.analytics.page,
+    country: state.analytics.country,
     loading: state.analytics.loading,
 });
 
-export default connect(mapStateToProps, { getPageVisit })(PageVisitedChart);
+export default connect(mapStateToProps, { getCountry })(LocationChart);
 
 const PERIOD = [
     {

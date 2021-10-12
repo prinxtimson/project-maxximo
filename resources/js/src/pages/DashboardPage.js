@@ -13,6 +13,8 @@ import AdminDashboard from "../components/AdminDashboard";
 import SportsChart from "../components/SportsChart";
 import Dashboard from "../components/Dashboard";
 import PageVisitedChart from "../components/PageVisitedChart";
+import DurationChart from "../components/DurationChart";
+import BounceRateChart from "../components/BounceRateChart";
 
 const DashboardPage = ({ loading }) => {
     const { routeName } = useParams();
@@ -39,6 +41,10 @@ const DashboardPage = ({ loading }) => {
                 return <AdminDashboard />;
             case "page-visited":
                 return <PageVisitedChart />;
+            case "duration":
+                return <DurationChart />;
+            case "bounce-rate":
+                return <BounceRateChart />;
             default:
                 return <Dashboard />;
         }

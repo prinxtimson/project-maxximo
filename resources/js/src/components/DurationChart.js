@@ -5,52 +5,59 @@ import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
 import Column2D from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
-import { getPageVisit } from "../actions/analytics";
+import { getDuration } from "../actions/analytics";
+import moment from "moment";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
-const PageVisitedChart = ({ getPageVisit, loading, page }) => {
+const DurationChart = ({ getDuration, loading, duration }) => {
     const [chartConfigs, setChartConfigs] = useState(null);
     const [period, setPeriod] = useState(7);
 
     useEffect(() => {
-        getPageVisit(7);
+        getDuration(7);
     }, []);
 
     useEffect(() => {
-        if (page.length > 0) {
+        if (duration.length > 0) {
             let data = [];
 
-            page.map((item) => {
+            duration.map((item) => {
+                let d = moment.duration(item[2], "seconds");
                 data.push({
-                    label: item.url,
-                    value: item.pageViews,
+                    label: moment(item[0]).format("ll"),
+                    value: `${d.minutes()}m ${d.seconds()}s`,
+                    tooltext: `${moment(item[0]).format(
+                        "LL"
+                    )}{br}{br} Duration: ${d.minutes()}m ${d.seconds()}s`,
                 });
             });
 
             setChartConfigs({
-                type: "bar2d", // The chart type
+                type: "line", // The chart type
                 width: "100%", // Width of the chart
                 height: "100%", // Height of the chart
                 dataFormat: "json", // Data type
                 dataSource: {
                     chart: {
-                        caption: "Page Visited by Users",
-                        //xAxisName: "URL",
-                        yAxisName: "Total Visit",
+                        caption: "Duration of Sessions per Day",
+                        xAxisName: "Day",
+                        yAxisName: "Time",
+                        yAxisPosition: "right",
                         theme: "fusion",
                         alignCaptionWithCanvas: "0",
-                        // drawAnchors: "0",
+                        drawAnchors: "0",
+                        numberSuffix: "min",
                     },
                     data,
                 },
             });
         }
-    }, [page]);
+    }, [duration]);
 
     const handleOnChange = (e) => {
         setPeriod(e.target.value);
-        getPageVisit(e.target.value);
+        getDuration(e.target.value);
     };
 
     return (
@@ -89,17 +96,17 @@ const PageVisitedChart = ({ getPageVisit, loading, page }) => {
     );
 };
 
-PageVisitedChart.propTypes = {
-    getPageVisit: PropTypes.func.isRequired,
-    page: PropTypes.array,
+DurationChart.propTypes = {
+    getDuration: PropTypes.func.isRequired,
+    duration: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
-    page: state.analytics.page,
+    duration: state.analytics.duration,
     loading: state.analytics.loading,
 });
 
-export default connect(mapStateToProps, { getPageVisit })(PageVisitedChart);
+export default connect(mapStateToProps, { getDuration })(DurationChart);
 
 const PERIOD = [
     {

@@ -25,19 +25,15 @@ class AnalysisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function session()
+    public function bounce($days)
     {
         //
-        $analyticsData = Analytics::performQuery(
-            Period::years(1),
-            'ga:sessions',
-            [
-                'metrics' => 'ga:sessions, ga:pageviews',
-                'dimensions' => 'ga:yearMonth'
-            ]
-        );
+        $analyticsData = Analytics::performQuery(Period::days($days), 'ga:sessions',[
+                'metrics' => 'ga:sessions,ga:bounces',
+                'dimensions' => 'ga:date'
+            ]);
 
-        return $analyticsData;
+        return response()->json($analyticsData);
     }
 
     /**
@@ -46,9 +42,25 @@ class AnalysisController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function analysis()
+    public function session_time($days)
     {
-        return Analytics::getAnalyticsService(Period::days(7));
+        $analyticsData = Analytics::performQuery(Period::days($days), 'ga:sessions', [
+            'dimensions'=>'ga:date',
+            'metrics' => 'ga:sessions,ga:sessionDuration'
+        ]);
+
+        return response()->json($analyticsData);
+    }
+
+    public function session_country($days)
+    {
+        $analyticsData = Analytics::performQuery(Period::days($days), 'ga:sessions', [
+            'dimensions'=>'ga:country',
+            'metrics'=>'ga:sessions',
+            'sort'=>'-ga:sessions'
+        ]);
+
+        return response()->json($analyticsData);
     }
 
     /**
@@ -82,9 +94,9 @@ class AnalysisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function browser($days)
     {
-        //
+        return Analytics::fetchTopBrowsers(Period::days($days), 20);
     }
 
     /**

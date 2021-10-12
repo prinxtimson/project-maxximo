@@ -17,7 +17,7 @@ const SportsChart = ({
     getFootballById,
 }) => {
     const [chartConfigs, setChartConfigs] = useState(null);
-    const [chartConfigs2, setChartConfigs2] = useState(null);
+    //const [chartConfigs2, setChartConfigs2] = useState(null);
     const [fixtures, setFixtures] = useState([]);
     const [teams, setTeams] = useState("");
 
@@ -33,65 +33,65 @@ const SportsChart = ({
         return clearChart;
     }, []);
 
-    useEffect(() => {
-        let newFixtures = [];
-        if (sport.football) {
-            sport.football.fixtures?.map((item) => {
-                setTeams(`${item.teams.home.name} VS ${item.teams.away.name}`);
-                newFixtures.push({
-                    teams: `${item.teams.home.name} VS ${item.teams.away.name}`,
-                    id: item.fixture.id,
-                });
-            });
-        }
+    // useEffect(() => {
+    //     let newFixtures = [];
+    //     if (sport.football) {
+    //         sport.football.fixtures?.map((item) => {
+    //             setTeams(`${item.teams.home.name} VS ${item.teams.away.name}`);
+    //             newFixtures.push({
+    //                 teams: `${item.teams.home.name} VS ${item.teams.away.name}`,
+    //                 id: item.fixture.id,
+    //             });
+    //         });
+    //     }
 
-        setFixtures(newFixtures);
-    }, [sport.football]);
+    //     setFixtures(newFixtures);
+    // }, [sport.football]);
 
-    useEffect(() => {
-        if (sport.football) {
-            const { statistics } = sport.football;
+    // useEffect(() => {
+    //     if (sport.football) {
+    //         const { statistics } = sport.football;
 
-            let labels = statistics[0].statistics.map((item) => ({
-                label: item.type,
-            }));
-            let homeTeam = {
-                seriesname: statistics[0].team.name,
-                data: statistics[0].statistics.map((item) => ({
-                    value: item.name,
-                })),
-            };
-            let awayTeam = {
-                seriesname: statistics[1].team.name,
-                data: statistics[1].statistics.map((item) => ({
-                    value: item.name,
-                })),
-            };
+    //         let labels = statistics[0].statistics.map((item) => ({
+    //             label: item.type,
+    //         }));
+    //         let homeTeam = {
+    //             seriesname: statistics[0].team.name,
+    //             data: statistics[0].statistics.map((item) => ({
+    //                 value: item.name,
+    //             })),
+    //         };
+    //         let awayTeam = {
+    //             seriesname: statistics[1].team.name,
+    //             data: statistics[1].statistics.map((item) => ({
+    //                 value: item.name,
+    //             })),
+    //         };
 
-            setChartConfigs2({
-                type: "mscolumn2d", // The chart type
-                width: "100%", // Width of the chart
-                height: "100%", // Height of the chart
-                dataFormat: "json", // Data type
-                dataSource: {
-                    chart: {
-                        caption: "Match Statistics",
-                        subCaption: `${teams}`,
-                        xAxisName: "Statistics",
-                        yAxisName: "Value",
-                        theme: "fusion",
-                        labelDisplay: "rotate",
-                    },
-                    categories: [
-                        {
-                            category: labels,
-                        },
-                    ],
-                    dataset: [homeTeam, awayTeam],
-                },
-            });
-        }
-    }, [sport.football]);
+    //         setChartConfigs2({
+    //             type: "mscolumn2d", // The chart type
+    //             width: "100%", // Width of the chart
+    //             height: "100%", // Height of the chart
+    //             dataFormat: "json", // Data type
+    //             dataSource: {
+    //                 chart: {
+    //                     caption: "Match Statistics",
+    //                     subCaption: `${teams}`,
+    //                     xAxisName: "Statistics",
+    //                     yAxisName: "Value",
+    //                     theme: "fusion",
+    //                     labelDisplay: "rotate",
+    //                 },
+    //                 categories: [
+    //                     {
+    //                         category: labels,
+    //                     },
+    //                 ],
+    //                 dataset: [homeTeam, awayTeam],
+    //             },
+    //         });
+    //     }
+    // }, [sport.football]);
 
     useEffect(() => {
         if (sport.tennis) {
@@ -99,42 +99,31 @@ const SportsChart = ({
                 results: { rankings },
             } = sport.tennis;
 
-            let labels = [];
-            let tennisData = [];
+            let data = [];
 
             rankings.map(({ full_name, ranking_points }) => {
-                labels.push({ label: full_name });
-                tennisData.push({
+                data.push({
+                    label: full_name,
                     value: ranking_points,
                 });
             });
 
             setChartConfigs({
-                type: "msline", // The chart type
+                type: "line", // The chart type
                 width: "100%", // Width of the chart
                 height: "100%", // Height of the chart
                 dataFormat: "json", // Data type
                 dataSource: {
                     chart: {
                         caption: "Tennis Ranking",
-                        xAxisName: "Date",
-                        yAxisName: "Population",
+                        xAxisName: "Name",
+                        yAxisName: "Points",
                         theme: "fusion",
                         labelDisplay: "rotate",
                         labelStep: "5",
                         drawAnchors: "0",
                     },
-                    categories: [
-                        {
-                            category: labels,
-                        },
-                    ],
-                    dataset: [
-                        {
-                            seriesname: "Ranking Points",
-                            data: tennisData,
-                        },
-                    ],
+                    data,
                 },
             });
         }
@@ -146,7 +135,7 @@ const SportsChart = ({
                 <h5>Sport Rankings</h5>
             </div>
             <div className="row mb-4">
-                <div className="col col-md-6">
+                <div className="col-12">
                     <div className="card" style={{ minHeight: 400 }}>
                         <div className="card-body">
                             {!loading && chartConfigs && (
@@ -155,7 +144,7 @@ const SportsChart = ({
                         </div>
                     </div>
                 </div>
-                <div className="col col-md-6 mb-md-0 mb-4">
+                {/*<div className="col col-md-6 mb-md-0 mb-4">
                     <div className="card" style={{ minHeight: 400 }}>
                         <div className="card-body">
                             <div className="row mb-4">
@@ -211,6 +200,7 @@ const SportsChart = ({
                 </div>
             </div>
             */}
+            </div>
         </div>
     );
 };
