@@ -20,18 +20,18 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light py-0">
+        <nav className="navbar navbar-expand-xl navbar-light py-0">
             <div className="container">
                 <Link className="navbar-brand" to="/">
                     <img
                         src="/images/Elint_x.png"
                         alt="Elint X"
-                        width="59"
-                        height="58"
+                        width="69"
+                        height="68"
                     />
                 </Link>
                 <div
-                    className="collapse navbar-collapse d-none d-lg-block"
+                    className="collapse navbar-collapse d-none d-xl-block"
                     id="navbarNav"
                 >
                     <ul className="navbar-nav flex-grow-1">
@@ -222,8 +222,8 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                     </div>
                 )}
                 <div
-                    className={`collapse d-lg-none ${
-                        screenWidth < 990 ? "navbar-collapse" : null
+                    className={`collapse d-xl-none ${
+                        screenWidth < 1200 ? "navbar-collapse" : null
                     }`}
                     id="navbarNav"
                 >
@@ -238,8 +238,22 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                             </Link>
                         </li>
                         <li className="nav-item">
+                            <Link
+                                className="nav-link"
+                                aria-current="page"
+                                to="/subscribe"
+                            >
+                                Subscription
+                            </Link>
+                        </li>
+                        <li className="nav-item">
                             <Link className="nav-link" to="/about-us">
                                 About us
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/contact-us">
+                                Contact us
                             </Link>
                         </li>
                         {!loading && isAuthenticated && (

@@ -45,8 +45,8 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                         <img
                             src="/images/Elint_x.png"
                             alt="Elint X"
-                            width="59"
-                            height="58"
+                            width="69"
+                            height="68"
                         />
                     </Link>
                     <ul className="nav nav-pills flex-column mb-auto py-5">
@@ -196,22 +196,21 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                             >
                                 <span className="navbar-toggler-icon text-primary"></span>
                             </button>
-                            <div className="flex-grow-1 py-2">
-                                <Link
-                                    id="brand"
-                                    className={`navbar-brand d-xl-none ${
-                                        isActive ? "d-none" : "d-block"
-                                    }`}
-                                    to="/"
-                                >
-                                    <img
-                                        src="/images/Elint_x.png"
-                                        alt="Elint X"
-                                        width="59"
-                                        height="58"
-                                    />
-                                </Link>
-                            </div>
+                            <Link
+                                id="brand"
+                                className={`navbar-brand d-xl-none ${
+                                    isActive ? "d-none" : "d-block"
+                                }`}
+                                to="/"
+                            >
+                                <img
+                                    src="/images/Elint_x.png"
+                                    alt="Elint X"
+                                    width="69"
+                                    height="68"
+                                />
+                            </Link>
+                            <div className="flex-grow-1 py-2"></div>
                             <div className="flex-shrink-0 d-flex align-items-center">
                                 <div className="me-2 dropdown">
                                     <a
