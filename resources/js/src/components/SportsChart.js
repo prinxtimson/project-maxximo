@@ -16,8 +16,9 @@ const SportsChart = ({
     clearChart,
     getFootballById,
 }) => {
+    const { football, tennis } = sport;
     const [chartConfigs, setChartConfigs] = useState(null);
-    //const [chartConfigs2, setChartConfigs2] = useState(null);
+    const [chartConfigs2, setChartConfigs2] = useState(null);
     const [fixtures, setFixtures] = useState([]);
     const [teams, setTeams] = useState("");
 
@@ -35,8 +36,8 @@ const SportsChart = ({
 
     // useEffect(() => {
     //     let newFixtures = [];
-    //     if (sport.football) {
-    //         sport.football.fixtures?.map((item) => {
+    //     if (football) {
+    //         football.fixtures?.map((item) => {
     //             setTeams(`${item.teams.home.name} VS ${item.teams.away.name}`);
     //             newFixtures.push({
     //                 teams: `${item.teams.home.name} VS ${item.teams.away.name}`,
@@ -46,58 +47,60 @@ const SportsChart = ({
     //     }
 
     //     setFixtures(newFixtures);
-    // }, [sport.football]);
+    // }, [football]);
 
     // useEffect(() => {
-    //     if (sport.football) {
-    //         const { statistics } = sport.football;
+    //     if (football) {
+    //         console.log(football);
+    //         const { statistics } = football;
+    //         if (statistics.length > 0) {
+    //             let labels = statistics[0].statistics.map((item) => ({
+    //                 label: item.type,
+    //             }));
+    //             let homeTeam = {
+    //                 seriesname: statistics[0].team.name,
+    //                 data: statistics[0].statistics.map((item) => ({
+    //                     value: item.name,
+    //                 })),
+    //             };
+    //             let awayTeam = {
+    //                 seriesname: statistics[1].team.name,
+    //                 data: statistics[1].statistics.map((item) => ({
+    //                     value: item.name,
+    //                 })),
+    //             };
 
-    //         let labels = statistics[0].statistics.map((item) => ({
-    //             label: item.type,
-    //         }));
-    //         let homeTeam = {
-    //             seriesname: statistics[0].team.name,
-    //             data: statistics[0].statistics.map((item) => ({
-    //                 value: item.name,
-    //             })),
-    //         };
-    //         let awayTeam = {
-    //             seriesname: statistics[1].team.name,
-    //             data: statistics[1].statistics.map((item) => ({
-    //                 value: item.name,
-    //             })),
-    //         };
-
-    //         setChartConfigs2({
-    //             type: "mscolumn2d", // The chart type
-    //             width: "100%", // Width of the chart
-    //             height: "100%", // Height of the chart
-    //             dataFormat: "json", // Data type
-    //             dataSource: {
-    //                 chart: {
-    //                     caption: "Match Statistics",
-    //                     subCaption: `${teams}`,
-    //                     xAxisName: "Statistics",
-    //                     yAxisName: "Value",
-    //                     theme: "fusion",
-    //                     labelDisplay: "rotate",
-    //                 },
-    //                 categories: [
-    //                     {
-    //                         category: labels,
+    //             setChartConfigs2({
+    //                 type: "mscolumn3d", // The chart type
+    //                 width: "100%", // Width of the chart
+    //                 height: "100%", // Height of the chart
+    //                 dataFormat: "json", // Data type
+    //                 dataSource: {
+    //                     chart: {
+    //                         caption: "Match Statistics",
+    //                         subCaption: `${teams}`,
+    //                         xAxisName: "Statistics",
+    //                         yAxisName: "Value",
+    //                         theme: "fusion",
+    //                         labelDisplay: "rotate",
     //                     },
-    //                 ],
-    //                 dataset: [homeTeam, awayTeam],
-    //             },
-    //         });
+    //                     categories: [
+    //                         {
+    //                             category: labels,
+    //                         },
+    //                     ],
+    //                     dataset: [homeTeam, awayTeam],
+    //                 },
+    //             });
+    //         }
     //     }
-    // }, [sport.football]);
+    // }, [football]);
 
     useEffect(() => {
-        if (sport.tennis) {
+        if (tennis) {
             const {
                 results: { rankings },
-            } = sport.tennis;
+            } = tennis;
 
             let data = [];
 
@@ -120,31 +123,22 @@ const SportsChart = ({
                         yAxisName: "Points",
                         theme: "fusion",
                         labelDisplay: "rotate",
-                        labelStep: "5",
+                        //labelStep: "5",
                         drawAnchors: "0",
                     },
                     data,
                 },
             });
         }
-    }, [sport.tennis]);
+    }, [tennis]);
 
     return (
         <div className="container-fluid p-4">
             <div className="p-2">
-                <h5>Sport Rankings</h5>
+                <h5>Sport Statidtics</h5>
             </div>
             <div className="row mb-4">
-                <div className="col-12">
-                    <div className="card" style={{ minHeight: 400 }}>
-                        <div className="card-body">
-                            {!loading && chartConfigs && (
-                                <ReactFC {...chartConfigs} />
-                            )}
-                        </div>
-                    </div>
-                </div>
-                {/*<div className="col col-md-6 mb-md-0 mb-4">
+                {/*<div className="col-12 mb-4">
                     <div className="card" style={{ minHeight: 400 }}>
                         <div className="card-body">
                             <div className="row mb-4">
@@ -176,6 +170,15 @@ const SportsChart = ({
                             )}
                         </div>
                     </div>
+                            </div>*/}
+                <div className="col-12">
+                    <div className="card" style={{ minHeight: 400 }}>
+                        <div className="card-body">
+                            {!loading && chartConfigs && (
+                                <ReactFC {...chartConfigs} />
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
             {/*
@@ -200,7 +203,6 @@ const SportsChart = ({
                 </div>
             </div>
             */}
-            </div>
         </div>
     );
 };

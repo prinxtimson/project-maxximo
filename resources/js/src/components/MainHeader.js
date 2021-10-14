@@ -83,24 +83,21 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                     {loading
                         ? null
                         : !isAuthenticated && (
-                              <ul className="navbar-nav">
-                                  <li className="nav-item mx-2 my-sm-2">
-                                      <Link
-                                          className="btn btn-primary text-white"
-                                          to="/register"
-                                      >
-                                          Register
-                                      </Link>
-                                  </li>
-                                  <li className="nav-item mx-2 my-sm-2">
-                                      <Link
-                                          className="btn btn-outline-primary"
-                                          to="/login"
-                                      >
-                                          Login
-                                      </Link>
-                                  </li>
-                              </ul>
+                              <div className="d-grid gap-2 d-md-block col-md-3 col-sm-6 col-xs-12">
+                                  <Link
+                                      className="btn btn-light text-primary"
+                                      to="/register"
+                                  >
+                                      Register
+                                  </Link>
+                                  <span className=" mx-2" />
+                                  <Link
+                                      className="btn btn-outline-light"
+                                      to="/login"
+                                  >
+                                      Login
+                                  </Link>
+                              </div>
                           )}
                 </div>
                 {loading ? null : isAuthenticated ? (
@@ -285,24 +282,21 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                     {loading
                         ? null
                         : !isAuthenticated && (
-                              <ul className="navbar-nav">
-                                  <li className="nav-item mx-2 my-sm-2">
-                                      <Link
-                                          className="btn btn-light text-primary"
-                                          to="/register"
-                                      >
-                                          Register
-                                      </Link>
-                                  </li>
-                                  <li className="nav-item mx-2 my-sm-2">
-                                      <Link
-                                          className="btn btn-outline-light"
-                                          to="/login"
-                                      >
-                                          Login
-                                      </Link>
-                                  </li>
-                              </ul>
+                              <div className="d-grid gap-2 d-md-block col-md-3 col-sm-6 col-xs-12">
+                                  <Link
+                                      className="btn btn-light text-primary"
+                                      to="/register"
+                                  >
+                                      Register
+                                  </Link>
+                                  <span className=" mx-2" />
+                                  <Link
+                                      className="btn btn-outline-light"
+                                      to="/login"
+                                  >
+                                      Login
+                                  </Link>
+                              </div>
                           )}
                 </div>
             </div>

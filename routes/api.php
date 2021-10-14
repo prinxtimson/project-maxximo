@@ -25,6 +25,7 @@ Route::post('/forgot-password', [AuthController::class, 'forgotPass']);
 Route::post('/reset-password', [AuthController::class, 'resetPass']);
 Route::post('/register', [UserController::class, 'register']);
 Route::get('/content/{type}', [ContentController::class, 'show']);
+Route::get('sport/football/{id}', [ChartController::class, 'statistics']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -50,7 +51,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('entertainment/video', [ChartController::class, 'trend_video']);
     Route::get('sport/tennis', [ChartController::class, 'tennis_ranking']);
     Route::get('sport/football', [ChartController::class, 'fixtures']);
-    Route::get('sport/football/{id}', [ChartController::class, 'statistics']);
+    //Route::get('sport/football/{id}', [ChartController::class, 'statistics']);
     Route::get('food-and-drinks/{food}', [ChartController::class, 'food']);
     Route::get('analytics/visit/{days}', [AnalysisController::class, 'index']);
     Route::get('analytics/most/{days}', [AnalysisController::class, 'show']);

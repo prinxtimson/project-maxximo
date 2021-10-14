@@ -42,14 +42,14 @@ class ChartController extends Controller
     public function fixtures(){
         return Http::withHeaders([
             'x-rapidapi-host' => 'api-football-v1.p.rapidapi.com',
-	        'x-rapidapi-key' => '21f0213dd4msh41a889b503940d6p1b8441jsn897fab25878f'
+	        'x-rapidapi-key' => '0e506352b5mshe07dbf8a3d7514ep155a6cjsna7900c51df5e'
         ])->get('https://api-football-v1.p.rapidapi.com/v3/fixtures', ['last' => 50])->throw()->json();
     }
 
     public function statistics($id){
         return Http::withHeaders([
             'x-rapidapi-host' => 'api-football-v1.p.rapidapi.com',
-	        'x-rapidapi-key' => '21f0213dd4msh41a889b503940d6p1b8441jsn897fab25878f'
+	        'x-rapidapi-key' => '0e506352b5mshe07dbf8a3d7514ep155a6cjsna7900c51df5e'
         ])->get('https://api-football-v1.p.rapidapi.com/v3/fixtures/statistics', ['fixture' => $id])->throw()->json();
     }
 }
