@@ -135,7 +135,7 @@ const SportsChart = ({
     return (
         <div className="container-fluid p-4">
             <div className="p-2">
-                <h5>Sport Statidtics</h5>
+                <h5>Sport</h5>
             </div>
             <div className="row mb-4">
                 {/*<div className="col-12 mb-4">
