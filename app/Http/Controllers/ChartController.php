@@ -22,34 +22,35 @@ class ChartController extends Controller
     }
 
     public function food($food){
-        return Http::get('https://api.edamam.com/api/nutrition-data?app_id=72c7af91&app_key=7da89b6fdd99a139e1fa3009ff0254e0&nutrition-type=logging&ingr='.$food)->throw()->json();
+        $api_key=env('NUTRITION_API_KEY');
+        return Http::get('https://api.edamam.com/api/nutrition-data?app_id=72c7af91&app_key='.$api_key.'&nutrition-type=logging&ingr='.$food)->throw()->json();
     }
 
     public function trend_video(){
         return Http::withHeaders([
             'x-rapidapi-host' => 'tiktok-best-experience.p.rapidapi.com',
-	        'x-rapidapi-key' => '21f0213dd4msh41a889b503940d6p1b8441jsn897fab25878f'
+	        'x-rapidapi-key' => env('RAPID_API_KEY_1')
         ])->get('https://tiktok-best-experience.p.rapidapi.com/trending')->throw()->json();
     }
 
     public function tennis_ranking(){
         return Http::withHeaders([
             'x-rapidapi-host' => 'tennis-live-data.p.rapidapi.com',
-	        'x-rapidapi-key' => '21f0213dd4msh41a889b503940d6p1b8441jsn897fab25878f'
+	        'x-rapidapi-key' => env('RAPID_API_KEY_1')
         ])->get('https://tennis-live-data.p.rapidapi.com/rankings/ATP')->throw()->json();
     }
 
     public function fixtures(){
         return Http::withHeaders([
             'x-rapidapi-host' => 'api-football-v1.p.rapidapi.com',
-	        'x-rapidapi-key' => '0e506352b5mshe07dbf8a3d7514ep155a6cjsna7900c51df5e'
+	        'x-rapidapi-key' => env('RAPID_API_KEY_2')
         ])->get('https://api-football-v1.p.rapidapi.com/v3/fixtures', ['last' => 50])->throw()->json();
     }
 
     public function statistics($id){
         return Http::withHeaders([
             'x-rapidapi-host' => 'api-football-v1.p.rapidapi.com',
-	        'x-rapidapi-key' => '0e506352b5mshe07dbf8a3d7514ep155a6cjsna7900c51df5e'
+	        'x-rapidapi-key' => env('RAPID_API_KEY_2')
         ])->get('https://api-football-v1.p.rapidapi.com/v3/fixtures/statistics', ['fixture' => $id])->throw()->json();
     }
 }

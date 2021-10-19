@@ -123,13 +123,13 @@
 
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
-    apiKey: "AIzaSyCPO0O-IR2iA9o8UVOGfEXN6xkRuNdTD0s",
-    authDomain: "maxximo-3c227.firebaseapp.com",
-    projectId: "maxximo-3c227",
-    storageBucket: "maxximo-3c227.appspot.com",
-    messagingSenderId: "881684953750",
-    appId: "1:881684953750:web:351c9ec27088f79bc2e0b7",
-    measurementId: "G-F8SZXFSYSN"
+    apiKey: env('GOOGLE_API_ID'),
+    authDomain: env('GOOGLE_AUTH_DOMAIN'),
+    projectId: env('GOOGLE_PROJECT_ID'),
+    storageBucket: env('GOOGLE_STORAGE_BUCKET'),
+    messagingSenderId: env('GOOGLE_MESSAGING_SENDER_ID'),
+    appId: env('GOOGLE_API_ID'),
+    measurementId: env('GOOGLE_MEASUREMENT_ID')
   };
 
   // Initialize Firebase
