@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebNotificationController;
 
 /*
@@ -55,10 +56,17 @@ Route::middleware(['guest'])->group(function () {
     Route::get('forgot-password', function () {
         return view('welcome');
     });
+
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('password/email', [AuthController::class, 'forgotPass']);
+    Route::post('password/update', [AuthController::class, 'resetPass']);
+
+    Route::post('register', [UserController::class, 'register']);
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::put('change-password', [AuthController::class, 'changePass']);
+    Route::post('logout', [AuthController::class, 'logout']);
     Route::get('change-password', function () {
         return view('welcome');
     });

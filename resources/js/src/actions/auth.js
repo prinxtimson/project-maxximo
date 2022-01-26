@@ -58,18 +58,11 @@ export const uploadAvatar = (file) => async (dispatch) => {
 //Login user action
 export const loginUser = (email, password, history) => async (dispatch) => {
     dispatch({ type: AUTH_LOADING });
-    const config = {
-        headers: {
-            "Content-Type": "application/json",
-        },
-    };
-
-    const body = JSON.stringify({ email, password });
 
     try {
         await axios.get(`/sanctum/csrf-cookie`);
 
-        const res = await axios.post("/api/login", body, config);
+        const res = await axios.post("/login", { email, password });
 
         dispatch({
             type: LOGIN_SUCCESS,
@@ -81,14 +74,13 @@ export const loginUser = (email, password, history) => async (dispatch) => {
     } catch (err) {
         console.log(err.response);
         dispatch({ type: LOGIN_FAIL });
-        if (err.response.status == 500) {
+        if (err.response.status === 500) {
             return dispatch(
                 setAlert("Server errror, please try again.", "danger")
             );
         }
 
         dispatch(setAlert(err.response.data.message, "danger"));
-
     }
 };
 
@@ -116,16 +108,9 @@ export const updateUser = (data) => async (dispatch) => {
 // Register user action
 export const registerUser = (formData, history) => async (dispatch) => {
     dispatch({ type: AUTH_LOADING });
-    const config = {
-        headers: {
-            "Content-Type": "application/json",
-        },
-    };
-
-    const body = JSON.stringify(formData);
 
     try {
-        const res = await axios.post("/api/register", body, config);
+        const res = await axios.post("/register", formData);
 
         dispatch({
             type: REGISTER_SUCCESS,
@@ -145,22 +130,14 @@ export const registerUser = (formData, history) => async (dispatch) => {
         }
 
         dispatch(setAlert(err.response.data.message, "danger"));
-        
     }
 };
 
 export const changePassword = (data) => async (dispatch) => {
     dispatch({ type: AUTH_LOADING });
-    const config = {
-        headers: {
-            "Content-Type": "application/json",
-        },
-    };
-
-    const body = JSON.stringify(data);
 
     try {
-        const res = await axios.put("/api/change-password", body, config);
+        const res = await axios.put("/change-password", data);
 
         dispatch(setAlert(res.data.message, "success"));
         window.location.reload();
@@ -267,7 +244,7 @@ export const logoutUser = (history) => async (dispatch) => {
     try {
         await axios.post(`/logout`);
         dispatch({ type: LOGOUT_USER });
-        history.replace("/");
+        window.location.reload();
     } catch (error) {
         console.log(err.response);
         if (err.response.status == 500) {

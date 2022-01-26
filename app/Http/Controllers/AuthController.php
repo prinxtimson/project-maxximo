@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Notification;
 class AuthController extends Controller
 {
     public function login(Request $request) {
-        $fields = $request->validate([
+        $request->validate([
             'email' => 'required|string',
             'password' => 'required|string'
         ]);
@@ -44,7 +44,7 @@ class AuthController extends Controller
         ], 401);
     }
 
-    public function me(Request $request) {
+    public function me() {
         $user = auth()->user()->load(['roles']);
         $response = [
             'user' => $user,
