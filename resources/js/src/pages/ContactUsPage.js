@@ -5,8 +5,11 @@ import { connect } from "react-redux";
 import emailjs from "emailjs-com";
 import { setAlert } from "../actions/alert";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
+import { FaMapMarkerAlt, FaEnvelope, FaPhone, FaGlobe } from "react-icons/fa";
 
 const ContactUsPage = ({ alerts, setAlert }) => {
+    const { t } = useTranslation(["contact-us"]);
     const [loading, setLoading] = useState(false);
     const formRef = useRef(null);
     const [formData, setFormData] = useState({
@@ -63,13 +66,13 @@ const ContactUsPage = ({ alerts, setAlert }) => {
                         <div className="row align-items-center">
                             <div className="col-8">
                                 <h1 className="fw-bold text-white">
-                                    Contact Us
+                                    {t("title")}
                                 </h1>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="container-fluid">
+                <div className="container-fluid py-5 bg-light">
                     <div className="row align-items-center">
                         <div className="col">
                             <div
@@ -78,7 +81,7 @@ const ContactUsPage = ({ alerts, setAlert }) => {
                             >
                                 <div className="card-body">
                                     <h4 className="card-title text-primary text-center">
-                                        We will like to hear from you
+                                        {t("sub_title")}
                                     </h4>
 
                                     {alerts.map(
@@ -110,7 +113,7 @@ const ContactUsPage = ({ alerts, setAlert }) => {
                                                 required
                                             />
                                             <label htmlFor="floatingInput">
-                                                Name
+                                                {t("name")}
                                             </label>
                                         </div>
                                         <div className="form-floating col-12">
@@ -125,7 +128,7 @@ const ContactUsPage = ({ alerts, setAlert }) => {
                                                 required
                                             />
                                             <label htmlFor="floatingInput">
-                                                Email address
+                                                {t("email")}
                                             </label>
                                         </div>
                                         <div className="form-floating col-12">
@@ -140,7 +143,7 @@ const ContactUsPage = ({ alerts, setAlert }) => {
                                             ></textarea>
 
                                             <label htmlFor="floatingInput">
-                                                Message
+                                                {t("message")}
                                             </label>
                                         </div>
                                         <div className="d-grid gap-2 col-12 mx-auto">
@@ -153,7 +156,7 @@ const ContactUsPage = ({ alerts, setAlert }) => {
                                                 type="submit"
                                                 disabled={loading}
                                             >
-                                                Submit
+                                                {t("btn_text")}
                                             </button>
                                         </div>
                                     </form>
@@ -161,11 +164,40 @@ const ContactUsPage = ({ alerts, setAlert }) => {
                             </div>
                         </div>
                         <div className="col d-sm-none d-md-block">
+                            <div className="my-2">
+                                <div className="my-2">
+                                    <FaMapMarkerAlt />
+                                    <p className="muted-text">
+                                        Unite 1i,75 Millmarsh Lane, London. EN3
+                                        7PU
+                                    </p>
+                                </div>
+                                <div className="my-2">
+                                    <FaEnvelope />
+                                    <p className="muted-text">
+                                        info@mytritek.co.uk
+                                    </p>
+                                </div>
+                                <div className="my-2">
+                                    <FaPhone />
+                                    <p className="muted-text">
+                                        +44(0)7401262066, +44(0)7737114714
+                                    </p>
+                                </div>
+                                <div className="my-2">
+                                    <FaGlobe />
+                                    <p className="muted-text">
+                                        www.mytritek.co.uk
+                                    </p>
+                                </div>
+                            </div>
+                            {/*
                             <img
                                 style={{ width: "100%" }}
                                 src="/images/contact_us.png"
                                 alt="Contact us illustration"
                             />
+                            */}
                         </div>
                     </div>
                 </div>

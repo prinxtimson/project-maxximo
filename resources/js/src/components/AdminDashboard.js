@@ -7,10 +7,12 @@ import FusionCharts from "fusioncharts";
 import Column2D from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const AdminDashboard = ({ getVisit, visit, loading, userType }) => {
+    const { t } = useTranslation(["dashboard"]);
     const [chartConfigs, setChartConfigs] = useState(null);
     const [period, setPeriod] = useState(7);
     const [chartConfigs2, setChartConfigs2] = useState(null);
@@ -38,7 +40,7 @@ const AdminDashboard = ({ getVisit, visit, loading, userType }) => {
                 dataFormat: "json", // Data type
                 dataSource: {
                     chart: {
-                        caption: "User Type",
+                        caption: t("admin_page.caption"),
                         theme: "fusion",
                         startingAngle: "310",
                         showLegend: "1",
@@ -82,9 +84,9 @@ const AdminDashboard = ({ getVisit, visit, loading, userType }) => {
                 dataFormat: "json", // Data type
                 dataSource: {
                     chart: {
-                        caption: "Visitors to website",
-                        xAxisName: "Day",
-                        yAxisName: "Visit",
+                        caption: t("admin_page.caption_2"),
+                        xAxisName: t("admin_page.x_axis"),
+                        yAxisName: t("admin_page.y_axis"),
                         theme: "fusion",
                         labelStep: period > 7 ? "5" : "0",
                         // drawAnchors: "0",
@@ -104,7 +106,7 @@ const AdminDashboard = ({ getVisit, visit, loading, userType }) => {
         <div className="container-fluid p-4">
             <div className="row mb-4">
                 <label htmlFor="country" className="col-sm-4">
-                    Period
+                    {t("admin_page.period")}
                 </label>
                 <div className="col-sm-8">
                     <select
@@ -114,10 +116,12 @@ const AdminDashboard = ({ getVisit, visit, loading, userType }) => {
                         value={period}
                         onChange={handleOnChange}
                     >
-                        <option value="">Select Period</option>
+                        <option value="">
+                            {t("admin_page.select_period")}
+                        </option>
                         {PERIOD.map((item) => (
                             <option key={item.value} value={item.value}>
-                                {item.name}
+                                {t("admin_page.label", { num: item.value })}
                             </option>
                         ))}
                     </select>

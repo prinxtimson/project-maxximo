@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
 import Column2D from "fusioncharts/fusioncharts.charts";
+import { useTranslation } from "react-i18next";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import { getSport, clearChart, getFootballById } from "../actions/chart";
 
@@ -16,6 +17,7 @@ const SportsChart = ({
     clearChart,
     getFootballById,
 }) => {
+    const { t } = useTranslation(["dashboard"]);
     const { football, tennis } = sport;
     const [chartConfigs, setChartConfigs] = useState(null);
     const [chartConfigs2, setChartConfigs2] = useState(null);
@@ -118,9 +120,9 @@ const SportsChart = ({
                 dataFormat: "json", // Data type
                 dataSource: {
                     chart: {
-                        caption: "Tennis Ranking",
-                        xAxisName: "Name",
-                        yAxisName: "Points",
+                        caption: t("sport_chat.caption"),
+                        xAxisName: t("sport_chat.x_axis"),
+                        yAxisName: t("sport_chat.y_axis"),
                         theme: "fusion",
                         labelDisplay: "rotate",
                         //labelStep: "5",
@@ -135,7 +137,7 @@ const SportsChart = ({
     return (
         <div className="container-fluid p-4">
             <div className="p-2">
-                <h5>Sport</h5>
+                <h5>{t("sport_chat.title")}</h5>
             </div>
             <div className="row mb-4">
                 {/*<div className="col-12 mb-4">

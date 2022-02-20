@@ -6,6 +6,7 @@ import { resetPassword } from "../actions/auth";
 import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const ResetPasswordPage = ({
     setAlert,
@@ -14,6 +15,7 @@ const ResetPasswordPage = ({
     resetPassword,
     alerts,
 }) => {
+    const { t } = useTranslation(["reset-password"]);
     const history = useHistory();
     const search = new URLSearchParams(useLocation().search);
     const [formData, setFormData] = useState({
@@ -51,7 +53,7 @@ const ResetPasswordPage = ({
                 >
                     <div className="card-body">
                         <h1 className="card-title text-primary text-center">
-                            Reset Password
+                            {t("title")}
                         </h1>
                         {alerts.map(
                             (alert) =>
@@ -80,7 +82,9 @@ const ResetPasswordPage = ({
                                     onChange={handleOnChange}
                                     required
                                 />
-                                <label htmlFor="floatingInput">Password</label>
+                                <label htmlFor="floatingInput">
+                                    {t("password")}
+                                </label>
                             </div>
                             <div className="form-floating col-12">
                                 <input
@@ -94,7 +98,7 @@ const ResetPasswordPage = ({
                                     required
                                 />
                                 <label htmlFor="floatingInput">
-                                    Confirm Password
+                                    {t("confirm_password")}
                                 </label>
                             </div>
                             <div className="d-grid gap-2 col-12 mx-auto">
@@ -105,7 +109,7 @@ const ResetPasswordPage = ({
                                     type="submit"
                                     disabled={loading}
                                 >
-                                    Submit
+                                    {t("btn_text")}
                                 </button>
                             </div>
                         </form>

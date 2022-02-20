@@ -6,6 +6,7 @@ import { setAlert } from "../actions/alert";
 import { registerUser } from "../actions/auth";
 import { connect } from "react-redux";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const RegistrationPage = ({
     setAlert,
@@ -14,6 +15,7 @@ const RegistrationPage = ({
     alerts,
     loading,
 }) => {
+    const { t } = useTranslation(["register"]);
     const history = useHistory();
     const [formData, setFormData] = useState({
         name: "",
@@ -51,11 +53,11 @@ const RegistrationPage = ({
                         >
                             <div className="card-body">
                                 <h1 className="card-title text-primary text-center">
-                                    Sign Up
+                                    {t("title")}
                                 </h1>
                                 <p className="lead text-center">
-                                    <i className="fas fa-user"></i> Create Your
-                                    Account
+                                    <i className="fas fa-user"></i>{" "}
+                                    {t("sub_title")}
                                 </p>
                                 {alerts.map(
                                     (alert) =>
@@ -85,7 +87,7 @@ const RegistrationPage = ({
                                             required
                                         />
                                         <label htmlFor="floatingInput">
-                                            Full name
+                                            {t("name")}
                                         </label>
                                     </div>
                                     <div className="form-floating col-12">
@@ -100,7 +102,7 @@ const RegistrationPage = ({
                                             required
                                         />
                                         <label htmlFor="floatingInput">
-                                            Email address
+                                            {t("email")}
                                         </label>
                                     </div>
                                     <div className="form-floating col-12">
@@ -115,7 +117,7 @@ const RegistrationPage = ({
                                             required
                                         />
                                         <label htmlFor="floatingInput">
-                                            Password
+                                            {t("password")}
                                         </label>
                                     </div>
                                     <div className="form-floating col-12">
@@ -130,7 +132,7 @@ const RegistrationPage = ({
                                             required
                                         />
                                         <label htmlFor="floatingInput">
-                                            Confirm Password
+                                            {t("confirm_password")}
                                         </label>
                                     </div>
                                     <div className="d-grid gap-2 col-12 mx-auto">
@@ -143,27 +145,27 @@ const RegistrationPage = ({
                                             type="submit"
                                             disabled={loading}
                                         >
-                                            Register
+                                            {t("btn_text")}
                                         </button>
                                     </div>
                                 </form>
                                 <p className="my-1">
-                                    Already have an account?{" "}
-                                    <Link to="/login">Login</Link>
+                                    {`${t("have_account")} `}
+                                    <Link to="/login">{t("login")}</Link>
                                 </p>
                                 <p className="text-muted mb-0 mt-4">
                                     {
                                         "By Submitting this form, I agree to Elint-X's "
                                     }
                                     <Link color="inherit" to="/privacy-policy">
-                                        Privacy Policy
+                                        {t("privacy_policy")}
                                     </Link>
                                     {" and "}
                                     <Link
                                         color="inherit"
                                         to="/terms-and-conditions"
                                     >
-                                        Terms and Conditions
+                                        {t("terms_and_conditions")}
                                     </Link>
                                     {"."}
                                 </p>

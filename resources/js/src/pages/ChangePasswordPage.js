@@ -4,8 +4,10 @@ import MainContainer from "../components/MainContainer";
 import { changePassword } from "../actions/auth";
 import { connect } from "react-redux";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const ChangePasswordPage = ({ loading, changePassword, alerts }) => {
+    const { t } = useTranslation(["change-password"]);
     const [formData, setFormData] = useState({
         password: "",
         new_password: "",
@@ -35,7 +37,7 @@ const ChangePasswordPage = ({ loading, changePassword, alerts }) => {
                 >
                     <div className="card-body">
                         <h1 className="card-title text-primary text-center">
-                            Change Password
+                            {t("title")}
                         </h1>
                         {alerts.map(
                             (alert) =>
@@ -65,7 +67,7 @@ const ChangePasswordPage = ({ loading, changePassword, alerts }) => {
                                     required
                                 />
                                 <label htmlFor="floatingInput">
-                                    Old password
+                                    {t("old_password")}
                                 </label>
                             </div>
                             <div className="form-floating col-12">
@@ -80,7 +82,7 @@ const ChangePasswordPage = ({ loading, changePassword, alerts }) => {
                                     required
                                 />
                                 <label htmlFor="floatingInput">
-                                    New password
+                                    {t("new_password")}
                                 </label>
                             </div>
                             <div className="form-floating col-12">
@@ -95,7 +97,7 @@ const ChangePasswordPage = ({ loading, changePassword, alerts }) => {
                                     required
                                 />
                                 <label htmlFor="floatingInput">
-                                    Confirm new password
+                                    {t("confiem_new_password")}
                                 </label>
                             </div>
                             <div className="d-grid gap-2 col-12 mx-auto">
@@ -106,7 +108,7 @@ const ChangePasswordPage = ({ loading, changePassword, alerts }) => {
                                     type="submit"
                                     disabled={loading}
                                 >
-                                    Submit
+                                    {t("btn_text")}
                                 </button>
                             </div>
                         </form>

@@ -5,11 +5,13 @@ import FusionCharts from "fusioncharts";
 import Column2D from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { getVideo, clearChart } from "../actions/chart";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
+    const { t } = useTranslation(["dashboard"]);
     const [chartConfigs, setChartConfigs] = useState(null);
     const [chartConfigs2, setChartConfigs2] = useState(null);
     const [chartConfigs3, setChartConfigs3] = useState(null);
@@ -32,22 +34,30 @@ const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
                 diggCountData.push({
                     label: author.nickname,
                     value: stats.diggCount,
-                    tooltext: `Music:{br} Title: ${music.title}{br} Author: ${music.authorName}`,
+                    tooltext: `${t("entertainment_chat.music")}:{br} ${t(
+                        "entertainment_chat.title_text"
+                    )}: ${music.title}{br} Author: ${music.authorName}`,
                 });
                 shareCountData.push({
                     label: author.nickname,
                     value: stats.shareCount,
-                    tooltext: `Music:{br} Title: ${music.title}{br} Author: ${music.authorName}`,
+                    tooltext: `${t("entertainment_chat.music")}:{br} ${t(
+                        "entertainment_chat.title_text"
+                    )}: ${music.title}{br} Author: ${music.authorName}`,
                 });
                 commentCountData.push({
                     label: author.nickname,
                     value: stats.commentCount,
-                    tooltext: `Music:{br} Title: ${music.title}{br} Author: ${music.authorName}`,
+                    tooltext: `${t("entertainment_chat.music")}:{br} ${t(
+                        "entertainment_chat.title_text"
+                    )}: ${music.title}{br} Author: ${music.authorName}`,
                 });
                 playCountData.push({
                     label: author.nickname,
                     value: stats.playCount,
-                    tooltext: `Music:{br} Title: ${music.title}{br} Author: ${music.authorName}`,
+                    tooltext: `${t("entertainment_chat.music")}:{br} ${t(
+                        "entertainment_chat.title_text"
+                    )}: ${music.title}{br} Author: ${music.authorName}`,
                 });
             });
 
@@ -58,9 +68,9 @@ const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
                 dataFormat: "json",
                 dataSource: {
                     chart: {
-                        caption: "Digital Count",
-                        xAxisName: "Author",
-                        yAxisName: "Count",
+                        caption: t("entertainment_chat.caption"),
+                        xAxisName: t("entertainment_chat.x_axis"),
+                        yAxisName: t("entertainment_chat.y_axis"),
                         //numberSuffix: "M",
                         theme: "fusion",
                     },
@@ -75,9 +85,9 @@ const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
                 dataFormat: "json",
                 dataSource: {
                     chart: {
-                        caption: "Share Count",
-                        xAxisName: "Author",
-                        yAxisName: "Count",
+                        caption: t("entertainment_chat.caption_1"),
+                        xAxisName: t("entertainment_chat.x_axis"),
+                        yAxisName: t("entertainment_chat.y_axis"),
                         //numberSuffix: "M",
                         theme: "fusion",
                     },
@@ -92,9 +102,9 @@ const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
                 dataFormat: "json",
                 dataSource: {
                     chart: {
-                        caption: "Comment Count",
-                        xAxisName: "Author",
-                        yAxisName: "Count",
+                        caption: t("entertainment_chat.caption_2"),
+                        xAxisName: t("entertainment_chat.x_axis"),
+                        yAxisName: t("entertainment_chat.y_axis"),
                         //numberSuffix: "M",
                         theme: "fusion",
                     },
@@ -109,9 +119,9 @@ const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
                 dataFormat: "json",
                 dataSource: {
                     chart: {
-                        caption: "Play Count",
-                        xAxisName: "Author",
-                        yAxisName: "Count",
+                        caption: t("entertainment_chat.caption_3"),
+                        xAxisName: t("entertainment_chat.x_axis"),
+                        yAxisName: t("entertainment_chat.y_axis"),
                         //numberSuffix: "M",
                         theme: "fusion",
                     },
@@ -123,7 +133,7 @@ const EntertainmentChart = ({ loading, trendVideo, getVideo, clearChart }) => {
     return (
         <div className="container-fluid p-4">
             <div className="p-2">
-                <h5>Trending Tictok Video</h5>
+                <h5>{t("entertainment_chat.title", { name: "Tictok" })}</h5>
             </div>
             <div className="row mb-4">
                 <div className="col col-md-6">

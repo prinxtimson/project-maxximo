@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Moment from "react-moment";
+import { useTranslation } from "react-i18next";
 
 const SubscriptionTable = ({ subscriptions, loading }) => {
+    const { t } = useTranslation(["dashboard"]);
+
     return (
         <div className="container p-4">
             <div className="card">
@@ -12,16 +15,28 @@ const SubscriptionTable = ({ subscriptions, loading }) => {
                         <table className="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">Due Date</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Paid On</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">
+                                        {t("subscription_table.th_0")}
+                                    </th>
+                                    <th scope="col">
+                                        {t("subscription_table.th_1")}
+                                    </th>
+                                    <th scope="col">
+                                        {t("subscription_table.th_2")}
+                                    </th>
+                                    <th scope="col">
+                                        {t("subscription_table.th_3")}
+                                    </th>
+                                    <th scope="col">
+                                        {t("subscription_table.th_4")}
+                                    </th>
+                                    <th scope="col">
+                                        {t("subscription_table.th_5")}
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {!loading && subscription.length > 0 ? (
+                                {!loading && subscriptions.length > 0 ? (
                                     subscriptions.map((subscription) => (
                                         <tr
                                             key={subscription.id}
@@ -76,7 +91,9 @@ const SubscriptionTable = ({ subscriptions, loading }) => {
                                                     className="btn btn-danger btn-sm text-white"
                                                     type="button"
                                                 >
-                                                    Delete
+                                                    {t(
+                                                        "subscription_table.btn_text"
+                                                    )}
                                                 </button>
                                             </td>
                                         </tr>
@@ -85,7 +102,9 @@ const SubscriptionTable = ({ subscriptions, loading }) => {
                                     <tr>
                                         <td>
                                             <strong>
-                                                No subscription available yet.
+                                                {t(
+                                                    "subscription_table.table_text"
+                                                )}
                                             </strong>
                                         </td>
                                     </tr>

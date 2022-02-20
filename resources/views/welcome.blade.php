@@ -51,6 +51,14 @@
     margin-left: -260px;
   }
 
+  .react-chatbot-kit-chat-container {
+    height: 100%;
+  }
+
+  .react-chatbot-kit-chat-message-container {
+    overflow: auto !important;
+  }
+
   .brand-active {
     display: none;
   }
@@ -76,7 +84,7 @@
   </style>
 </head>
 
-<body class="antialiased">
+<body class="antialiased" dir='ltr'>
   <div id="app" class='main flex-grow-1 d-flex'></div>
   <div class="modal fade" id="freeTrialModal" aria-hidden="true" aria-labelledby="freeTrialModalLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">

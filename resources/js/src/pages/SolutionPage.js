@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import MainContainer from "../components/MainContainer";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const SolutionPage = () => {
+    const { t } = useTranslation(["solution"]);
     useEffect(() => {
         ReactGA.pageview(window.location.pathname);
     }, []);
@@ -19,14 +21,7 @@ const SolutionPage = () => {
                             <div className="col-8">
                                 <h1 className="fw-bold text-white">ELINT-X</h1>
                                 <h5 className="text-white">
-                                    From real time raw data to up-to date
-                                    reports, Elint-X platform is your one-stop
-                                    shop for all your data and trend analysis
-                                    enquiries leaving you time to focus on your
-                                    business. Insights gained from this platform
-                                    will give you the strategies needed to
-                                    leverage data to make informed business
-                                    decisions.
+                                    {t("paragraph_1")}
                                 </h5>
                             </div>
                             <div className="col-4"></div>
@@ -41,12 +36,9 @@ const SolutionPage = () => {
                                     className="fw-bold"
                                     style={{ color: "#1976d2" }}
                                 >
-                                    Who Has The Most to Gain from Elint-X
+                                    {t("header_2")}
                                 </h2>
-                                <h5>
-                                    Start-up businesses, Existing businesses,
-                                    Academic and Market Researchers, Developers.
-                                </h5>
+                                <h5>{t("paragraph_2")}</h5>
                             </div>
                             <div className="col-6">
                                 <img
@@ -77,14 +69,9 @@ const SolutionPage = () => {
                                     className="fw-bold"
                                     style={{ color: "#1976d2" }}
                                 >
-                                    Use Driven Methods to Apply Insights
+                                    {t("header_3")}
                                 </h2>
-                                <h5>
-                                    Get the right tools to capture, evaluate
-                                    real time data to gain the insights needed
-                                    to make informed business decisions to match
-                                    your business options.
-                                </h5>
+                                <h5>{t("paragraph_3")}</h5>
                             </div>
                         </div>
                     </div>
@@ -97,14 +84,9 @@ const SolutionPage = () => {
                                     className="fw-bold"
                                     style={{ color: "#1976d2" }}
                                 >
-                                    Branding and Rebranding
+                                    {t("header_4")}
                                 </h2>
-                                <h5>
-                                    Gain insights needed to build, evaluate, and
-                                    improve your online presence to attract more
-                                    customers, improve customer engagement and
-                                    retain customers.
-                                </h5>
+                                <h5>{t("paragraph_4")}</h5>
                             </div>
                             <div className="col-6">
                                 <img
@@ -135,14 +117,9 @@ const SolutionPage = () => {
                                     className="fw-bold"
                                     style={{ color: "#1976d2" }}
                                 >
-                                    Competitive Analysis
+                                    {t("header_5")}
                                 </h2>
-                                <h5>
-                                    Real time data reporting delivers accurate
-                                    trend analysis helping you to leverage the
-                                    edge you need over your business
-                                    competitors.
-                                </h5>
+                                <h5>{t("paragraph_5")}</h5>
                             </div>
                         </div>
                     </div>
@@ -155,16 +132,9 @@ const SolutionPage = () => {
                                     className="fw-bold"
                                     style={{ color: "#1976d2" }}
                                 >
-                                    What It does for You
+                                    {t("header_6")}
                                 </h2>
-                                <h5>
-                                    With an easy-to use intuitive dashboard with
-                                    infographics, download options and flexible
-                                    API, you can process, analyse data and share
-                                    reports in a snap. Elint-X also offers built
-                                    in technical support that secures your data
-                                    while giving you the control you need.
-                                </h5>
+                                <h5>{t("paragraph_6")}</h5>
                             </div>
                             <div className="col-6">
                                 <img

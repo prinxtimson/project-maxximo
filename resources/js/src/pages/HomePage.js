@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const HomePage = ({ isAuthenticated, loading }) => {
+    const { t } = useTranslation(["home"]);
+
     useEffect(() => {
         ReactGA.pageview(window.location.pathname);
     }, []);
@@ -22,11 +25,9 @@ const HomePage = ({ isAuthenticated, loading }) => {
                                 className="display-1 fw-bold"
                                 style={{ color: "blue" }}
                             >
-                                Insights
+                                {t("title")}
                             </h1>
-                            <h2 className="fs-1">
-                                Get solutions tailored to your business options
-                            </h2>
+                            <h2 className="fs-1">{t("sub_title")}</h2>
                             <div className="d-grid gap-2 d-md-block">
                                 {loading
                                     ? null
@@ -36,7 +37,7 @@ const HomePage = ({ isAuthenticated, loading }) => {
                                               type="button"
                                               to="/register"
                                           >
-                                              Start Your 14-day Free Trial
+                                              {t("link_text")}
                                           </Link>
                                       )}
                             </div>

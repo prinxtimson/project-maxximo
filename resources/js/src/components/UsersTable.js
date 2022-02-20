@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { setAlert } from "../actions/alert";
+import { useTranslation } from "react-i18next";
 
 const axios = window.axios;
 
 const UsersTable = ({ setAlert, alerts }) => {
+    const { t } = useTranslation(["dashboard"]);
     const [users, setUsers] = useState([]);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -44,14 +46,14 @@ const UsersTable = ({ setAlert, alerts }) => {
     return (
         <div className="container py-5">
             {loading ? (
-                <p className="py-5">Loading........</p>
+                <p className="py-5">{t("users_table.loading")}........</p>
             ) : (
                 <div className="card">
                     <div className="card-body table-responsive">
                         <div className="d-flex py-3">
                             <div className="flex-shrink-0">
                                 <a href="#" type="button" onClick={getAllUsers}>
-                                    All users
+                                    {t("users_table.all_users")}
                                 </a>
                                 <span>{`(${data.length})`}</span>
                             </div>
@@ -61,7 +63,7 @@ const UsersTable = ({ setAlert, alerts }) => {
                                     type="button"
                                     onClick={getTrashedUser}
                                 >
-                                    Trashed users
+                                    {t("users_table.trashed_users")}
                                 </a>
                                 <span>{`(${
                                     data.filter((item) => item.deleted_at)
@@ -73,12 +75,12 @@ const UsersTable = ({ setAlert, alerts }) => {
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">{t("users_table.th_1")}</th>
+                                    <th scope="col">{t("users_table.th_2")}</th>
+                                    <th scope="col">{t("users_table.th_3")}</th>
+                                    <th scope="col">{t("users_table.th_4")}</th>
+                                    <th scope="col">{t("users_table.th_5")}</th>
+                                    <th scope="col">{t("users_table.th_6")}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -142,7 +144,7 @@ const UsersTable = ({ setAlert, alerts }) => {
                                                     className="btn btn-danger btn-sm text-white"
                                                     type="button"
                                                 >
-                                                    Delete
+                                                    {t("users_table.btn_text")}
                                                 </button>
                                             </td>
                                         </tr>

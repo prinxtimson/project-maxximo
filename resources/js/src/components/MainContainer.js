@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
+
 import MainFooter from "./MainFooter";
 import MainHeader from "./MainHeader";
 

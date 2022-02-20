@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
 import Column2D from "fusioncharts/fusioncharts.charts";
@@ -11,6 +12,7 @@ import moment from "moment";
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const BounceRateChart = ({ getBounceRate, bounce, loading }) => {
+    const { t } = useTranslation(["dashboard"]);
     const [chartConfigs, setChartConfigs] = useState(null);
     const [period, setPeriod] = useState(7);
 
@@ -27,9 +29,9 @@ const BounceRateChart = ({ getBounceRate, bounce, loading }) => {
                 data.push({
                     label: moment(item[0]).format("ll"),
                     value: rate,
-                    tooltext: `${moment(item[0]).format(
-                        "LL"
-                    )}{br}{br} Bounce Rate: ${rate}%`,
+                    tooltext: `${moment(item[0]).format("LL")}{br}{br} ${t(
+                        "bounce_rate_chat.title"
+                    )}: ${rate}%`,
                 });
             });
 
@@ -40,9 +42,9 @@ const BounceRateChart = ({ getBounceRate, bounce, loading }) => {
                 dataFormat: "json", // Data type
                 dataSource: {
                     chart: {
-                        caption: "Bounce Rate",
-                        xAxisName: "Day",
-                        yAxisName: "Percentage",
+                        caption: t("bounce_rate_chat.title"),
+                        xAxisName: t("bounce_rate_chat.x_axis"),
+                        yAxisName: t("bounce_rate_chat.y_axis"),
                         yAxisPosition: "right",
                         theme: "fusion",
                         alignCaptionWithCanvas: "0",
@@ -64,7 +66,7 @@ const BounceRateChart = ({ getBounceRate, bounce, loading }) => {
         <div className="container-fluid p-4">
             <div className="row mb-4">
                 <label htmlFor="country" className="col-sm-4">
-                    Period
+                    {t("admin_page.period")}
                 </label>
                 <div className="col-sm-8">
                     <select
@@ -74,10 +76,12 @@ const BounceRateChart = ({ getBounceRate, bounce, loading }) => {
                         value={period}
                         onChange={handleOnChange}
                     >
-                        <option value="">Select Period</option>
+                        <option value="">
+                            {t("admin_page.select_period")}
+                        </option>
                         {PERIOD.map((item) => (
                             <option key={item.value} value={item.value}>
-                                {item.name}
+                                {t("admin_page.label", { num: item.value })}
                             </option>
                         ))}
                     </select>

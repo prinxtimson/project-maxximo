@@ -5,12 +5,14 @@ import { requestPasswordReset } from "../actions/auth";
 import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const ForgotPasswordPage = ({
     isAuthenticated,
     requestPasswordReset,
     alerts,
 }) => {
+    const { t } = useTranslation(["forgot-password"]);
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -42,11 +44,11 @@ const ForgotPasswordPage = ({
                         >
                             <div className="card-body">
                                 <h1 className="card-title text-primary text-center">
-                                    Request Password Reset
+                                    {t("title")}
                                 </h1>
                                 <p className="lead text-center">
-                                    <i className="fas fa-user"></i> Enter your
-                                    email to request password reset.
+                                    <i className="fas fa-user"></i>{" "}
+                                    {t("sub_title")}
                                 </p>
                                 {alerts.map(
                                     (alert) =>
@@ -77,7 +79,7 @@ const ForgotPasswordPage = ({
                                             required
                                         />
                                         <label htmlFor="floatingInput">
-                                            Email address
+                                            {t("email")}
                                         </label>
                                     </div>
                                     <div className="d-grid gap-2 col-12 mx-auto">
@@ -90,13 +92,13 @@ const ForgotPasswordPage = ({
                                             type="submit"
                                             disabled={loading}
                                         >
-                                            Submit
+                                            {t("btn_text")}
                                         </button>
                                     </div>
                                 </form>
                                 <p className="my-1">
-                                    Remember password?{" "}
-                                    <Link to="/login">Login</Link>
+                                    {t("remember_password") + " "}
+                                    <Link to="/login">{t("login")}</Link>
                                 </p>
                             </div>
                         </div>

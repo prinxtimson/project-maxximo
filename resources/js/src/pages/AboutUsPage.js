@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import MainContainer from "../components/MainContainer";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const AboutUsPage = () => {
+    const { t } = useTranslation(["about-us"]);
     useEffect(() => {
         ReactGA.pageview(window.location.pathname);
     }, []);
@@ -17,7 +19,9 @@ const AboutUsPage = () => {
                     <div className="container">
                         <div className="row align-items-center">
                             <div className="col-8">
-                                <h1 className="fw-bold text-white">About Us</h1>
+                                <h1 className="fw-bold text-white">
+                                    {t("title")}
+                                </h1>
                             </div>
                         </div>
                     </div>
@@ -34,23 +38,13 @@ const AboutUsPage = () => {
                                         srcset=""
                                     />
                                     <h5 className="mb-4 text-muted fs-4">
-                                        Today, more than at any other time in
-                                        human existence, we need data to make
-                                        fast, informed and qualitative decisions
-                                        in the face of complex challenges.
+                                        {t("first_paragraph")}
                                     </h5>
                                     <h5 className="mb-4 text-muted fs-4">
-                                        Elint-X provides access to vital
-                                        resources to enable a global community
-                                        aggregate solution to real life
-                                        challenges.
+                                        {t("second_paragraph")}
                                     </h5>
                                     <h5 className="mb-4 text-muted fs-4">
-                                        Our mission is to ensure we create a
-                                        platform that provides a superlative
-                                        user experience for analysing real-world
-                                        data empowering individuals to make
-                                        cutting edge decisions.
+                                        {t("third_paragraph")}
                                     </h5>
                                 </div>
                             </div>

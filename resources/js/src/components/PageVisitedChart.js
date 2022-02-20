@@ -6,10 +6,12 @@ import FusionCharts from "fusioncharts";
 import Column2D from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import { getPageVisit } from "../actions/analytics";
+import { useTranslation } from "react-i18next";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const PageVisitedChart = ({ getPageVisit, loading, page }) => {
+    const { t } = useTranslation(["dashboard"]);
     const [chartConfigs, setChartConfigs] = useState(null);
     const [period, setPeriod] = useState(7);
 
@@ -35,9 +37,9 @@ const PageVisitedChart = ({ getPageVisit, loading, page }) => {
                 dataFormat: "json", // Data type
                 dataSource: {
                     chart: {
-                        caption: "Page Visited by Users",
+                        caption: t("page_visit_chat.caption"),
                         //xAxisName: "URL",
-                        yAxisName: "Total Visit",
+                        yAxisName: t("page_visit_chat.y_axis"),
                         theme: "fusion",
                         alignCaptionWithCanvas: "0",
                         // drawAnchors: "0",
@@ -57,7 +59,7 @@ const PageVisitedChart = ({ getPageVisit, loading, page }) => {
         <div className="container-fluid p-4">
             <div className="row mb-4">
                 <label htmlFor="country" className="col-sm-4">
-                    Period
+                    {t("admin_page.period")}
                 </label>
                 <div className="col-sm-8">
                     <select
@@ -67,10 +69,12 @@ const PageVisitedChart = ({ getPageVisit, loading, page }) => {
                         value={period}
                         onChange={handleOnChange}
                     >
-                        <option value="">Select Period</option>
+                        <option value="">
+                            {t("admin_page.select_period")}
+                        </option>
                         {PERIOD.map((item) => (
                             <option key={item.value} value={item.value}>
-                                {item.name}
+                                {t("admin_page.label", { num: item.value })}
                             </option>
                         ))}
                     </select>

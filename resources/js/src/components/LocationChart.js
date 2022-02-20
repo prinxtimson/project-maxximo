@@ -7,10 +7,12 @@ import Column2D from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import { getCountry } from "../actions/analytics";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const LocationChart = ({ getCountry, loading, country }) => {
+    const { t } = useTranslation(["dashboard"]);
     const [chartConfigs, setChartConfigs] = useState(null);
     const [period, setPeriod] = useState(7);
 
@@ -27,9 +29,9 @@ const LocationChart = ({ getCountry, loading, country }) => {
                 data.push({
                     label: moment(item[0]).format("ll"),
                     value: rate,
-                    tooltext: `${moment(item[0]).format(
-                        "LL"
-                    )}{br}{br} Bounce Rate: ${rate}%`,
+                    tooltext: `${moment(item[0]).format("LL")}{br}{br} ${t(
+                        "bounce_rate_chat.title"
+                    )}: ${rate}%`,
                 });
             });
 
@@ -40,9 +42,9 @@ const LocationChart = ({ getCountry, loading, country }) => {
                 dataFormat: "json", // Data type
                 dataSource: {
                     chart: {
-                        caption: "Bounce Rate",
-                        xAxisName: "Day",
-                        yAxisName: "Percentage",
+                        caption: t("bounce_rate_chat.title"),
+                        xAxisName: t("bounce_rate_chat.x_axis"),
+                        yAxisName: t("bounce_rate_chat.y_axis"),
                         yAxisPosition: "right",
                         theme: "fusion",
                         alignCaptionWithCanvas: "0",
@@ -64,7 +66,7 @@ const LocationChart = ({ getCountry, loading, country }) => {
         <div className="container-fluid p-4">
             <div className="row mb-4">
                 <label htmlFor="country" className="col-sm-4">
-                    Period
+                    {t("admin_page.period")}
                 </label>
                 <div className="col-sm-8">
                     <select
@@ -74,10 +76,12 @@ const LocationChart = ({ getCountry, loading, country }) => {
                         value={period}
                         onChange={handleOnChange}
                     >
-                        <option value="">Select Period</option>
+                        <option value="">
+                            {t("admin_page.select_period")}
+                        </option>
                         {PERIOD.map((item) => (
                             <option key={item.value} value={item.value}>
-                                {item.name}
+                                {t("admin_page.label", { num: item.value })}
                             </option>
                         ))}
                     </select>

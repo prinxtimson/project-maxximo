@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import scriptLoader from "react-async-script-loader";
+import { useTranslation } from "react-i18next";
 
 const CLIENT = {
     sandbox:
@@ -21,6 +22,7 @@ const PaypalButton = ({
     user,
     handleSavePayment,
 }) => {
+    const { t } = useTranslation(["dashboard"]);
     const [state, setState] = useState({
         showButtons: false,
         loading: true,
@@ -71,8 +73,7 @@ const PaypalButton = ({
             {paid && (
                 <div className="main">
                     <h2>
-                        Congrats! you just paid for that picture. Work a little
-                        harder and you'll be able to afford the car itself{" "}
+                        {t("paypal_btn.h2") + " "}
                         <span role="img" aria-label="emoji">
                             {" "}
                             😉

@@ -4,8 +4,10 @@ import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 import { deleteAccount, updateUser } from "../actions/auth";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
+    const { t } = useTranslation(["profile"]);
     const [inputRef, setInputRef] = useState(null);
     const [file, setFile] = useState(null);
     const [formData, setFormData] = useState({
@@ -56,7 +58,7 @@ const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
                 >
                     <div className="card-body">
                         <h1 className="card-title text-primary text-center">
-                            Profile
+                            {t("title")}
                         </h1>
                         {alerts.map(
                             (alert) =>
@@ -125,7 +127,7 @@ const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
                                     type="submit"
                                     disabled={loading}
                                 >
-                                    Save
+                                    {t("save_btn")}
                                 </button>
                             </div>
                         </form>
@@ -138,7 +140,7 @@ const ProfilePage = ({ alerts, loading, updateUser, deleteAccount, user }) => {
                                 disabled={loading}
                                 onClick={deleteAccount}
                             >
-                                Delete Account
+                                {t("delete_btn")}
                             </button>
                         </div>
                     </div>

@@ -6,10 +6,12 @@ import FusionCharts from "fusioncharts";
 import Column2D from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import { getFood, clearChart } from "../actions/chart";
+import { useTranslation } from "react-i18next";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const FoodChart = ({ getFood, clearChart, food, loading }) => {
+    const { t } = useTranslation(["dashboard"]);
     const [chartConfigs, setChartConfigs] = useState(null);
     const [chartConfigs2, setChartConfigs2] = useState(null);
     const [chartConfigs3, setChartConfigs3] = useState(null);
@@ -61,7 +63,7 @@ const FoodChart = ({ getFood, clearChart, food, loading }) => {
                 dataFormat: "json",
                 dataSource: {
                     chart: {
-                        caption: "Total Daily Nutrient Needed",
+                        caption: t("food_chat.caption"),
                         theme: "fusion",
                         startingAngle: "310",
                         legendPosition: "right",
@@ -81,7 +83,7 @@ const FoodChart = ({ getFood, clearChart, food, loading }) => {
                 dataFormat: "json",
                 dataSource: {
                     chart: {
-                        caption: "Total Nutrient Available in Food",
+                        caption: t("food_chat.caption_1"),
                         theme: "fusion",
                         startingAngle: "310",
                         legendPosition: "right",
@@ -100,7 +102,7 @@ const FoodChart = ({ getFood, clearChart, food, loading }) => {
         <div className="container-fluid p-4">
             <div className="row mb-4">
                 <label htmlFor="country" className="col-sm-4">
-                    Food
+                    {t("food_chat.food")}
                 </label>
                 <div className="col-sm-8">
                     <select
@@ -110,7 +112,7 @@ const FoodChart = ({ getFood, clearChart, food, loading }) => {
                         defaultValue="rice"
                         onChange={handleOnChange}
                     >
-                        <option value="">Select Food</option>
+                        <option value="">{t("food_chat.select_food")}</option>
                         {FOODS.map((item) => (
                             <option key={item.value} value={item.value}>
                                 {item.name}

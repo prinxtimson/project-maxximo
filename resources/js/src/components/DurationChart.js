@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
+import { useTranslation } from "react-i18next";
 import Column2D from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import { getDuration } from "../actions/analytics";
@@ -11,6 +12,7 @@ import moment from "moment";
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 const DurationChart = ({ getDuration, loading, duration }) => {
+    const { t } = useTranslation(["dashboard"]);
     const [chartConfigs, setChartConfigs] = useState(null);
     const [period, setPeriod] = useState(7);
 
@@ -27,9 +29,9 @@ const DurationChart = ({ getDuration, loading, duration }) => {
                 data.push({
                     label: moment(item[0]).format("ll"),
                     value: `${d.minutes()}m ${d.seconds()}s`,
-                    tooltext: `${moment(item[0]).format(
-                        "LL"
-                    )}{br}{br} Duration: ${d.minutes()}m ${d.seconds()}s`,
+                    tooltext: `${moment(item[0]).format("LL")}{br}{br} ${t(
+                        "duration_chat.title"
+                    )}: ${d.minutes()}m ${d.seconds()}s`,
                 });
             });
 
@@ -40,9 +42,9 @@ const DurationChart = ({ getDuration, loading, duration }) => {
                 dataFormat: "json", // Data type
                 dataSource: {
                     chart: {
-                        caption: "Duration of Sessions per Day",
-                        xAxisName: "Day",
-                        yAxisName: "Time",
+                        caption: t("duration_chat.caption"),
+                        xAxisName: t("duration_chat.x_axis"),
+                        yAxisName: t("duration_chat.y_axis"),
                         yAxisPosition: "right",
                         theme: "fusion",
                         alignCaptionWithCanvas: "0",
@@ -64,7 +66,7 @@ const DurationChart = ({ getDuration, loading, duration }) => {
         <div className="container-fluid p-4">
             <div className="row mb-4">
                 <label htmlFor="country" className="col-sm-4">
-                    Period
+                    {t("admin_page.period")}
                 </label>
                 <div className="col-sm-8">
                     <select
@@ -74,10 +76,12 @@ const DurationChart = ({ getDuration, loading, duration }) => {
                         value={period}
                         onChange={handleOnChange}
                     >
-                        <option value="">Select Period</option>
+                        <option value="">
+                            {t("admin_page.select_period")}
+                        </option>
                         {PERIOD.map((item) => (
                             <option key={item.value} value={item.value}>
-                                {item.name}
+                                {t("admin_page.label", { num: item.value })}
                             </option>
                         ))}
                     </select>

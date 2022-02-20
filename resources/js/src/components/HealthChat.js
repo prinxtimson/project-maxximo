@@ -5,6 +5,7 @@ import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
 import Column2D from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+import { useTranslation } from "react-i18next";
 import { getHealth, clearChart, getHealthByCountry } from "../actions/chart";
 import moment from "moment";
 
@@ -17,6 +18,7 @@ const HealthChat = ({
     clearChart,
     getHealthByCountry,
 }) => {
+    const { t } = useTranslation(["dashboard"]);
     const [chartConfigs, setChartConfigs] = useState(null);
     const [chartConfigs2, setChartConfigs2] = useState(null);
     const [chartConfigs3, setChartConfigs3] = useState(null);
@@ -62,9 +64,9 @@ const HealthChat = ({
                 dataFormat: "json", // Data type
                 dataSource: {
                     chart: {
-                        caption: "Covid19 History",
-                        xAxisName: "Date",
-                        yAxisName: "Population",
+                        caption: t("health_chat.caption"),
+                        xAxisName: t("health_chat.x_axis"),
+                        yAxisName: t("health_chat.y_axis"),
                         numberSuffix: "M",
                         theme: "fusion",
                         labelDisplay: "rotate",
@@ -79,17 +81,17 @@ const HealthChat = ({
                     dataset: [
                         {
                             renderAs: "line",
-                            seriesname: "Cases",
+                            seriesname: t("health_chat.cases"),
                             data: casesData,
                         },
                         {
                             renderAs: "line",
-                            seriesname: "Recovered",
+                            seriesname: t("health_chat.recovered"),
                             data: recoveredData,
                         },
                         {
                             renderAs: "line",
-                            seriesname: "Deaths",
+                            seriesname: t("health_chat.deaths"),
                             data: deathsData,
                         },
                     ],
@@ -109,7 +111,7 @@ const HealthChat = ({
                 dataFormat: "json",
                 dataSource: {
                     chart: {
-                        caption: "Covid19 Cases Worldwide",
+                        caption: t("health_chat.caption_1"),
                         theme: "fusion",
                         startingAngle: "310",
                         showLegend: "1",
@@ -119,15 +121,15 @@ const HealthChat = ({
                     },
                     data: [
                         {
-                            label: "Cases",
+                            label: t("health_chat.caption"),
                             value: `${cases}`,
                         },
                         {
-                            label: "Recovered",
+                            label: t("health_chat.caption"),
                             value: `${recovered}`,
                         },
                         {
-                            label: "Deaths",
+                            label: t("health_chat.caption"),
                             value: `${deaths}`,
                         },
                     ],
@@ -147,7 +149,7 @@ const HealthChat = ({
                 dataFormat: "json",
                 dataSource: {
                     chart: {
-                        caption: `Covid19 Cases in ${country}`,
+                        caption: t("health_chat.caption_2", { country }),
                         theme: "fusion",
                         startingAngle: "310",
                         showLegend: "1",
@@ -157,15 +159,15 @@ const HealthChat = ({
                     },
                     data: [
                         {
-                            label: "Cases",
+                            label: t("health_chat.caption"),
                             value: `${cases}`,
                         },
                         {
-                            label: "Recovered",
+                            label: t("health_chat.caption"),
                             value: `${recovered}`,
                         },
                         {
-                            label: "Deaths",
+                            label: t("health_chat.caption"),
                             value: `${deaths}`,
                         },
                     ],
@@ -203,7 +205,7 @@ const HealthChat = ({
                         <div className="card-body">
                             <div className="row">
                                 <label htmlFor="country" className="col-sm-4">
-                                    Country
+                                    {t("health_chat.country")}
                                 </label>
                                 <div className="col-sm-8">
                                     <select
@@ -214,7 +216,9 @@ const HealthChat = ({
                                         onChange={handleOnChange}
                                         required
                                     >
-                                        <option value="">Select Country</option>
+                                        <option value="">
+                                            {t("health_chat.select_country")}
+                                        </option>
                                         {COUNTRIES.map((item) => (
                                             <option
                                                 key={item.code}

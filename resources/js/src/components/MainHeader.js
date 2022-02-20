@@ -2,8 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { logoutUser } from "../actions/auth";
+import { useTranslation } from "react-i18next";
 
 const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
+    const { t } = useTranslation(["dashboard"]);
     const dropBtnRef = useRef(null);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [searchResult, setSearchResult] = useState([]);
@@ -41,7 +43,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                 aria-current="page"
                                 to="/solution"
                             >
-                                Solutions
+                                {t("header.nav_link")}
                             </Link>
                         </li>
                         <li className="nav-item">
@@ -50,7 +52,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                 aria-current="page"
                                 to="/subscribe"
                             >
-                                Subscription
+                                {t("header.nav_link_1")}
                             </Link>
                         </li>
                         <li className="nav-item">
@@ -58,7 +60,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                 className="nav-link text-white fw-bold"
                                 to="/about-us"
                             >
-                                About us
+                                {t("header.nav_link_2")}
                             </Link>
                         </li>
                         <li className="nav-item">
@@ -66,7 +68,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                 className="nav-link text-white fw-bold"
                                 to="/contact-us"
                             >
-                                Contact us
+                                {t("header.nav_link_3")}
                             </Link>
                         </li>
                         {!loading && isAuthenticated && (
@@ -75,7 +77,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                     className="nav-link text-white fw-bold"
                                     to="/dashboard"
                                 >
-                                    Dashboard
+                                    {t("header.nav_link_4")}
                                 </Link>
                             </li>
                         )}
@@ -88,14 +90,14 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                       className="btn btn-light text-primary"
                                       to="/register"
                                   >
-                                      Register
+                                      {t("header.nav_link_5")}
                                   </Link>
                                   <span className=" mx-2" />
                                   <Link
                                       className="btn btn-outline-light"
                                       to="/login"
                                   >
-                                      Login
+                                      {t("header.nav_link_6")}
                                   </Link>
                               </div>
                           )}
@@ -128,7 +130,9 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                             >
                                 {searchResult.length === 0 ? (
                                     <li>
-                                        <p className="px-3">No result found</p>
+                                        <p className="px-3">
+                                            {t("header.paragraph")}
+                                        </p>
                                     </li>
                                 ) : (
                                     searchResult.map((result, index) => (
@@ -137,7 +141,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                                 className="dropdown-item"
                                                 href="#"
                                             >
-                                                Action
+                                                {t("header.action")}
                                             </a>
                                         </li>
                                     ))
@@ -146,7 +150,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                         </div>
                         <div className="d-flex mx-2 align-items-center">
                             <h5 className="d-none d-md-block text-white fw-bold">
-                                Welcome, {user?.name}
+                                {t("header.welcome")}, {user?.name}
                             </h5>
                             <div className="dropdown mx-2">
                                 <a
@@ -173,7 +177,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                             className="dropdown-item"
                                             to="/profile"
                                         >
-                                            Profile
+                                            {t("header.profile")}
                                         </Link>
                                     </li>
                                     <li>
@@ -181,7 +185,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                             className="dropdown-item"
                                             to="/change-password"
                                         >
-                                            Change Password
+                                            {t("header.change_password")}
                                         </Link>
                                     </li>
                                     <li>
@@ -194,7 +198,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                             type="button"
                                             onClick={() => logoutUser(history)}
                                         >
-                                            Sign out
+                                            {t("header.sign_out")}
                                         </a>
                                     </li>
                                 </ul>
@@ -240,7 +244,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                 aria-current="page"
                                 to="/solution"
                             >
-                                Solutions
+                                {t("header.nav_link")}
                             </Link>
                         </li>
                         <li className="nav-item">
@@ -249,7 +253,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                 aria-current="page"
                                 to="/subscribe"
                             >
-                                Subscription
+                                {t("header.nav_link_1")}
                             </Link>
                         </li>
                         <li className="nav-item">
@@ -257,7 +261,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                 className="nav-link text-white fw-bold"
                                 to="/about-us"
                             >
-                                About us
+                                {t("header.nav_link_2")}
                             </Link>
                         </li>
                         <li className="nav-item">
@@ -265,7 +269,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                 className="nav-link text-white fw-bold"
                                 to="/contact-us"
                             >
-                                Contact us
+                                {t("header.nav_link_3")}
                             </Link>
                         </li>
                         {!loading && isAuthenticated && (
@@ -274,7 +278,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                     className="nav-link text-white fw-bold"
                                     to="/dashboard"
                                 >
-                                    Dashboard
+                                    {t("header.nav_link_4")}
                                 </Link>
                             </li>
                         )}
@@ -287,14 +291,14 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                       className="btn btn-light text-primary"
                                       to="/register"
                                   >
-                                      Register
+                                      {t("header.nav_link_5")}
                                   </Link>
                                   <span className=" mx-2" />
                                   <Link
                                       className="btn btn-outline-light"
                                       to="/login"
                                   >
-                                      Login
+                                      {t("header.nav_link_6")}
                                   </Link>
                               </div>
                           )}

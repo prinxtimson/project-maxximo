@@ -9,8 +9,10 @@ import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 import { saveTerms } from "../actions/terms";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const TermsConditionsPage = ({ isAuthenticated, terms, saveTerms, user }) => {
+    const { t } = useTranslation(["terms-and-conditions"]);
     const [editorState, setEditorState] = useState(() =>
         EditorState.createEmpty()
     );
@@ -40,7 +42,7 @@ const TermsConditionsPage = ({ isAuthenticated, terms, saveTerms, user }) => {
         <MainContainer>
             <div className="bg-white">
                 <div className="container">
-                    <h2 className="text-align-center">Terms And Conditions</h2>
+                    <h2 className="text-align-center">{t("title")}</h2>
                     <div className="py-2">
                         {isAuthenticated && user?.roles[0]?.name === "admin" && (
                             <div className="py-2">
@@ -51,14 +53,14 @@ const TermsConditionsPage = ({ isAuthenticated, terms, saveTerms, user }) => {
                                             type="button"
                                             onClick={handleSaveTerms}
                                         >
-                                            Save
+                                            {t("save")}
                                         </button>
                                         <button
                                             className="btn btn-light mx-1"
                                             type="button"
                                             onClick={() => setEdit(false)}
                                         >
-                                            Cancel
+                                            {t("cancel")}
                                         </button>
                                     </div>
                                 ) : (
@@ -67,7 +69,7 @@ const TermsConditionsPage = ({ isAuthenticated, terms, saveTerms, user }) => {
                                         type="button"
                                         onClick={() => setEdit(true)}
                                     >
-                                        Edit
+                                        {t("edit")}
                                     </button>
                                 )}
                             </div>

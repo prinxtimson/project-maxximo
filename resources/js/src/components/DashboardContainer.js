@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
 import MainFooter from "./MainFooter";
 import { logoutUser } from "../actions/auth";
+import { useTranslation } from "react-i18next";
 
 const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
+    const { t } = useTranslation(["dashboard"]);
     const { routeName } = useParams();
     const dropBtnRef = useRef(null);
     const [searchResult, setSearchResult] = useState([]);
@@ -63,7 +65,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                         }`}
                                         aria-current="page"
                                     >
-                                        No of Visit
+                                        {t("container.tab_1")}
                                     </Link>
                                 </li>
                                 <li>
@@ -75,7 +77,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                 : "text-white"
                                         }`}
                                     >
-                                        Duration
+                                        {t("container.tab_2")}
                                     </Link>
                                 </li>
                                 <li>
@@ -87,7 +89,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                 : "text-white"
                                         }`}
                                     >
-                                        Page Visited
+                                        {t("container.tab_3")}
                                     </Link>
                                 </li>
                                 <li>
@@ -99,7 +101,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                 : "text-white"
                                         }`}
                                     >
-                                        Bounce Rate
+                                        {t("container.tab_5")}
                                     </Link>
                                 </li>
                                 <li>
@@ -111,7 +113,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                 : "text-white"
                                         }`}
                                     >
-                                        Users
+                                        {t("container.tab_6")}
                                     </Link>
                                 </li>
                             </>
@@ -127,7 +129,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                         }`}
                                         aria-current="page"
                                     >
-                                        Food
+                                        {t("container.tab_7")}
                                     </Link>
                                 </li>
                                 <li>
@@ -139,7 +141,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                 : "text-white"
                                         }`}
                                     >
-                                        Health
+                                        {t("container.tab_8")}
                                     </Link>
                                 </li>
                                 <li>
@@ -151,7 +153,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                 : "text-white"
                                         }`}
                                     >
-                                        Entertainment
+                                        {t("container.tab_9")}
                                     </Link>
                                 </li>
                                 <li>
@@ -163,7 +165,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                 : "text-white"
                                         }`}
                                     >
-                                        Sport
+                                        {t("container.tab_10")}
                                     </Link>
                                 </li>
                                 <li>
@@ -175,7 +177,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                 : "text-white"
                                         }`}
                                     >
-                                        Account
+                                        {t("container.tab_11")}
                                     </Link>
                                 </li>
                             </>
@@ -244,7 +246,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                         {searchResult.length === 0 ? (
                                             <li>
                                                 <p className="px-3">
-                                                    No result found
+                                                    {t("container.no_result")}
                                                 </p>
                                             </li>
                                         ) : (
@@ -258,7 +260,9 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                             className="dropdown-item"
                                                             href="#"
                                                         >
-                                                            Action
+                                                            {t(
+                                                                "container.action"
+                                                            )}
                                                         </a>
                                                     </li>
                                                 )
@@ -271,7 +275,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                         className="d-none d-md-block fw-bold"
                                         style={{ color: "#00a7ad" }}
                                     >
-                                        Welcome, {user?.name}
+                                        {t("container.welcome")}, {user?.name}
                                     </h5>
                                     <div className="dropdown mx-2">
                                         <a
@@ -297,14 +301,15 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                 className="d-md-none py-2 fw-bold"
                                                 style={{ color: "#00a7ad" }}
                                             >
-                                                Welcome, {user?.name}
+                                                {t("container.welcome")},{" "}
+                                                {user?.name}
                                             </h5>
                                             <li>
                                                 <Link
                                                     className="dropdown-item"
                                                     to="/profile"
                                                 >
-                                                    Profile
+                                                    {t("container.profile")}
                                                 </Link>
                                             </li>
                                             <li>
@@ -312,7 +317,9 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                     className="dropdown-item"
                                                     to="/change-password"
                                                 >
-                                                    Change Password
+                                                    {t(
+                                                        "container.change_password"
+                                                    )}
                                                 </Link>
                                             </li>
                                             <li>
@@ -327,7 +334,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                         logoutUser(history)
                                                     }
                                                 >
-                                                    Sign out
+                                                    {t("container.logout_btn")}
                                                 </a>
                                             </li>
                                         </ul>

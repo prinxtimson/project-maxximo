@@ -9,8 +9,10 @@ import MainContainer from "../components/MainContainer";
 import { connect } from "react-redux";
 import { savePrivacy } from "../actions/privacy";
 import ReactGA from "react-ga";
+import { useTranslation } from "react-i18next";
 
 const PrivacyPolicyPage = ({ isAuthenticated, privacy, savePrivacy, user }) => {
+    const { t } = useTranslation(["privacy"]);
     const [editorState, setEditorState] = useState(() =>
         EditorState.createEmpty()
     );
@@ -52,14 +54,14 @@ const PrivacyPolicyPage = ({ isAuthenticated, privacy, savePrivacy, user }) => {
                                             type="button"
                                             onClick={handleSavePrivacy}
                                         >
-                                            Save
+                                            {t("save")}
                                         </button>
                                         <button
                                             className="btn btn-light mx-1"
                                             type="button"
                                             onClick={() => setEdit(false)}
                                         >
-                                            Cancel
+                                            {t("cancel")}
                                         </button>
                                     </div>
                                 ) : (
@@ -68,7 +70,7 @@ const PrivacyPolicyPage = ({ isAuthenticated, privacy, savePrivacy, user }) => {
                                         type="button"
                                         onClick={() => setEdit(true)}
                                     >
-                                        Edit
+                                        {t("edit")}
                                     </button>
                                 )}
                             </div>
