@@ -50,7 +50,10 @@ class SubscriptionController extends Controller
             'subscriptionID' => 'required|string',
         ]);
 
-        $token = Http::withBasicAuth('AT6nHMCPgcjo6zYjeau5SIKnqgeCoKG5uPd7hJhItuEtfI3mexsGSKQ-C-Iuq_QtYQI7RHFkyHFGiJyS', 'ENpHIwu43Az7x49DTjeq7yC662-4UwaXQqgdvP1OFwru15ztYNzaMMOQ2no8yJKpwsPVyqbWQhEY0ifM')->post('https://api-m.sandbox.paypal.com/v1/oauth2/token', [
+       $username = env('PAYPAL_USER');
+        $password = env('PAYPAL_PASSWORD');
+
+        $token = Http::withBasicAuth($username, $password)->post('https://api-m.sandbox.paypal.com/v1/oauth2/token', [
             'grant_type' => 'client_credentials'
         ])->json();
 
@@ -115,7 +118,10 @@ class SubscriptionController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $token = Http::withBasicAuth('AT6nHMCPgcjo6zYjeau5SIKnqgeCoKG5uPd7hJhItuEtfI3mexsGSKQ-C-Iuq_QtYQI7RHFkyHFGiJyS', 'ENpHIwu43Az7x49DTjeq7yC662-4UwaXQqgdvP1OFwru15ztYNzaMMOQ2no8yJKpwsPVyqbWQhEY0ifM')->post('https://api-m.sandbox.paypal.com/v1/oauth2/token', [
+        $username = env('PAYPAL_USER');
+        $password = env('PAYPAL_PASSWORD');
+
+        $token = Http::withBasicAuth($username, $password)->post('https://api-m.sandbox.paypal.com/v1/oauth2/token', [
             'grant_type' => 'client_credentials'
         ])->json();
 
@@ -129,7 +135,10 @@ class SubscriptionController extends Controller
 
     public function cancel(Request $request, $id)
     {
-        $token = Http::withBasicAuth('AT6nHMCPgcjo6zYjeau5SIKnqgeCoKG5uPd7hJhItuEtfI3mexsGSKQ-C-Iuq_QtYQI7RHFkyHFGiJyS', 'ENpHIwu43Az7x49DTjeq7yC662-4UwaXQqgdvP1OFwru15ztYNzaMMOQ2no8yJKpwsPVyqbWQhEY0ifM')->post('https://api-m.sandbox.paypal.com/v1/oauth2/token', [
+       $username = env('PAYPAL_USER');
+        $password = env('PAYPAL_PASSWORD');
+
+        $token = Http::withBasicAuth($username, $password)->post('https://api-m.sandbox.paypal.com/v1/oauth2/token', [
             'grant_type' => 'client_credentials'
         ])->json();
 

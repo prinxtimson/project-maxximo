@@ -37,6 +37,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                     id="navbarNav"
                 >
                     <ul className="navbar-nav flex-grow-1">
+                        {/*
                         <li className="nav-item">
                             <Link
                                 className="nav-link text-white fw-bold"
@@ -55,6 +56,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                 {t("header.nav_link_1")}
                             </Link>
                         </li>
+                        */}
                         <li className="nav-item">
                             <Link
                                 className="nav-link text-white fw-bold"
@@ -172,6 +174,8 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                     className="dropdown-menu dropdown-menu-end dropdown-menu-dark text-small shadow p-3"
                                     aria-labelledby="dropdownUser1"
                                 >
+                                    {/*
+                                     
                                     <li>
                                         <Link
                                             className="dropdown-item"
@@ -188,6 +192,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                             {t("header.change_password")}
                                         </Link>
                                     </li>
+                                    */}
                                     <li>
                                         <hr className="dropdown-divider" />
                                     </li>
@@ -238,6 +243,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                     id="navbarNav"
                 >
                     <ul className="navbar-nav flex-grow-1">
+                        {/*
                         <li className="nav-item">
                             <Link
                                 className="nav-link text-white fw-bold"
@@ -256,6 +262,7 @@ const MainHeader = ({ isAuthenticated, logoutUser, loading, user }) => {
                                 {t("header.nav_link_1")}
                             </Link>
                         </li>
+                         */}
                         <li className="nav-item">
                             <Link
                                 className="nav-link text-white fw-bold"

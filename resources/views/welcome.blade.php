@@ -86,19 +86,7 @@
 
 <body class="antialiased" dir='ltr'>
   <div id="app" class='main flex-grow-1 d-flex'></div>
-  <div class="modal fade" id="freeTrialModal" aria-hidden="true" aria-labelledby="freeTrialModalLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
 
-        <button type="button" style="z-index: 2000" class="btn-close position-absolute top-0 end-0"
-          data-bs-dismiss="modal" aria-label="Close"></button>
-
-        <div class="modal-body py-5">
-          Signup to our 14 days free trial <a href="/register">Now</a>
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- Start of ChatBot (www.chatbot.com) code -->
   <script type="text/javascript">
   window.__be = window.__be || {};

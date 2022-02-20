@@ -7,14 +7,14 @@ import Cookies from "universal-cookie";
 
 const LANGUAGES = [
     {
-        code: "fr",
-        name: "Francais",
-        country_code: "fr",
-    },
-    {
         code: "en",
         name: "English",
         country_code: "gb",
+    },
+    {
+        code: "fr",
+        name: "Francais",
+        country_code: "fr",
     },
     {
         code: "es",
@@ -92,7 +92,8 @@ const MainFooter = () => {
                         <li className="nav-item">
                             <Link
                                 className="nav-link text-white"
-                                to="/terms-and-conditions"
+                                //to="/terms-and-conditions"
+                                to="#"
                             >
                                 {t("footer.terms_and_conditions", {
                                     sign: "&",
@@ -102,7 +103,8 @@ const MainFooter = () => {
                         <li className="nav-item text-white">
                             <Link
                                 className="nav-link text-white"
-                                to="/privacy-policy"
+                                //to="/privacy-policy"
+                                to="#"
                             >
                                 {t("footer.privacy_policy")}
                             </Link>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Suspense } from "react";
 import ReactDOM from "react-dom";
+import { useTranslation } from "react-i18next";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import CookieConsent from "react-cookie-consent";
@@ -41,9 +42,10 @@ import ContactUsPage from "./pages/ContactUsPage";
 
 const cookies = new Cookies();
 
-ReactGA.initialize("UA-209541600-1");
+ReactGA.initialize(process.env.MIX_GOOGLE_TOKEN);
 
 const App = () => {
+    const { t } = useTranslation(["translation"]);
     const [btnRef, setBtnRef] = useState(null);
     const [auth, setAuth] = useState(store.getState().auth);
     const [showChat, setShowChat] = useState(false);
@@ -176,13 +178,32 @@ const App = () => {
                         <FaRobot color="#fff" size={30} />
                     </button>
                 </div>
+                <div
+                    className="modal fade"
+                    id="freeTrialModal"
+                    aria-hidden="true"
+                    aria-labelledby="freeTrialModalLabel"
+                    tabIndex="-1"
+                >
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <button
+                                type="button"
+                                style={{ zIndex: 2000 }}
+                                className="btn-close position-absolute top-0 end-0"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
 
-                <CookieConsent buttonText="Accept all cookies" debug={true}>
-                    Elint-X uses site cookies to provide site functionality and
-                    improve user experience. By clicking "Accept all cookies",
-                    you agree to the storing of cookies on your device to
-                    enhance site navigation, site usage and our marketing
-                    efforts cookie policy.
+                            <div className="modal-body py-5">
+                                {`${t("free_trial")} `}
+                                <a href="/register">{t("now")}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <CookieConsent buttonText={t("cookie_btn")} debug={true}>
+                    {t("cookie_text")}
                 </CookieConsent>
                 <button
                     className="d-none"

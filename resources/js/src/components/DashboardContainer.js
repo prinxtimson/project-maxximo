@@ -53,7 +53,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                         />
                     </Link>
                     <ul className="nav nav-pills flex-column mb-auto py-5">
-                        {user?.roles[0]?.name === "admin" ? (
+                        {/*user?.roles[0]?.name === "admin" ? (
                             <>
                                 <li className="nav-item">
                                     <Link
@@ -181,7 +181,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                     </Link>
                                 </li>
                             </>
-                        )}
+                                    )*/}
                     </ul>
                     <hr />
                 </nav>
@@ -304,6 +304,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                 {t("container.welcome")},{" "}
                                                 {user?.name}
                                             </h5>
+                                            {/** 
                                             <li>
                                                 <Link
                                                     className="dropdown-item"
@@ -322,6 +323,7 @@ const DashboardContainer = ({ children, logoutUser, user, alerts }) => {
                                                     )}
                                                 </Link>
                                             </li>
+                                            */}
                                             <li>
                                                 <hr className="dropdown-divider" />
                                             </li>
