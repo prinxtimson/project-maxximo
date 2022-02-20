@@ -42,7 +42,7 @@ import ContactUsPage from "./pages/ContactUsPage";
 
 const cookies = new Cookies();
 
-ReactGA.initialize(process.env.MIX_GOOGLE_TOKEN);
+ReactGA.initialize("UA-209541600-1");
 
 const App = () => {
     const { t } = useTranslation(["translation"]);
